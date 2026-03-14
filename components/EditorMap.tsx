@@ -2,166 +2,156 @@
 
 import { useEffect, useRef, useState } from 'react'
 import Link from 'next/link'
+import {
+  CALIFORNIA_PATH,
+  NEW_YORK_PATH,
+  JAPAN_PATHS,
+  INDIA_PATH,
+} from '@/data/mapShapes'
 
-const cities = [
-  { id: 'sf', name: 'San Francisco', x: 13, y: 32, slug: 'san-francisco' },
-  { id: 'nyc', name: 'New York', x: 27, y: 28, slug: 'new-york' },
-  { id: 'tokyo', name: 'Tokyo', x: 88, y: 26, slug: 'tokyo' },
-  { id: 'mumbai', name: 'Mumbai', x: 68, y: 38, slug: 'mumbai' },
-]
+const STROKE_WIDTH = 1.5
 
-const OCEAN = '#114665'
+type Place = {
+  id: string
+  label: string
+  cityName: string
+  path: string
+  picks: string
+}
 
-// Simplified equirectangular continent paths (0–100 x 0–50) — recognizable real shapes
-const CONTINENTS = [
-  // North America (Alaska, Canada, USA, Mexico, Gulf, Florida)
-  'M 5 10 L 9 8 L 15 10 L 19 14 L 23 18 L 25 22 L 25 26 L 23 30 L 21 34 L 21 38 L 23 40 L 25 38 L 27 34 L 29 30 L 29 26 L 27 22 L 25 18 L 23 14 L 19 12 L 15 10 L 11 8 L 7 10 L 5 10 Z',
-  // South America
-  'M 26 34 L 28 32 L 30 35 L 32 39 L 33 43 L 33 48 L 32 50 L 29 50 L 27 47 L 26 42 L 26 37 L 26 34 Z',
-  // Europe
-  'M 45 14 L 49 12 L 54 14 L 56 18 L 56 24 L 54 28 L 51 30 L 47 28 L 45 24 L 45 18 L 45 14 Z',
-  // Africa
-  'M 45 24 L 49 22 L 54 24 L 57 28 L 57 36 L 55 42 L 51 46 L 47 44 L 45 38 L 45 30 L 45 24 Z',
-  // Asia (with Indian subcontinent)
-  'M 51 12 L 57 10 L 67 12 L 79 14 L 91 16 L 98 20 L 99 26 L 96 31 L 90 33 L 82 32 L 76 34 L 72 37 L 68 35 L 64 34 L 60 35 L 56 33 L 54 28 L 52 22 L 51 12 Z',
-  // Australia
-  'M 77 34 L 83 32 L 89 34 L 93 38 L 92 42 L 87 46 L 81 46 L 77 42 L 75 38 L 77 34 Z',
+/** Literal icons: California, New York, then whole countries (Japan, India). */
+const PLACES: Place[] = [
+  {
+    id: 'ca',
+    label: 'California',
+    cityName: 'San Francisco',
+    path: CALIFORNIA_PATH,
+    picks: 'Nari, Snail Bar, Tiya, F.O.B. Kitchen',
+  },
+  {
+    id: 'ny',
+    label: 'New York',
+    cityName: 'New York City',
+    path: NEW_YORK_PATH,
+    picks: 'Le Bernardin, Atomix, and more',
+  },
+  {
+    id: 'japan',
+    label: 'Japan',
+    cityName: 'Tokyo',
+    path: JAPAN_PATHS,
+    picks: 'Jiro, Narisawa, and the city\'s best',
+  },
+  {
+    id: 'india',
+    label: 'India',
+    cityName: 'Mumbai',
+    path: INDIA_PATH,
+    picks: 'Coming soon',
+  },
 ]
 
 export default function EditorMap() {
-  const ref = useRef<HTMLDivElement>(null)
-  const [visible, setVisible] = useState<Record<string, boolean>>({})
-  const [selected, setSelected] = useState<string | null>(null)
-  const [hovered, setHovered] = useState<string | null>(null)
+  const ref = useRef<HTMLSectionElement>(null)
+  const [visible, setVisible] = useState(false)
+  const [selectedId, setSelectedId] = useState<string | null>(null)
+  const [hoveredId, setHoveredId] = useState<string | null>(null)
 
   useEffect(() => {
     const el = ref.current
     if (!el) return
     const observer = new IntersectionObserver(
       (entries) => {
-        entries.forEach((entry) => {
-          if (!entry.isIntersecting) return
-          setVisible((v) => ({ ...v, root: true }))
-        })
+        if (entries[0]?.isIntersecting) setVisible(true)
       },
-      { threshold: 0.15 }
+      { threshold: 0.12 }
     )
     observer.observe(el)
     return () => observer.disconnect()
   }, [])
 
-  useEffect(() => {
-    if (!visible.root) return
-    const timeouts = cities.map((c, i) =>
-      setTimeout(() => setVisible((v) => ({ ...v, [c.id]: true })), 150 + i * 120)
-    )
-    return () => timeouts.forEach(clearTimeout)
-  }, [visible.root])
-
   return (
     <section ref={ref} className="relative py-section overflow-hidden section-after-image">
-      <div className="max-w-layout mx-auto px-6 sm:px-8 mb-6">
+      <div className="max-w-layout mx-auto px-6 sm:px-8 mb-8">
         <h2 className="font-playfair text-2xl sm:text-3xl font-medium text-midnight text-center mb-3 tracking-tight">
           Where We&apos;ve Dined
         </h2>
         <p className="text-midnight/80 text-center max-w-xl mx-auto text-[18px] leading-[1.6]">
-          Cities we return to. Click a dot for our picks.
+          California and New York — then Japan and India. Click a place for our picks.
         </p>
       </div>
 
-      {/* Larger map with subtle 3D and realistic continent shapes */}
       <div
-        className="relative w-full max-w-7xl mx-auto px-4 sm:px-6"
-        style={{
-          perspective: '1400px',
-        }}
+        className="max-w-4xl mx-auto px-4 sm:px-6 flex flex-wrap justify-center items-end gap-10 sm:gap-14 transition-opacity duration-700"
+        style={{ opacity: visible ? 1 : 0 }}
       >
-        <div
-          className="relative w-full mx-auto transition-transform duration-700 ease-out"
-          style={{
-            transform: 'rotateX(4deg) rotateZ(0deg)',
-            transformStyle: 'preserve-3d',
-            boxShadow: '0 24px 48px -12px rgba(17, 70, 101, 0.15)',
-          }}
-        >
-          <div className="relative w-full aspect-[2/1] min-h-[320px] sm:min-h-[380px]">
-            <svg
-              viewBox="0 0 100 50"
-              className="w-full h-full"
-              fill="none"
-              stroke={OCEAN}
-              strokeWidth="0.5"
-              strokeLinejoin="round"
-              strokeLinecap="round"
-              aria-hidden
+        {PLACES.map((place) => {
+          const isSelected = selectedId === place.id
+          const isHovered = hoveredId === place.id
+          const showLabel = isSelected || isHovered
+
+          return (
+            <div
+              key={place.id}
+              className="flex flex-col items-center"
             >
-              {CONTINENTS.map((d, i) => (
-                <path key={i} d={d} />
-              ))}
-            </svg>
-
-            {cities.map((city) => {
-              const isActive = selected === city.id || hovered === city.id
-              return (
-                <div
-                  key={city.id}
-                  className="absolute transform -translate-x-1/2 -translate-y-1/2"
-                  style={{
-                    left: `${city.x}%`,
-                    top: `${city.y}%`,
-                  }}
+              <div className="relative">
+                <button
+                  type="button"
+                  onClick={() => setSelectedId(isSelected ? null : place.id)}
+                  onMouseEnter={() => setHoveredId(place.id)}
+                  onMouseLeave={() => setHoveredId(null)}
+                  className="block w-24 h-24 sm:w-28 sm:h-28 text-ocean hover:text-burgundy transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-burgundy focus:ring-offset-2 focus:ring-offset-[#f3f3f5] rounded-sm"
+                  aria-label={`${place.cityName} — view restaurants`}
                 >
-                  <button
-                    type="button"
-                    onClick={() => setSelected(selected === city.id ? null : city.id)}
-                    onMouseEnter={() => setHovered(city.id)}
-                    onMouseLeave={() => setHovered(null)}
-                    className="absolute w-4 h-4 -ml-2 -mt-2 rounded-full border-2 border-ocean bg-ocean/95 shadow-lg animate-pulse-glow transition-all duration-300 hover:border-burgundy hover:scale-125 focus:outline-none focus:ring-2 focus:ring-burgundy focus:ring-offset-2 focus:ring-offset-[#f3f3f5]"
-                    style={{
-                      opacity: visible[city.id] ? 1 : 0,
-                      transform: visible[city.id] ? 'scale(1)' : 'scale(0)',
-                    }}
-                    aria-label={`${city.name} — view restaurants`}
-                  />
-                  {/* City label — visible on hover or select */}
-                  <span
-                    className="absolute left-1/2 top-full mt-2 -translate-x-1/2 whitespace-nowrap text-metadata font-medium text-midnight opacity-0 transition-opacity duration-200 pointer-events-none"
-                    style={{
-                      opacity: isActive ? 1 : 0,
-                      zIndex: 10,
-                    }}
+                  <svg
+                    viewBox="0 0 100 100"
+                    className="w-full h-full"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth={STROKE_WIDTH}
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    preserveAspectRatio="xMidYMid meet"
+                    style={{ overflow: 'visible' }}
                   >
-                    {city.name}
-                  </span>
-                  {selected === city.id && (
-                    <span className="absolute left-1/2 top-full mt-8 -translate-x-1/2 whitespace-nowrap z-10">
-                      <Link
-                        href="/ranking-guide"
-                        className="inline-block text-white text-metadata bg-midnight/95 hover:bg-burgundy px-3 py-2 rounded-sm transition-colors"
-                        style={{ backgroundImage: 'none' }}
-                      >
-                        View rankings →
-                      </Link>
-                    </span>
-                  )}
-                </div>
-              )
-            })}
-          </div>
-        </div>
+                    <path d={place.path} style={{ vectorEffect: 'non-scaling-stroke' }} strokeWidth={STROKE_WIDTH} />
+                  </svg>
+                </button>
+
+                {isSelected && (
+                  <div className="absolute left-1/2 top-full mt-3 -translate-x-1/2 z-20 w-56 rounded-sm bg-midnight/96 backdrop-blur-sm px-4 py-4 shadow-xl border border-black/10">
+                  <p className="font-playfair text-sm font-medium text-white tracking-tight">
+                    {place.cityName}
+                  </p>
+                  <p className="text-white/85 text-metadata mt-1 leading-relaxed">
+                    {place.picks}
+                  </p>
+                  <Link
+                    href="/ranking-guide"
+                    className="inline-block mt-3 text-white/95 text-metadata border-b border-white/60 pb-0.5 hover:border-white transition-colors"
+                    style={{ backgroundImage: 'none' }}
+                  >
+                    View rankings →
+                  </Link>
+                  </div>
+                )}
+              </div>
+
+              <span
+                className="mt-3 text-metadata font-medium text-midnight text-center transition-opacity duration-200"
+                style={{ opacity: showLabel ? 1 : 0.7 }}
+              >
+                {place.cityName}
+              </span>
+            </div>
+          )
+        })}
       </div>
 
-      {/* Legend: city names always visible below map */}
-      <div className="flex flex-wrap justify-center gap-x-6 gap-y-2 mt-8 px-4">
-        {cities.map((city) => (
-          <span
-            key={city.id}
-            className="text-metadata text-midnight/70"
-          >
-            {city.name}
-          </span>
-        ))}
-      </div>
+      <p className="text-metadata text-midnight/60 text-center mt-10 px-4">
+        San Francisco · New York City · Tokyo · Mumbai
+      </p>
     </section>
   )
 }
