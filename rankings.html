@@ -32,34 +32,21 @@
         <label for="filter-location">Location</label>
         <select id="filter-location">
           <option value="">All</option>
-          <option value="New York">New York</option>
-          <option value="Chicago">Chicago</option>
           <option value="San Francisco">San Francisco</option>
-          <option value="Tokyo">Tokyo</option>
-          <option value="Paris">Paris</option>
-          <option value="California">California</option>
-        </select>
-        <label for="filter-price">Price</label>
-        <select id="filter-price">
-          <option value="">All</option>
-          <option value="$$$">$$$ (Splurge)</option>
-          <option value="$$">$$ (Fine)</option>
-          <option value="$">$ (Worth it)</option>
+          <option value="Placeholder">Placeholder</option>
         </select>
         <label for="filter-cuisine">Cuisine</label>
         <select id="filter-cuisine">
           <option value="">All</option>
-          <option value="French">French</option>
-          <option value="Japanese">Japanese</option>
-          <option value="American">American</option>
-          <option value="Seafood">Seafood</option>
-          <option value="Contemporary">Contemporary</option>
+          <option value="Indian fusion">Indian fusion</option>
+          <option value="Contemporary Californian">Contemporary Californian</option>
+          <option value="Thai / Californian">Thai / Californian</option>
+          <option value="Filipino">Filipino</option>
         </select>
-        <label for="filter-stars">Michelin stars</label>
+        <label for="filter-stars">Michelin</label>
         <select id="filter-stars">
           <option value="">All</option>
-          <option value="3">3 stars</option>
-          <option value="2">2 stars</option>
+          <option value="Guide">Guide</option>
           <option value="1">1 star</option>
         </select>
         <button type="button" class="btn btn-primary" id="reset-filters">Reset</button>
@@ -71,131 +58,59 @@
             <th>Restaurant</th>
             <th>Location</th>
             <th>Cuisine</th>
-            <th>Stars</th>
-            <th>Price</th>
+            <th>Michelin</th>
+            <th>Our rating (1–10)</th>
             <th>Reserve</th>
           </tr>
         </thead>
         <tbody id="rank-body">
-          <tr data-location="New York" data-price="$$$" data-cuisine="Seafood" data-stars="3">
-            <td>Le Bernardin</td>
-            <td>New York</td>
-            <td>Seafood</td>
-            <td>★★★</td>
-            <td>$$$</td>
-            <td><a href="#" class="affiliate-link btn btn-primary">Reserve →</a></td>
-          </tr>
-          <tr data-location="Chicago" data-price="$$$" data-cuisine="American" data-stars="3">
-            <td>Alinea</td>
-            <td>Chicago</td>
-            <td>American</td>
-            <td>★★★</td>
-            <td>$$$</td>
-            <td><a href="#" class="affiliate-link btn btn-primary">Reserve →</a></td>
-          </tr>
-          <tr data-location="Tokyo" data-price="$$$" data-cuisine="Japanese" data-stars="3">
-            <td>Sukiyabashi Jiro</td>
-            <td>Tokyo</td>
-            <td>Japanese</td>
-            <td>★★★</td>
-            <td>$$$</td>
-            <td><a href="#" class="affiliate-link btn btn-primary">Reserve →</a></td>
-          </tr>
-          <tr data-location="New York" data-price="$$$" data-cuisine="American" data-stars="3">
-            <td>Eleven Madison Park</td>
-            <td>New York</td>
-            <td>American</td>
-            <td>★★★</td>
-            <td>$$$</td>
-            <td><a href="#" class="affiliate-link btn btn-primary">Reserve →</a></td>
-          </tr>
-          <tr data-location="San Francisco" data-price="$$$" data-cuisine="Contemporary" data-stars="3">
-            <td>Benu</td>
+          <tr data-location="San Francisco" data-cuisine="Indian fusion" data-stars="Guide">
+            <td>Tiya</td>
             <td>San Francisco</td>
-            <td>Contemporary</td>
-            <td>★★★</td>
-            <td>$$$</td>
+            <td>Indian fusion</td>
+            <td>Guide 2024–25</td>
+            <td>4 · 4.5</td>
             <td><a href="#" class="affiliate-link btn btn-primary">Reserve →</a></td>
           </tr>
-          <tr data-location="San Francisco" data-price="$$$" data-cuisine="American" data-stars="3">
-            <td>Quince</td>
+          <tr data-location="San Francisco" data-cuisine="Contemporary Californian" data-stars="Guide">
+            <td>Snail Bar</td>
             <td>San Francisco</td>
-            <td>American</td>
-            <td>★★★</td>
-            <td>$$$</td>
+            <td>Contemporary Californian</td>
+            <td>Guide 2023–25</td>
+            <td>7 · 6.5</td>
             <td><a href="#" class="affiliate-link btn btn-primary">Reserve →</a></td>
           </tr>
-          <tr data-location="San Francisco" data-price="$$$" data-cuisine="American" data-stars="3">
-            <td>Saison</td>
+          <tr data-location="San Francisco" data-cuisine="Thai / Californian" data-stars="1">
+            <td>Nari</td>
             <td>San Francisco</td>
-            <td>American</td>
-            <td>★★★</td>
-            <td>$$$</td>
+            <td>Thai / Californian</td>
+            <td>1 Star 2023–25</td>
+            <td>7.7 · 7.5</td>
             <td><a href="#" class="affiliate-link btn btn-primary">Reserve →</a></td>
           </tr>
-          <tr data-location="California" data-price="$$$" data-cuisine="American" data-stars="3">
-            <td>The French Laundry</td>
-            <td>Yountville, CA</td>
-            <td>American</td>
-            <td>★★★</td>
-            <td>$$$</td>
-            <td><a href="#" class="affiliate-link btn btn-primary">Reserve →</a></td>
-          </tr>
-          <tr data-location="California" data-price="$$$" data-cuisine="American" data-stars="3">
-            <td>Single Thread</td>
-            <td>Healdsburg, CA</td>
-            <td>American</td>
-            <td>★★★</td>
-            <td>$$$</td>
-            <td><a href="#" class="affiliate-link btn btn-primary">Reserve →</a></td>
-          </tr>
-          <tr data-location="New York" data-price="$$" data-cuisine="Korean" data-stars="2">
-            <td>Atomix</td>
-            <td>New York</td>
-            <td>Korean</td>
-            <td>★★</td>
-            <td>$$</td>
-            <td><a href="#" class="affiliate-link btn btn-primary">Reserve →</a></td>
-          </tr>
-          <tr data-location="Chicago" data-price="$$" data-cuisine="American" data-stars="2">
-            <td>Oriole</td>
-            <td>Chicago</td>
-            <td>American</td>
-            <td>★★</td>
-            <td>$$</td>
-            <td><a href="#" class="affiliate-link btn btn-primary">Reserve →</a></td>
-          </tr>
-          <tr data-location="San Francisco" data-price="$$" data-cuisine="American" data-stars="2">
-            <td>Lazy Bear</td>
+          <tr data-location="San Francisco" data-cuisine="Filipino" data-stars="Guide">
+            <td>F.O.B. Kitchen</td>
             <td>San Francisco</td>
-            <td>American</td>
-            <td>★★</td>
-            <td>$$</td>
+            <td>Filipino</td>
+            <td>Guide 2021–25</td>
+            <td>5.6 · 5.5</td>
             <td><a href="#" class="affiliate-link btn btn-primary">Reserve →</a></td>
           </tr>
-          <tr data-location="Tokyo" data-price="$$" data-cuisine="Japanese" data-stars="2">
-            <td>Narisawa</td>
-            <td>Tokyo</td>
-            <td>Japanese</td>
-            <td>★★</td>
-            <td>$$</td>
-            <td><a href="#" class="affiliate-link btn btn-primary">Reserve →</a></td>
+          <tr data-placeholder="true" data-location="Placeholder" data-cuisine="" data-stars="">
+            <td>Placeholder</td>
+            <td>—</td>
+            <td>—</td>
+            <td>—</td>
+            <td>—</td>
+            <td>—</td>
           </tr>
-          <tr data-location="Paris" data-price="$$$" data-cuisine="French" data-stars="3">
-            <td>Arpège</td>
-            <td>Paris</td>
-            <td>French</td>
-            <td>★★★</td>
-            <td>$$$</td>
-            <td><a href="#" class="affiliate-link btn btn-primary">Reserve →</a></td>
-          </tr>
-          <tr data-location="Paris" data-price="$$$" data-cuisine="French" data-stars="3">
-            <td>Mirazur</td>
-            <td>Menton, France</td>
-            <td>French</td>
-            <td>★★★</td>
-            <td>$$$</td>
-            <td><a href="#" class="affiliate-link btn btn-primary">Reserve →</a></td>
+          <tr data-placeholder="true" data-location="Placeholder" data-cuisine="" data-stars="">
+            <td>Placeholder</td>
+            <td>—</td>
+            <td>—</td>
+            <td>—</td>
+            <td>—</td>
+            <td>—</td>
           </tr>
         </tbody>
       </table>
