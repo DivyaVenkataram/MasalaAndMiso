@@ -1,4 +1,5 @@
 import Hero from '@/components/Hero'
+import MapSection from '@/components/MapSection'
 import FeaturedArticles from '@/components/FeaturedArticles'
 import StoryGrid from '@/components/StoryGrid'
 import SectionDivider from '@/components/SectionDivider'
@@ -8,6 +9,10 @@ export default function Home() {
   return (
     <main>
       <Hero />
+      <SectionDivider />
+      <FadeInSection>
+        <MapSection />
+      </FadeInSection>
       <SectionDivider />
       <FadeInSection>
         <FeaturedArticles />

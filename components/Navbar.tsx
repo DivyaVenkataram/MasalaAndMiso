@@ -1,17 +1,20 @@
 'use client'
 
 import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 import { useEffect, useState } from 'react'
 
 const navLinks = [
+  { href: '/blog', label: 'Blog' },
+  { href: '/rankings', label: 'Rankings' },
+  { href: '/best-of', label: 'Best Of' },
   { href: '/restaurants', label: 'Restaurants' },
-  { href: '/recipes', label: 'Recipes' },
-  { href: '/cities', label: 'Cities' },
   { href: '/guides', label: 'Guides' },
   { href: '/about', label: 'About' },
 ]
 
 export default function Navbar() {
+  const pathname = usePathname()
   const [scrolled, setScrolled] = useState(false)
 
   useEffect(() => {
@@ -19,6 +22,11 @@ export default function Navbar() {
     window.addEventListener('scroll', onScroll, { passive: true })
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
+
+  const isActive = (href: string) => {
+    if (href === '/') return pathname === '/'
+    return pathname === href || pathname.startsWith(href + '/')
+  }
 
   return (
     <header
@@ -35,20 +43,27 @@ export default function Navbar() {
         MASALA & MISO
       </Link>
       <nav className="flex items-center gap-8">
-        {navLinks.map(({ href, label }) => (
-          <Link
-            key={href}
-            href={href}
-            className={`text-sm font-medium transition-colors duration-200 ${
-              scrolled
-                ? 'text-midnight hover:text-ocean'
-                : 'text-white/90 hover:text-white'
-            }`}
-            style={scrolled ? undefined : { backgroundImage: 'none' }}
-          >
-            {label}
-          </Link>
-        ))}
+        {navLinks.map(({ href, label }) => {
+          const active = isActive(href)
+          return (
+            <Link
+              key={href}
+              href={href}
+              className={`text-sm font-medium transition-colors duration-200 ${
+                scrolled
+                  ? active
+                    ? 'text-burgundy'
+                    : 'text-midnight hover:text-ocean'
+                  : active
+                    ? 'text-burgundy'
+                    : 'text-white/90 hover:text-white'
+              }`}
+              style={scrolled ? undefined : { backgroundImage: 'none' }}
+            >
+              {label}
+            </Link>
+          )
+        })}
       </nav>
     </header>
   )
