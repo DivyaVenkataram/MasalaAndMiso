@@ -2,8 +2,18 @@ import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import { getStory } from '@/data/stories'
 import ArticlePage from '@/components/ArticlePage'
+import type { Metadata } from 'next'
 
 type Props = { params: { slug: string } }
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const story = getStory(params.slug)
+  if (!story) return { title: 'Not Found' }
+  return {
+    title: `${story.title} — MASALA & MISO`,
+    description: story.description,
+  }
+}
 
 export default function BlogPost({ params }: Props) {
   const story = getStory(params.slug)

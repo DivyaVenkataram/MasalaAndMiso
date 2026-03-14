@@ -1,9 +1,12 @@
 import Link from 'next/link'
 
 const footerLinks = [
+  { href: '/blog', label: 'Blog' },
+  { href: '/rankings', label: 'Rankings' },
+  { href: '/best-of', label: 'Best Of' },
+  { href: '/about', label: 'About' },
   { href: '/recipes', label: 'Recipes' },
   { href: '/restaurants', label: 'Restaurants' },
-  { href: '/cities', label: 'Cities' },
   { href: '/newsletter', label: 'Newsletter' },
 ]
 
@@ -35,7 +38,7 @@ export default function Footer() {
         </nav>
       </div>
       <div className="max-w-layout mx-auto px-6 mt-12 pt-8 border-t border-neutral/20">
-        <p className="text-neutral/60 text-sm">© Masala & Miso</p>
+        <p className="text-neutral/60 text-sm">© Masala & Miso. Michelin-backed reviews.</p>
       </div>
     </footer>
   )
