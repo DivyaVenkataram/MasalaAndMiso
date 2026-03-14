@@ -10,6 +10,8 @@ const cities = [
   { id: 'mumbai', name: 'Mumbai', x: 68, y: 42, slug: 'mumbai' },
 ]
 
+const OCEAN = '#114665'
+
 export default function EditorMap() {
   const ref = useRef<HTMLDivElement>(null)
   const [visible, setVisible] = useState<Record<string, boolean>>({})
@@ -41,25 +43,25 @@ export default function EditorMap() {
 
   return (
     <section ref={ref} className="relative py-section overflow-hidden section-after-image">
-      <div className="max-w-layout mx-auto px-8 mb-8">
-        <h2 className="font-playfair text-2xl sm:text-3xl font-medium text-midnight text-center mb-4 tracking-tight">
+      <div className="max-w-layout mx-auto px-8 mb-6">
+        <h2 className="font-playfair text-2xl sm:text-3xl font-medium text-midnight text-center mb-3 tracking-tight">
           Where We&apos;ve Dined
         </h2>
         <p className="text-midnight/80 text-center max-w-xl mx-auto text-[18px] leading-[1.6]">
-          A minimal map of cities we return to. Click a city to see our picks.
+          Cities we return to. Click a dot for our picks.
         </p>
       </div>
 
-      <div
-        className="relative max-w-4xl mx-auto aspect-[2/1] rounded-sm overflow-hidden"
-        style={{ background: '#1a2332' }}
-      >
+      {/* Map fused to section background — no box, countries in dark blue */}
+      <div className="relative w-full max-w-5xl mx-auto aspect-[2/1] px-4 sm:px-8">
         <svg
           viewBox="0 0 100 50"
-          className="w-full h-full absolute inset-0 text-white/20"
+          className="w-full h-full"
           fill="none"
-          stroke="currentColor"
-          strokeWidth="0.25"
+          stroke={OCEAN}
+          strokeWidth="0.55"
+          strokeLinejoin="round"
+          aria-hidden
         >
           <path d="M 8 12 L 12 8 L 18 15 L 20 28 L 18 42 L 22 48 L 20 38 L 24 28 L 28 18 Z" />
           <path d="M 26 22 L 30 35 L 28 45 L 32 48 L 35 38 L 38 28 Z" />
@@ -74,7 +76,7 @@ export default function EditorMap() {
             key={city.id}
             type="button"
             onClick={() => setSelected(selected === city.id ? null : city.id)}
-            className="absolute w-4 h-4 -ml-2 -mt-2 rounded-full border-2 border-white/70 bg-ocean/90 animate-pulse-glow transition-all duration-500 hover:border-burgundy focus:outline-none focus:ring-2 focus:ring-burgundy focus:ring-offset-2 focus:ring-offset-[#1a2332]"
+            className="absolute w-3.5 h-3.5 -ml-[7px] -mt-[7px] rounded-full border-2 border-ocean bg-ocean/90 shadow-md animate-pulse-glow transition-all duration-300 hover:border-burgundy hover:scale-110 focus:outline-none focus:ring-2 focus:ring-burgundy focus:ring-offset-2 focus:ring-offset-[#f3f3f5]"
             style={{
               left: `${city.x}%`,
               top: `${city.y}%`,
@@ -87,7 +89,7 @@ export default function EditorMap() {
               <span className="absolute left-1/2 top-full mt-2 -translate-x-1/2 whitespace-nowrap z-10">
                 <Link
                   href="/ranking-guide"
-                  className="inline-block text-white text-metadata bg-midnight/95 hover:bg-burgundy px-3 py-2 link-editorial"
+                  className="inline-block text-white text-metadata bg-midnight/95 hover:bg-burgundy px-3 py-2 link-editorial rounded-sm"
                   style={{ backgroundImage: 'none' }}
                 >
                   View rankings →
@@ -98,7 +100,7 @@ export default function EditorMap() {
         ))}
       </div>
 
-      <p className="text-metadata text-midnight/60 text-center mt-8">
+      <p className="text-metadata text-midnight/60 text-center mt-6">
         San Francisco · New York · Tokyo · Mumbai
       </p>
     </section>

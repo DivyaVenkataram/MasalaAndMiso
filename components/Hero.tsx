@@ -42,7 +42,7 @@ export default function Hero() {
           MASALA & MISO
         </h1>
         <p className="font-playfair text-section font-normal text-white/95 mb-8 max-w-2xl mx-auto tracking-normal normal-case">
-          A culinary journey between India and Japan.
+          Where Michelin cultures meet—elevated dining across borders.
         </p>
         <Link
           href="/posts"

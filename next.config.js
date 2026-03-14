@@ -11,6 +11,7 @@ const nextConfig = {
       { source: '/blog/:path*', destination: '/posts/:path*', permanent: true },
       { source: '/rankings', destination: '/ranking-guide', permanent: true },
       { source: '/best-of', destination: '/editors-table', permanent: true },
+      { source: '/drinks', destination: '/best-drinks', permanent: true },
     ]
   },
 }

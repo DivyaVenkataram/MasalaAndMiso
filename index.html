@@ -35,6 +35,7 @@
   </style>
 </head>
 <body>
+<<<<<<< HEAD
   <div class="box">
     <h1>MASALA & MISO</h1>
     <p>This file is not the main site. The full editorial site runs as a Next.js app.</p>
@@ -43,5 +44,110 @@
     <p>Then open <strong><a href="http://localhost:3000">http://localhost:3000</a></strong> in your browser.</p>
     <a href="http://localhost:3000">Open app →</a>
   </div>
+=======
+  <header class="site-header">
+    <a href="index.html" class="logo">
+      <span class="logo-mark">M&M</span>
+      <span>Masala & Miso</span>
+    </a>
+    <nav class="nav-main">
+      <a href="index.html" class="active">Home</a>
+      <a href="blog.html">Blog</a>
+      <a href="rankings.html">Rankings</a>
+      <a href="best-of.html">Best Of</a>
+      <a href="about.html">About</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <p class="hero-pill">Michelin Guide · Honest ratings · Bay Area & beyond</p>
+      <h1>Where we've dined,<br>no fluff.</h1>
+      <p class="lead">Thoughtful reviews and ratings from the tables we've actually visited. Guide and starred spots, one honest score each.</p>
+      <a href="rankings.html" class="btn btn-hero">Browse rankings →</a>
+    </section>
+
+    <div class="main-content">
+      <section class="map-section">
+        <div class="map-intro">
+          <h2 class="section-title">Our World of Restaurants</h2>
+          <p class="subheading">Every pin is a meal we've shared. Currently focused on the Bay Area, with more cities to come.</p>
+        </div>
+        <div id="map"></div>
+      </section>
+
+      <section class="methodology-preview">
+        <h2 class="section-title">How We Rate</h2>
+        <p class="methodology-text">One overall score per restaurant (1–10), averaged from our two reviewers. We consider food, service, ambiance, value, and originality—aligned with how we experience Michelin Guide and starred tables.</p>
+      </section>
+
+      <section class="reviews-section mt-2 mb-2">
+        <h2 class="section-title">Recent Reviews</h2>
+        <div class="card-grid">
+          <article class="card">
+            <div class="card-image">Tiya · San Francisco</div>
+            <div class="card-body">
+              <div class="card-meta">San Francisco · Michelin Guide 2024–25</div>
+              <h3>Tiya — Indian Fusion</h3>
+              <span class="card-rating">4.3</span>
+              <p>Refined Indian fusion in the city. Our rating on the Michelin scale (1–10).</p>
+              <a href="blog.html#tiya" class="card-link">Read review →</a>
+            </div>
+          </article>
+          <article class="card">
+            <div class="card-image">Snail Bar · San Francisco</div>
+            <div class="card-body">
+              <div class="card-meta">San Francisco · Michelin Guide 2023–25</div>
+              <h3>Snail Bar — Contemporary Californian</h3>
+              <span class="card-rating">6.8</span>
+              <p>Contemporary Californian cooking with a distinct point of view.</p>
+              <a href="blog.html#snailbar" class="card-link">Read review →</a>
+            </div>
+          </article>
+          <article class="card">
+            <div class="card-image">Nari · San Francisco</div>
+            <div class="card-body">
+              <div class="card-meta">San Francisco · 1 Michelin Star 2023–25</div>
+              <h3>Nari — Thai / Californian</h3>
+              <span class="card-rating">7.6</span>
+              <p>Thai and Californian flavors in a polished, star-worthy setting.</p>
+              <a href="blog.html#nari" class="card-link">Read review →</a>
+            </div>
+          </article>
+          <article class="card">
+            <div class="card-image">F.O.B. Kitchen · San Francisco</div>
+            <div class="card-body">
+              <div class="card-meta">San Francisco · Michelin Guide 2021–25</div>
+              <h3>F.O.B. Kitchen — Filipino</h3>
+              <span class="card-rating">5.6</span>
+              <p>Filipino cuisine in the Michelin Guide. Heart and technique at the table.</p>
+              <a href="blog.html#fob" class="card-link">Read review →</a>
+            </div>
+          </article>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <a href="index.html" class="footer-logo">
+        <span class="footer-logo-mark">M&M</span>
+        <span>Masala & Miso</span>
+      </a>
+      <nav class="footer-nav">
+        <a href="blog.html">Blog</a>
+        <a href="rankings.html">Rankings</a>
+        <a href="best-of.html">Best Of</a>
+        <a href="about.html">About</a>
+      </nav>
+      <span class="copyright">© Masala & Miso. Michelin-backed reviews.</span>
+    </div>
+  </footer>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+  <script src="js/data/restaurants.js"></script>
+  <script src="js/map.js"></script>
+>>>>>>> 4075b9e9ec92a50188b184d07e6b965345fffc8f
 </body>
 </html>
