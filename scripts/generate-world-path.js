@@ -6,8 +6,9 @@
  */
 const https = require('https');
 
-const SIMPLIFY_EVERY = 6; // keep every Nth point — higher = more abstract, less detail
+const SIMPLIFY_EVERY = 14; // keep every Nth point — higher = more abstract shapes
 const ROUND = 1;         // decimal places (1 = slightly softer look)
+const CORNER_ROUND = 0.26; // 0 = sharp, higher = more rounded (keep <0.3 for distinction)
 const ANTARCTICA_LAT = -58; // exclude land south of this (Antarctica)
 
 function isAntarcticaRing(coords) {
@@ -34,14 +35,37 @@ function simplifyRing(coords) {
   return out;
 }
 
+function fmt(x, y) {
+  const X = Math.round(x * Math.pow(10, ROUND)) / Math.pow(10, ROUND);
+  const Y = Math.round(y * Math.pow(10, ROUND)) / Math.pow(10, ROUND);
+  return `${X.toFixed(ROUND)},${Y.toFixed(ROUND)}`;
+}
+
 function coordsToPath(coords) {
   const simplified = simplifyRing(coords);
   const pts = simplified.map(([lon, lat]) => {
-    const x = Math.round((lon + 180) * Math.pow(10, ROUND)) / Math.pow(10, ROUND);
-    const y = Math.round((90 - lat) * Math.pow(10, ROUND)) / Math.pow(10, ROUND);
-    return `${x.toFixed(ROUND)},${y.toFixed(ROUND)}`;
+    const x = (lon + 180);
+    const y = (90 - lat);
+    return [x, y];
   });
-  return 'M ' + pts.join(' L ') + ' Z';
+  const n = pts.length;
+  if (n < 3) return 'M ' + pts.map(([x, y]) => fmt(x, y)).join(' L ') + ' Z';
+  const t = CORNER_ROUND;
+  const parts = [];
+  for (let i = 0; i < n; i++) {
+    const prev = pts[(i - 1 + n) % n];
+    const curr = pts[i];
+    const next = pts[(i + 1) % n];
+    const inX = curr[0] - t * (curr[0] - prev[0]);
+    const inY = curr[1] - t * (curr[1] - prev[1]);
+    const outX = curr[0] + t * (next[0] - curr[0]);
+    const outY = curr[1] + t * (next[1] - curr[1]);
+    if (i === 0) {
+      parts.push('M ' + fmt(inX, inY));
+    }
+    parts.push('Q ' + fmt(curr[0], curr[1]) + ' ' + fmt(outX, outY));
+  }
+  return parts.join(' ') + ' Z';
 }
 
 function geomToPaths(geom) {

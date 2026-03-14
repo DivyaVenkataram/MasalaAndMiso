@@ -39,7 +39,11 @@ export default function Home() {
       </FadeInSection>
 
       {/* 5. Editorial text — fluid, tight to map above */}
+<<<<<<< HEAD
       <section className="section-after-image pt-4 pb-10 sm:pt-6 sm:pb-12 px-8 -mt-2">
+=======
+      <section className="section-after-image pt-5 sm:pt-6 pb-10 sm:pb-12 px-8">
+>>>>>>> 90a9996f89c75e1225e318133016f5db3156267d
         <div className="max-w-2xl mx-auto text-center">
           <p className="text-midnight/85 text-[18px] leading-[1.6] mb-5">
             From San Francisco to Tokyo, we track the tables worth booking. Use the ranking guide to filter by city and cuisine.

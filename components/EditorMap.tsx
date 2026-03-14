@@ -116,6 +116,7 @@ export default function EditorMap() {
   const parallax = ref.current ? Math.min(1, scrollY * 0.0003) * 8 : 0
 
   return (
+<<<<<<< HEAD
     <section
       ref={ref}
       className="relative py-16 sm:py-20 overflow-hidden"
@@ -126,6 +127,10 @@ export default function EditorMap() {
       }}
     >
       <div className="max-w-layout mx-auto px-6 sm:px-8 mb-10">
+=======
+    <section ref={ref} className="relative pt-8 sm:pt-10 pb-0 overflow-hidden bg-page">
+      <div className="max-w-layout mx-auto px-6 sm:px-8 mb-3">
+>>>>>>> 90a9996f89c75e1225e318133016f5db3156267d
         <h2 className="font-playfair text-2xl sm:text-3xl font-medium text-midnight text-center mb-2 tracking-tight">
           Where We&apos;ve Dined
         </h2>
@@ -134,6 +139,7 @@ export default function EditorMap() {
         </p>
       </div>
 
+<<<<<<< HEAD
       <div className="relative w-full max-w-[70%] mx-auto" style={{ aspectRatio: '620/500', maxWidth: 720 }}>
         <svg
           viewBox="0 0 620 500"
@@ -206,6 +212,117 @@ export default function EditorMap() {
                 boxShadow: '0 20px 50px rgba(0,0,0,0.12)',
                 padding: '20px 24px',
               }}
+=======
+      <div
+        className="w-full transition-opacity duration-700"
+        style={{ opacity: visible ? 1 : 0 }}
+      >
+        <div className="relative overflow-hidden w-full" style={{ background: '#f3f3f5' }}>
+          {/* Ombre in — less at top */}
+          <div
+            className="absolute inset-x-0 top-0 z-10 pointer-events-none"
+            style={{
+              height: '28%',
+              background: 'linear-gradient(to bottom, #f3f3f5 0%, rgba(243, 243, 245, 0.92) 25%, rgba(243, 243, 245, 0.4) 65%, transparent 100%)',
+            }}
+            aria-hidden
+          />
+          {/* Ombre out — extends up over countries so fade is over South America */}
+          <div
+            className="absolute inset-x-0 bottom-0 z-10 pointer-events-none"
+            style={{
+              height: '58%',
+              background: 'linear-gradient(to top, #f3f3f5 0%, #f3f3f5 4%, rgba(243, 243, 245, 0.97) 14%, rgba(243, 243, 245, 0.88) 28%, rgba(243, 243, 245, 0.5) 52%, transparent 100%)',
+            }}
+            aria-hidden
+          />
+          <svg
+            viewBox="0 0 360 180"
+            className="w-full h-auto block"
+            style={{ aspectRatio: '360 / 180', minHeight: 420, maxHeight: 'min(80vh, 640px)' }}
+            aria-label="World map: where we’ve dined"
+          >
+            {/* Ocean — page background */}
+            <rect width="360" height="180" fill="#f3f3f5" />
+            {/* Land — darker countries only, abstract shapes */}
+            <path
+              d={LAND_PATH}
+              fill="rgba(17, 70, 101, 0.54)"
+              stroke="rgba(17, 70, 101, 0.85)"
+              strokeWidth={0.58}
+              strokeLinejoin="round"
+              strokeLinecap="round"
+            />
+            {/* City pins + labels */}
+            {CITIES.map((city) => {
+              const { x, y } = lonLatToXY(city.lon, city.lat)
+              const isOpen = openCityId === city.id
+              return (
+                <g
+                  key={city.id}
+                  transform={`translate(${x}, ${y})`}
+                  className="cursor-pointer outline-none"
+                  role="button"
+                  tabIndex={0}
+                  onClick={() => setOpenCityId(isOpen ? null : city.id)}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                      e.preventDefault()
+                      setOpenCityId(isOpen ? null : city.id)
+                    }
+                  }}
+                  aria-label={`${city.cityName}: ${city.restaurants}`}
+                >
+                  <text
+                    x={0}
+                    y={10}
+                    textAnchor="middle"
+                    fill="#16202b"
+                    fontSize={3.2}
+                    fontFamily="var(--font-playfair), Georgia, serif"
+                    fontWeight={500}
+                    pointerEvents="none"
+                  >
+                    {city.cityName}
+                  </text>
+                  <path
+                    d={PIN_PATH}
+                    fill="rgba(17, 70, 101, 0.2)"
+                    transform="scale(1,-1) translate(0.35, 0.28)"
+                    pointerEvents="none"
+                  />
+                  <path
+                    d={PIN_PATH}
+                    fill="#720f32"
+                    stroke="rgba(255,255,255,0.85)"
+                    strokeWidth={0.45}
+                    strokeLinejoin="round"
+                    transform="scale(1,-1)"
+                  />
+                </g>
+              )
+            })}
+          </svg>
+        </div>
+
+        {/* Dropdown: restaurants for selected city — blue text on light */}
+        {openCity && (
+          <div
+            className="mt-2 rounded-sm bg-white/95 backdrop-blur-sm px-5 py-4 shadow-lg border border-ocean/15 max-w-md mx-auto animate-fade-in"
+            role="region"
+            aria-label={`Restaurants in ${openCity.cityName}`}
+          >
+            <p className="font-playfair text-base font-medium text-ocean tracking-tight">
+              {openCity.cityName}
+            </p>
+            <p className="text-ocean/80 text-metadata mt-1 leading-relaxed">
+              {openCity.restaurants}
+            </p>
+            <Link
+              href="/ranking-guide"
+              className="inline-block mt-3 text-ocean text-metadata border-b border-ocean/50 pb-0.5 hover:border-ocean transition-colors"
+              style={{ backgroundImage: 'none' }}
+>>>>>>> 90a9996f89c75e1225e318133016f5db3156267d
             >
               <p className="font-playfair text-lg font-medium text-midnight tracking-tight">
                 {openRegion.cityName}
