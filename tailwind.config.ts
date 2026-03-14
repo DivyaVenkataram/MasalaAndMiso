@@ -16,33 +16,30 @@ const config: Config = {
       },
       fontFamily: {
         playfair: ['var(--font-playfair)', 'Georgia', 'serif'],
-        baskerville: ['var(--font-baskerville)', 'Georgia', 'serif'],
-        sans: ['var(--font-inter)', 'system-ui', 'sans-serif'],
+        editorial: ['Times New Roman', 'Times', 'serif'],
       },
       letterSpacing: {
-        brand: '0.12em',
+        brand: '0.15em',
+      },
+      fontSize: {
+        'section': ['2.625rem', { lineHeight: '1.2' }],
+        'section-lg': ['3.5rem', { lineHeight: '1.15' }],
       },
       maxWidth: {
         reading: '720px',
         layout: '1200px',
       },
-      spacing: {
-        '18': '4.5rem',
-        '22': '5.5rem',
-        '30': '7.5rem',
-        '80': '20rem',
+      backgroundImage: {
+        'hero': 'linear-gradient(rgba(22, 32, 43, 0.4), rgba(22, 32, 43, 0.6))',
       },
       animation: {
-        'fade-in': 'fadeIn 0.6s ease-out forwards',
+        'fade-in': 'fadeIn 0.8s ease-out forwards',
       },
       keyframes: {
         fadeIn: {
-          '0%': { opacity: '0', transform: 'translateY(16px)' },
+          '0%': { opacity: '0', transform: 'translateY(20px)' },
           '100%': { opacity: '1', transform: 'translateY(0)' },
         },
-      },
-      transitionDuration: {
-        '200': '200ms',
       },
     },
   },

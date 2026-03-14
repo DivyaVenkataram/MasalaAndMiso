@@ -23,8 +23,8 @@ export default function ArticlePage({
   children,
 }: ArticlePageProps) {
   return (
-    <article className="pt-24 pb-20">
-      <div className="relative w-full aspect-[21/9] min-h-[280px] bg-midnight">
+    <article>
+      <div className="relative w-full aspect-[21/9] min-h-[320px]">
         <Image
           src={image}
           alt={imageAlt}
@@ -34,19 +34,17 @@ export default function ArticlePage({
           sizes="100vw"
         />
       </div>
-      <div className="max-w-reading mx-auto px-6 -mt-16 relative z-10">
-        <h1 className="font-baskerville text-4xl sm:text-[2.75rem] text-midnight mb-4 bg-neutral p-6 shadow-lg">
+      <div className="max-w-reading mx-auto px-8 py-16">
+        <h1 className="font-playfair text-3xl sm:text-4xl font-medium text-midnight mb-6">
           {title}
         </h1>
-        <div className="flex flex-wrap gap-4 text-sm text-wine mb-12 bg-neutral px-6 py-3">
-          <span>{author}</span>
-          <span>{date}</span>
-          <span>{readTime}</span>
-        </div>
-        <div className="bg-neutral shadow-sm p-8 sm:p-12 space-y-6 text-base sm:text-lg leading-relaxed text-midnight">
+        <p className="text-midnight/70 text-sm uppercase tracking-widest mb-12">
+          {author} · {date} · {readTime}
+        </p>
+        <div className="space-y-6 text-lg leading-relaxed text-midnight">
           {children}
           {pullQuote && (
-            <blockquote className="font-baskerville text-2xl sm:text-[1.75rem] text-burgundy text-center py-8 my-8 border-y border-wine/30">
+            <blockquote className="pull-quote-editorial py-12 my-12">
               &ldquo;{pullQuote}&rdquo;
             </blockquote>
           )}

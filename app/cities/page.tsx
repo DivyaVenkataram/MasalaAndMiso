@@ -2,38 +2,46 @@ import Link from 'next/link'
 
 export default function CitiesPage() {
   return (
-    <main className="pt-28 pb-20">
-      <div className="max-w-layout mx-auto px-6">
-        <h1 className="font-playfair text-5xl sm:text-6xl font-semibold uppercase tracking-brand text-midnight mb-4">
+    <main>
+      <section
+        className="relative pt-40 pb-32 px-8 flex flex-col items-center justify-center min-h-[70vh] bg-cover bg-center"
+        style={{
+          backgroundImage: `linear-gradient(rgba(22,32,43,0.6), rgba(22,32,43,0.55)), url('https://images.unsplash.com/photo-1523531294919-4bcd7c65e216?w=1920&q=80')`,
+        }}
+      >
+        <h1 className="font-playfair text-4xl sm:text-5xl md:text-[3.5rem] font-medium text-white text-center mb-4">
           Cities
         </h1>
-        <p className="font-baskerville text-xl text-midnight/80 mb-12 max-w-reading">
-          Where to eat in San Francisco, New York, Tokyo, and beyond. Curated by city.
+        <p className="text-white/90 text-center max-w-xl text-lg">
+          Where to eat in San Francisco, New York, Tokyo, Mumbai, and beyond.
         </p>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          <Link
-            href="/best-of"
-            className="block p-6 rounded-sm bg-white border-l-4 border-burgundy shadow-md hover:shadow-lg transition-all"
-          >
-            <h2 className="font-baskerville text-lg text-midnight mb-1">San Francisco & Bay Area</h2>
-            <p className="text-sm text-midnight/70">Nari, Snail Bar, Tiya, F.O.B. Kitchen & more.</p>
-          </Link>
-          <div className="block p-6 rounded-sm bg-white border-l-4 border-wine/40 shadow-md opacity-90">
-            <h2 className="font-baskerville text-lg text-midnight mb-1">New York</h2>
-            <p className="text-sm text-midnight/70">Coming soon.</p>
-          </div>
-          <div className="block p-6 rounded-sm bg-white border-l-4 border-wine/40 shadow-md opacity-90">
-            <h2 className="font-baskerville text-lg text-midnight mb-1">Los Angeles</h2>
-            <p className="text-sm text-midnight/70">Coming soon.</p>
-          </div>
-          <div className="block p-6 rounded-sm bg-white border-l-4 border-wine/40 shadow-md opacity-90">
-            <h2 className="font-baskerville text-lg text-midnight mb-1">Japan</h2>
-            <p className="text-sm text-midnight/70">Coming soon.</p>
-          </div>
-        </div>
-        <p className="mt-10 text-midnight/70 text-sm">
-          See our full <Link href="/best-of" className="text-ocean hover:text-burgundy font-medium">Best Of</Link> and <Link href="/rankings" className="text-ocean hover:text-burgundy font-medium">Rankings</Link> for filters and reserve links.
+      </section>
+
+      <div className="max-w-reading mx-auto px-8 py-24">
+        <p className="text-midnight/85 text-lg leading-relaxed mb-12">
+          We build our coverage city by city. Each place gets a curated shortlist—no clutter, just where we&apos;d book again.
         </p>
+        <ul className="space-y-16">
+          <li className="border-b border-midnight/15 pb-12">
+            <h2 className="font-playfair text-2xl font-medium text-midnight mb-2">San Francisco & Bay Area</h2>
+            <p className="text-midnight/80 mb-4">Nari, Snail Bar, Tiya, F.O.B. Kitchen, and more. In the Guide or starred.</p>
+            <Link href="/editors-table" className="link-editorial">See Editor&apos;s Table →</Link>
+          </li>
+          <li className="border-b border-midnight/15 pb-12">
+            <h2 className="font-playfair text-2xl font-medium text-midnight mb-2">New York</h2>
+            <p className="text-midnight/80 mb-4">Coverage expanding. Le Bernardin, Atomix, and others in the pipeline.</p>
+            <Link href="/ranking-guide" className="link-editorial">Ranking Guide →</Link>
+          </li>
+          <li className="border-b border-midnight/15 pb-12">
+            <h2 className="font-playfair text-2xl font-medium text-midnight mb-2">Tokyo</h2>
+            <p className="text-midnight/80 mb-4">Where Michelin first went outside Europe. Jiro, Narisawa, and the city&apos;s best.</p>
+            <Link href="/posts" className="link-editorial">Read posts →</Link>
+          </li>
+          <li>
+            <h2 className="font-playfair text-2xl font-medium text-midnight mb-2">Mumbai</h2>
+            <p className="text-midnight/80 mb-4">Coming soon.</p>
+          </li>
+        </ul>
       </div>
     </main>
   )

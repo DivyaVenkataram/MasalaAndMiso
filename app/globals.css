@@ -7,29 +7,41 @@
     scroll-behavior: smooth;
   }
   body {
-    @apply bg-neutral text-midnight antialiased;
-    font-size: 1rem;
-    line-height: 1.7;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 18px;
+    line-height: 1.8;
+    color: #16202b;
+    background: #0a0a0a;
+    -webkit-font-smoothing: antialiased;
   }
 }
 
 @layer components {
   .link-editorial {
-    @apply text-ocean transition-colors duration-200 hover:text-burgundy;
+    color: #114665;
+    transition: color 0.25s ease, background-size 0.25s ease;
     background-image: linear-gradient(currentColor, currentColor);
     background-size: 0 1px;
     background-position: 0 100%;
     background-repeat: no-repeat;
   }
   .link-editorial:hover {
+    color: #720f32;
     background-size: 100% 1px;
   }
 }
 
-/* Pull quote */
-.pull-quote {
-  font-family: var(--font-baskerville), Georgia, serif;
-  font-size: 1.75rem;
+.pull-quote-editorial {
+  font-family: var(--font-playfair), Georgia, serif;
+  font-style: italic;
+  font-size: 32px;
   color: #720f32;
   text-align: center;
+  line-height: 1.4;
+}
+
+.section-divider {
+  height: 1px;
+  background-color: rgba(123, 68, 90, 0.3);
+  margin: 120px 0;
 }

@@ -1,0 +1,53 @@
+import Link from 'next/link'
+import Image from 'next/image'
+import { stories } from '@/data/stories'
+
+export default function PostsPage() {
+  return (
+    <main>
+      <section
+        className="relative pt-40 pb-32 px-8 flex flex-col items-center justify-center min-h-[60vh] bg-cover bg-center"
+        style={{
+          backgroundImage: `linear-gradient(rgba(22,32,43,0.5), rgba(22,32,43,0.6)), url('https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1920&q=80')`,
+        }}
+      >
+        <h1 className="font-playfair text-4xl sm:text-5xl md:text-[3.5rem] font-medium text-white text-center mb-4">
+          Posts
+        </h1>
+        <p className="text-white/90 text-center max-w-xl text-lg">
+          Dispatches from the table. Long-form reviews and stories.
+        </p>
+      </section>
+
+      <section className="relative">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-0">
+          {stories.map((story) => (
+            <Link
+              key={story.slug}
+              href={`/posts/${story.slug}`}
+              className="group relative block aspect-[4/5] overflow-hidden"
+            >
+              <Image
+                src={story.image}
+                alt=""
+                fill
+                className="object-cover transition-transform duration-700 group-hover:scale-105"
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+              />
+              <div
+                className="absolute inset-0 bg-midnight/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-8"
+              >
+                <div>
+                  <h2 className="font-playfair text-xl sm:text-2xl font-medium text-white">
+                    {story.title}
+                  </h2>
+                  <p className="text-white/80 text-sm mt-1">{story.city} · {story.readTime}</p>
+                </div>
+              </div>
+            </Link>
+          ))}
+        </div>
+      </section>
+    </main>
+  )
+}
