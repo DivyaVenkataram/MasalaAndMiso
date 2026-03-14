@@ -96,3 +96,32 @@
   pointer-events: none;
   animation: markerRing 1.5s ease-out infinite;
 }
+
+/* Geographic silhouettes section: soft horizontal ombre */
+.region-silhouettes-bg {
+  background: linear-gradient(90deg, #f3f3f5 0%, #e9ecef 50%, #f3f3f5 100%);
+}
+
+/* Map dropdown panel: fade + upward motion */
+@keyframes mapPanelIn {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.map-panel-in {
+  animation: mapPanelIn 0.4s ease-out forwards;
+}
+
+/* Map region marker: soft pulse */
+@keyframes mapMarkerPulse {
+  0%, 100% { opacity: 0.85; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.08); }
+}
+.map-marker-pulse {
+  animation: mapMarkerPulse 2.5s ease-in-out infinite;
+}
