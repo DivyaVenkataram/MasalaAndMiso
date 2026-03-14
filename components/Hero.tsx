@@ -38,10 +38,10 @@ export default function Hero() {
           filter: textBlur > 0 ? `blur(${textBlur}px)` : undefined,
         }}
       >
-        <h1 className="font-playfair text-5xl sm:text-6xl md:text-7xl font-semibold uppercase tracking-[0.15em] text-white mb-6">
+        <h1 className="font-playfair text-5xl sm:text-6xl md:text-7xl font-medium uppercase tracking-[0.15em] text-white mb-4">
           MASALA & MISO
         </h1>
-        <p className="font-playfair text-xl sm:text-2xl text-white/95 mb-12 max-w-2xl mx-auto font-normal tracking-normal normal-case">
+        <p className="font-playfair text-xl sm:text-2xl text-white/95 mb-8 max-w-2xl mx-auto font-normal tracking-normal normal-case">
           A culinary journey between India and Japan.
         </p>
         <Link

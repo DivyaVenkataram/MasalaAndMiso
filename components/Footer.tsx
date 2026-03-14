@@ -17,16 +17,16 @@ export default function Footer() {
           backgroundImage: `linear-gradient(rgba(22,32,43,0.92), rgba(22,32,43,0.95)), url('https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1920&q=60')`,
         }}
       />
-      <div className="relative z-10 py-20 px-8">
-        <div className="max-w-layout mx-auto flex flex-col md:flex-row justify-between items-start md:items-center gap-12">
+      <div className="relative z-10 py-section px-8">
+        <div className="max-w-layout mx-auto flex flex-col md:flex-row justify-between items-start md:items-center gap-8">
           <div className="max-w-sm">
             <Link
               href="/"
-              className="font-playfair text-xl font-semibold uppercase tracking-[0.15em] text-neutral hover:text-burgundy transition-colors inline-block mb-4"
+              className="font-playfair text-xl font-medium uppercase tracking-[0.15em] text-neutral hover:text-burgundy transition-colors inline-block mb-4"
             >
               MASALA & MISO
             </Link>
-            <p className="text-neutral/80 text-sm leading-relaxed">
+            <p className="text-neutral/80 text-metadata leading-[1.6]">
               A luxury culinary travel publication. Cross-cultural cuisine, travel storytelling, and elevated food journalism.
             </p>
           </div>
@@ -42,8 +42,8 @@ export default function Footer() {
             ))}
           </nav>
         </div>
-        <div className="max-w-layout mx-auto mt-16 pt-8 border-t border-white/10">
-          <p className="text-neutral/60 text-sm">© Masala & Miso</p>
+        <div className="max-w-layout mx-auto mt-8 pt-8 border-t border-white/10">
+          <p className="text-neutral/60 text-metadata">© Masala & Miso</p>
         </div>
       </div>
     </footer>

@@ -27,19 +27,19 @@ export default function Navbar() {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-8 py-5 transition-all duration-300 ${
+      className={`fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-8 py-4 transition-all duration-300 ${
         scrolled ? 'bg-black/80 backdrop-blur-md' : 'bg-transparent'
       }`}
     >
       <Link
         href="/"
-        className={`font-playfair text-lg font-semibold uppercase tracking-[0.15em] transition-colors duration-200 ${
+        className={`font-playfair text-lg font-medium uppercase tracking-[0.15em] transition-colors duration-200 ${
           scrolled ? 'text-neutral hover:text-burgundy' : 'text-white hover:text-neutral'
         }`}
       >
         MASALA & MISO
       </Link>
-      <nav className="flex items-center gap-10">
+      <nav className="flex items-center gap-8">
         {navLinks.map(({ href, label }) => {
           const active = isActive(href)
           return (

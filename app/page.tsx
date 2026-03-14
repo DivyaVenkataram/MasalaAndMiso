@@ -14,16 +14,16 @@ export default function Home() {
       </FadeInSection>
       <SectionDivider />
       <section
-        className="relative py-32 px-8 bg-cover bg-center bg-fixed"
+        className="relative py-section px-8 bg-cover bg-center bg-fixed"
         style={{
           backgroundImage: `linear-gradient(rgba(22,32,43,0.7), rgba(22,32,43,0.75)), url('https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=1920&q=80')`,
         }}
       >
         <div className="max-w-2xl mx-auto text-center">
-          <h2 className="font-playfair text-3xl sm:text-4xl font-medium text-white mb-6">
+          <h2 className="font-playfair text-3xl sm:text-4xl font-medium text-white mb-4">
             A table between two worlds
           </h2>
-          <p className="text-white/90 text-lg leading-relaxed mb-10">
+          <p className="text-white/90 text-[18px] leading-[1.6] mb-8">
             Masala & Miso is a luxury culinary travel publication. We write long-form reviews, curate where to eat by city, and keep a ranking guide—so you can reserve with confidence.
           </p>
           <Link

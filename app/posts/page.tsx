@@ -6,15 +6,15 @@ export default function PostsPage() {
   return (
     <main>
       <section
-        className="relative pt-40 pb-32 px-8 flex flex-col items-center justify-center min-h-[60vh] bg-cover bg-center"
+        className="relative pt-28 pb-section px-8 flex flex-col items-center justify-center min-h-[50vh] bg-cover bg-center"
         style={{
           backgroundImage: `linear-gradient(rgba(22,32,43,0.5), rgba(22,32,43,0.6)), url('https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1920&q=80')`,
         }}
       >
-        <h1 className="font-playfair text-4xl sm:text-5xl md:text-[3.5rem] font-medium text-white text-center mb-4">
+        <h1 className="font-playfair text-4xl sm:text-5xl font-medium text-white text-center mb-4">
           Posts
         </h1>
-        <p className="text-white/90 text-center max-w-xl text-lg">
+        <p className="text-white/90 text-center max-w-xl text-[18px] leading-[1.6]">
           Dispatches from the table. Long-form reviews and stories.
         </p>
       </section>
@@ -41,7 +41,7 @@ export default function PostsPage() {
                   <h2 className="font-playfair text-xl sm:text-2xl font-medium text-white">
                     {story.title}
                   </h2>
-                  <p className="text-white/80 text-sm mt-1">{story.city} · {story.readTime}</p>
+                  <p className="text-white/80 text-metadata mt-1">{story.city} · {story.readTime}</p>
                 </div>
               </div>
             </Link>

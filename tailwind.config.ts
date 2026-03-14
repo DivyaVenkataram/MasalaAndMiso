@@ -18,19 +18,20 @@ const config: Config = {
         playfair: ['var(--font-playfair)', 'Georgia', 'serif'],
         editorial: ['Times New Roman', 'Times', 'serif'],
       },
+      fontSize: {
+        'metadata': ['15px', { lineHeight: '1.6' }],
+        'filter': ['16px', { lineHeight: '1.6' }],
+      },
       letterSpacing: {
         brand: '0.15em',
       },
-      fontSize: {
-        'section': ['2.625rem', { lineHeight: '1.2' }],
-        'section-lg': ['3.5rem', { lineHeight: '1.15' }],
+      spacing: {
+        'section': '80px',
+        'component': '32px',
       },
       maxWidth: {
         reading: '720px',
         layout: '1200px',
-      },
-      backgroundImage: {
-        'hero': 'linear-gradient(rgba(22, 32, 43, 0.4), rgba(22, 32, 43, 0.6))',
       },
       animation: {
         'fade-in': 'fadeIn 0.8s ease-out forwards',

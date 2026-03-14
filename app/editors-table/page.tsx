@@ -29,40 +29,40 @@ export default function EditorsTablePage() {
   return (
     <main>
       <section
-        className="relative pt-40 pb-32 px-8 flex flex-col items-center justify-center min-h-[70vh] bg-cover bg-center"
+        className="relative pt-28 pb-section px-8 flex flex-col items-center justify-center min-h-[60vh] bg-cover bg-center"
         style={{
           backgroundImage: `linear-gradient(rgba(22,32,43,0.55), rgba(22,32,43,0.5)), url('https://images.unsplash.com/photo-1550966871-3ed3cdb5ed0c?w=1920&q=80')`,
         }}
       >
-        <h1 className="font-playfair text-4xl sm:text-5xl md:text-[3.5rem] font-medium text-white text-center mb-4">
+        <h1 className="font-playfair text-4xl sm:text-5xl font-medium text-white text-center mb-4">
           Editor&apos;s Table
         </h1>
-        <p className="text-white/90 text-center max-w-xl text-lg leading-relaxed">
+        <p className="text-white/90 text-center max-w-xl text-[18px] leading-[1.6]">
           Curated lists from the table. No rankings—just where we keep going back.
         </p>
       </section>
 
       {lists.map((list, i) => (
         <section key={i} className="relative">
-          <div className="max-w-layout mx-auto px-8 py-24">
+          <div className="max-w-layout mx-auto px-8 py-section">
             <div
-              className={`flex flex-col gap-16 md:gap-24 ${list.imagePosition === 'right' ? 'md:flex-row' : 'md:flex-row-reverse'}`}
+              className={`flex flex-col gap-8 md:gap-8 ${list.imagePosition === 'right' ? 'md:flex-row' : 'md:flex-row-reverse'}`}
             >
               <div className="flex-1 flex flex-col justify-center">
                 <h2 className="font-playfair text-3xl sm:text-4xl font-medium text-midnight mb-4">
                   {list.title}
                 </h2>
-                <p className="text-midnight/85 text-lg leading-relaxed mb-8 max-w-xl">
+                <p className="text-midnight/85 text-[18px] leading-[1.6] mb-6 max-w-xl">
                   {list.description}
                 </p>
-                <ul className="space-y-3">
+                <ul className="space-y-2">
                   {list.items.map((item, j) => (
-                    <li key={j} className="text-midnight/80 border-b border-midnight/10 pb-2 last:border-0">
+                    <li key={j} className="text-midnight/80 border-b border-midnight/10 pb-2 last:border-0 text-[18px] leading-[1.6]">
                       {item}
                     </li>
                   ))}
                 </ul>
-                <Link href="/ranking-guide" className="text-ocean link-editorial mt-6 inline-block">
+                <Link href="/ranking-guide" className="text-ocean link-editorial mt-4 inline-block">
                   See full ranking →
                 </Link>
               </div>

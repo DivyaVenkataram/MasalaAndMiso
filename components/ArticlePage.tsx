@@ -34,17 +34,17 @@ export default function ArticlePage({
           sizes="100vw"
         />
       </div>
-      <div className="max-w-reading mx-auto px-8 py-16">
-        <h1 className="font-playfair text-3xl sm:text-4xl font-medium text-midnight mb-6">
+      <div className="max-w-reading mx-auto px-8 py-section">
+        <h1 className="font-playfair text-3xl sm:text-4xl font-medium text-midnight mb-4">
           {title}
         </h1>
-        <p className="text-midnight/70 text-sm uppercase tracking-widest mb-12">
+        <p className="text-metadata text-midnight/70 uppercase tracking-widest mb-8">
           {author} · {date} · {readTime}
         </p>
-        <div className="space-y-6 text-lg leading-relaxed text-midnight">
+        <div className="space-y-4 text-[18px] leading-[1.6] text-midnight">
           {children}
           {pullQuote && (
-            <blockquote className="pull-quote-editorial py-12 my-12">
+            <blockquote className="pull-quote-editorial py-8 my-8">
               &ldquo;{pullQuote}&rdquo;
             </blockquote>
           )}

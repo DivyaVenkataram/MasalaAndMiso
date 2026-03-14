@@ -55,30 +55,30 @@ export default function RankingGuidePage() {
   return (
     <main className="min-h-screen">
       <section
-        className="relative pt-40 pb-32 px-8 flex flex-col items-center justify-center min-h-[70vh] bg-cover bg-center"
+        className="relative pt-28 pb-section px-8 flex flex-col items-center justify-center min-h-[60vh] bg-cover bg-center"
         style={{
           backgroundImage: `linear-gradient(rgba(22,32,43,0.6), rgba(22,32,43,0.5)), url('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=1920&q=80')`,
         }}
       >
-        <h1 className="font-playfair text-4xl sm:text-5xl md:text-[3.5rem] font-medium text-white text-center mb-4">
+        <h1 className="font-playfair text-4xl sm:text-5xl font-medium text-white text-center mb-4">
           Ranking Guide
         </h1>
-        <p className="text-white/90 text-center max-w-xl text-lg leading-relaxed">
+        <p className="text-white/90 text-center max-w-xl text-[18px] leading-[1.6]">
           Where we&apos;ve dined. Filter by place and style—then reserve.
         </p>
       </section>
 
       <div
-        className="max-w-3xl mx-auto px-8 py-24"
+        className="max-w-3xl mx-auto px-8 py-section"
         style={{ background: 'linear-gradient(180deg, rgba(209,209,214,0.03) 0%, transparent 100%)' }}
       >
-        <div className="flex flex-wrap items-baseline gap-6 mb-20 border-b border-midnight/20 pb-6">
+        <div className="flex flex-wrap items-baseline gap-4 mb-8 border-b border-midnight/20 pb-4">
           <div className="flex flex-wrap items-baseline gap-4">
-            <label className="text-midnight/80 text-sm uppercase tracking-widest">Location</label>
+            <label className="text-midnight/80 text-filter uppercase tracking-widest">Location</label>
             <select
               value={location}
               onChange={(e) => setLocation(e.target.value)}
-              className="bg-transparent border-0 border-b-2 border-midnight/40 py-1 pr-8 text-midnight font-editorial text-lg focus:outline-none focus:border-burgundy cursor-pointer appearance-none min-w-[140px]"
+              className="bg-transparent border-0 border-b-2 border-midnight/40 py-1 pr-8 text-midnight text-filter focus:outline-none focus:border-burgundy cursor-pointer appearance-none min-w-[140px]"
               style={{ backgroundImage: 'none' }}
             >
               {locationOptions.map((opt) => (
@@ -87,11 +87,11 @@ export default function RankingGuidePage() {
             </select>
           </div>
           <div className="flex flex-wrap items-baseline gap-4">
-            <label className="text-midnight/80 text-sm uppercase tracking-widest">Cuisine</label>
+            <label className="text-midnight/80 text-filter uppercase tracking-widest">Cuisine</label>
             <select
               value={cuisine}
               onChange={(e) => setCuisine(e.target.value)}
-              className="bg-transparent border-0 border-b-2 border-midnight/40 py-1 pr-8 text-midnight font-editorial text-lg focus:outline-none focus:border-burgundy cursor-pointer appearance-none min-w-[180px]"
+              className="bg-transparent border-0 border-b-2 border-midnight/40 py-1 pr-8 text-midnight text-filter focus:outline-none focus:border-burgundy cursor-pointer appearance-none min-w-[180px]"
             >
               {cuisineOptions.map((opt) => (
                 <option key={opt || 'all'} value={opt}>{opt || 'All'}</option>
@@ -99,11 +99,11 @@ export default function RankingGuidePage() {
             </select>
           </div>
           <div className="flex flex-wrap items-baseline gap-4">
-            <label className="text-midnight/80 text-sm uppercase tracking-widest">Michelin</label>
+            <label className="text-midnight/80 text-filter uppercase tracking-widest">Michelin</label>
             <select
               value={stars}
               onChange={(e) => setStars(e.target.value)}
-              className="bg-transparent border-0 border-b-2 border-midnight/40 py-1 pr-8 text-midnight font-editorial text-lg focus:outline-none focus:border-burgundy cursor-pointer appearance-none min-w-[100px]"
+              className="bg-transparent border-0 border-b-2 border-midnight/40 py-1 pr-8 text-midnight text-filter focus:outline-none focus:border-burgundy cursor-pointer appearance-none min-w-[100px]"
             >
               {starsOptions.map((opt) => (
                 <option key={opt || 'all'} value={opt}>{opt || 'All'}</option>
@@ -113,7 +113,7 @@ export default function RankingGuidePage() {
           <button
             type="button"
             onClick={() => { setLocation(''); setCuisine(''); setStars('') }}
-            className="text-ocean link-editorial text-sm uppercase tracking-widest"
+            className="text-ocean link-editorial text-filter uppercase tracking-widest"
           >
             Reset
           </button>
@@ -126,7 +126,7 @@ export default function RankingGuidePage() {
             return (
               <li
                 key={row.id}
-                className="py-12 border-b border-midnight/15 last:border-b-0"
+                className="py-8 border-b border-midnight/15 last:border-b-0"
               >
                 <span className="font-playfair text-4xl font-medium text-midnight/30 block mb-4">
                   {String(index + 1).padStart(2, '0')}
@@ -144,16 +144,16 @@ export default function RankingGuidePage() {
                   </span>
                 )}
                 {!isPlaceholder && (
-                  <p className="text-midnight/85 leading-relaxed mb-4 max-w-xl">
+                  <p className="text-midnight/85 leading-[1.6] mb-4 max-w-xl text-[18px]">
                     A table we return to. Refined technique, clear point of view, and a sense of place that stays with you after the last course.
                   </p>
                 )}
                 {!isPlaceholder && (
                   <div className="flex items-center gap-4">
                     <ScoreDots score={score} />
-                    <span className="text-midnight/50 text-sm">{row.rating}/10</span>
+                    <span className="text-midnight/50 text-metadata">{row.rating}/10</span>
                     {row.reserveHref !== '#' && (
-                      <Link href={row.reserveHref} className="text-ocean link-editorial text-sm ml-4">
+                      <Link href={row.reserveHref} className="text-ocean link-editorial text-filter ml-4">
                         Reserve →
                       </Link>
                     )}

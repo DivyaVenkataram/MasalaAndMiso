@@ -40,7 +40,7 @@ export default function EditorMap() {
   }, [visible.root])
 
   return (
-    <section ref={ref} className="relative py-32 overflow-hidden">
+    <section ref={ref} className="relative py-section overflow-hidden">
       <div
         className="absolute inset-0 bg-cover bg-center"
         style={{
@@ -48,10 +48,10 @@ export default function EditorMap() {
         }}
       />
       <div className="relative z-10 max-w-layout mx-auto px-8">
-        <h2 className="font-playfair text-section sm:text-section-lg font-medium text-white text-center mb-4">
+        <h2 className="font-playfair text-3xl sm:text-4xl font-medium text-white text-center mb-4">
           Where We&apos;ve Dined
         </h2>
-        <p className="text-white/80 text-center max-w-xl mx-auto mb-20 text-lg">
+        <p className="text-white/80 text-center max-w-xl mx-auto mb-8 text-[18px] leading-[1.6]">
           A minimal map of cities we return to. Click a city to see our picks.
         </p>
 
@@ -101,7 +101,7 @@ export default function EditorMap() {
           ))}
         </div>
 
-        <p className="text-white/60 text-center mt-12 text-sm">
+        <p className="text-metadata text-white/60 text-center mt-8">
           San Francisco · New York · Tokyo · Mumbai
         </p>
       </div>
