@@ -1,30 +1,68 @@
-// Restaurant pins — Bay Area visits + placeholders (New York, LA, Japan)
-const restaurants = [
-  { name: 'Tiya', city: 'San Francisco', lat: 37.7879, lng: -122.4074, michelin: 'Guide 2024–25' },
-  { name: 'Snail Bar', city: 'San Francisco', lat: 37.7694, lng: -122.4262, michelin: 'Guide 2023–25' },
-  { name: 'Nari', city: 'San Francisco', lat: 37.7849, lng: -122.4094, michelin: '1 Star 2023–25' },
-  { name: 'F.O.B. Kitchen', city: 'San Francisco', lat: 37.7627, lng: -122.4227, michelin: 'Guide 2021–25' },
-  { name: 'Placeholder', city: 'New York', lat: 40.7128, lng: -74.0060, michelin: '—' },
-  { name: 'Placeholder', city: 'Los Angeles', lat: 34.0522, lng: -118.2437, michelin: '—' },
-  { name: 'Placeholder', city: 'Japan', lat: 35.6762, lng: 139.6503, michelin: '—' },
-];
+/**
+ * Custom-styled map: data from MasalaData, light tiles, popover with full details.
+ */
+(function () {
+  var mapEl = document.getElementById('map');
+  if (!mapEl) return;
 
-function initMap() {
-  const map = L.map('map').setView([37.78, -122.41], 11); // SF/Bay Area focus
+  function initMap() {
+    var restaurants = typeof MasalaData !== 'undefined' ? MasalaData.getRestaurants() : [];
+    var reviewed = restaurants.filter(function (r) { return !r.isPlaceholder; });
 
-  L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
-    attribution: '&copy; OpenStreetMap, &copy; CARTO',
-    maxZoom: 19,
-  }).addTo(map);
+    var map = L.map('map', {
+      center: [37.78, -122.41],
+      zoom: 12,
+      scrollWheelZoom: true
+    });
 
-  restaurants.forEach((r) => {
-    const popup = `<strong>${r.name}</strong><br>${r.city} · ${r.michelin}`;
-    L.marker([r.lat, r.lng])
-      .addTo(map)
-      .bindPopup(popup);
-  });
-}
+    // Light, minimal tile layer (no dark/carto)
+    L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+      attribution: '&copy; OpenStreetMap &copy; CARTO',
+      maxZoom: 19
+    }).addTo(map);
 
-if (document.getElementById('map')) {
-  document.addEventListener('DOMContentLoaded', initMap);
-}
+    // Custom marker icon — simple dot/circle style
+    var markerHtml = '<span style="display:block;width:12px;height:12px;border-radius:50%;background:#720f32;border:2px solid #fff;box-shadow:0 1px 3px rgba(0,0,0,0.2);"></span>';
+    var icon = L.divIcon({
+      className: 'map-marker',
+      html: markerHtml,
+      iconSize: [16, 16],
+      iconAnchor: [8, 8]
+    });
+
+    restaurants.forEach(function (r) {
+      var marker = L.marker([r.lat, r.lng], { icon: icon }).addTo(map);
+
+      if (r.isPlaceholder) {
+        marker.bindPopup(
+          '<div class="map-popover">' +
+            '<h4>' + r.name + '</h4>' +
+            '<p class="meta">' + r.city + ' · Coming soon</p>' +
+          '</div>'
+        );
+        return;
+      }
+
+      var reviewUrl = r.reviewSlug ? ('review-' + r.reviewSlug + '.html') : ('blog.html#' + r.slug);
+      var popupContent =
+        '<div class="map-popover">' +
+          '<h4>' + r.name + '</h4>' +
+          '<p class="meta">' + r.city + (r.neighborhood ? ' · ' + r.neighborhood : '') + '</p>' +
+          '<p class="meta">' + r.cuisine + ' · ' + r.michelinDetail + '</p>' +
+          '<p class="score">' + r.score + ' / 10</p>' +
+          '<a href="' + reviewUrl + '">Read review →</a>' +
+        '</div>';
+
+      marker.bindPopup(popupContent, {
+        maxWidth: 280,
+        className: 'map-popover-wrapper'
+      });
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initMap);
+  } else {
+    initMap();
+  }
+})();

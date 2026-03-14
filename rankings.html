@@ -8,138 +8,168 @@
 </head>
 <body>
   <header class="site-header">
-    <a href="index.html" class="logo">
-      <span class="logo-mark">M&M</span>
-      <span>Masala & Miso</span>
-    </a>
-    <nav class="nav-main">
-      <a href="index.html">Home</a>
-      <a href="blog.html">Blog</a>
-      <a href="rankings.html" class="active">Rankings</a>
-      <a href="best-of.html">Best Of</a>
-      <a href="about.html">About</a>
-    </nav>
+    <div class="inner">
+      <a href="index.html" class="logo">
+        <span class="logo-mark">M&M</span>
+        Masala & Miso
+      </a>
+      <nav class="nav-main">
+        <a href="index.html">Home</a>
+        <a href="blog.html">Reviews</a>
+        <a href="rankings.html" class="active">Rankings</a>
+        <a href="best-of.html">Best Of</a>
+        <a href="about.html">About</a>
+      </nav>
+    </div>
   </header>
 
   <main>
     <section class="hero">
-      <h1>Rankings</h1>
-      <p class="lead">Filter by location, price, cuisine—and reserve your next meal.</p>
+      <div class="inner">
+        <h1>Rankings</h1>
+        <p class="lead">Filter by location, cuisine, Michelin distinction, and score. Sort by rating, city, or Michelin level.</p>
+      </div>
     </section>
 
-    <div class="main-content">
-      <div class="filters-bar">
-        <label for="filter-location">Location</label>
-        <select id="filter-location">
-          <option value="">All</option>
-          <option value="San Francisco">San Francisco</option>
-          <option value="New York">New York</option>
-          <option value="Los Angeles">Los Angeles</option>
-          <option value="Japan">Japan</option>
-        </select>
-        <label for="filter-cuisine">Cuisine</label>
-        <select id="filter-cuisine">
-          <option value="">All</option>
-          <option value="Indian fusion">Indian fusion</option>
-          <option value="Contemporary Californian">Contemporary Californian</option>
-          <option value="Thai / Californian">Thai / Californian</option>
-          <option value="Filipino">Filipino</option>
-        </select>
-        <label for="filter-stars">Michelin</label>
-        <select id="filter-stars">
-          <option value="">All</option>
-          <option value="Guide">Guide</option>
-          <option value="1">1 star</option>
-        </select>
-        <button type="button" class="btn btn-primary" id="reset-filters">Reset</button>
-      </div>
+    <div class="rankings-section">
+      <div class="inner">
+        <div class="rank-toolbar">
+          <label for="filter-location">Location</label>
+          <select id="filter-location">
+            <option value="">All</option>
+            <option value="San Francisco">San Francisco</option>
+            <option value="New York">New York</option>
+            <option value="Los Angeles">Los Angeles</option>
+            <option value="Japan">Japan</option>
+          </select>
+          <label for="filter-cuisine">Cuisine</label>
+          <select id="filter-cuisine">
+            <option value="">All</option>
+            <option value="Indian fusion">Indian fusion</option>
+            <option value="Contemporary Californian">Contemporary Californian</option>
+            <option value="Thai / Californian">Thai / Californian</option>
+            <option value="Filipino">Filipino</option>
+          </select>
+          <label for="filter-michelin">Michelin</label>
+          <select id="filter-michelin">
+            <option value="">All</option>
+            <option value="Guide">Guide</option>
+            <option value="1 Star">1 Star</option>
+          </select>
+          <label for="filter-score">Score</label>
+          <select id="filter-score">
+            <option value="">Any</option>
+            <option value="7">7+</option>
+            <option value="6">6+</option>
+            <option value="5">5+</option>
+          </select>
+          <span class="sort">
+            <label for="sort">Sort</label>
+            <select id="sort">
+              <option value="score">Highest rated</option>
+              <option value="city">City</option>
+              <option value="michelin">Michelin level</option>
+              <option value="name">Name</option>
+            </select>
+          </span>
+          <button type="button" class="btn" id="reset-filters">Reset</button>
+        </div>
 
-      <table class="rank-table" id="rank-table">
-        <thead>
-          <tr>
-            <th>Restaurant</th>
-            <th>Location</th>
-            <th>Cuisine</th>
-            <th>Michelin</th>
-            <th>Rating (1–10)</th>
-            <th>Reserve</th>
-          </tr>
-        </thead>
-        <tbody id="rank-body">
-          <tr data-location="San Francisco" data-cuisine="Indian fusion" data-stars="Guide">
-            <td>Tiya</td>
-            <td>San Francisco</td>
-            <td>Indian fusion</td>
-            <td>Guide 2024–25</td>
-            <td>4.3</td>
-            <td><a href="#" class="affiliate-link btn btn-primary">Reserve →</a></td>
-          </tr>
-          <tr data-location="San Francisco" data-cuisine="Contemporary Californian" data-stars="Guide">
-            <td>Snail Bar</td>
-            <td>San Francisco</td>
-            <td>Contemporary Californian</td>
-            <td>Guide 2023–25</td>
-            <td>6.8</td>
-            <td><a href="#" class="affiliate-link btn btn-primary">Reserve →</a></td>
-          </tr>
-          <tr data-location="San Francisco" data-cuisine="Thai / Californian" data-stars="1">
-            <td>Nari</td>
-            <td>San Francisco</td>
-            <td>Thai / Californian</td>
-            <td>1 Star 2023–25</td>
-            <td>7.6</td>
-            <td><a href="#" class="affiliate-link btn btn-primary">Reserve →</a></td>
-          </tr>
-          <tr data-location="San Francisco" data-cuisine="Filipino" data-stars="Guide">
-            <td>F.O.B. Kitchen</td>
-            <td>San Francisco</td>
-            <td>Filipino</td>
-            <td>Guide 2021–25</td>
-            <td>5.6</td>
-            <td><a href="#" class="affiliate-link btn btn-primary">Reserve →</a></td>
-          </tr>
-          <tr data-placeholder="true" data-location="New York" data-cuisine="" data-stars="">
-            <td>Placeholder</td>
-            <td>New York</td>
-            <td>—</td>
-            <td>—</td>
-            <td>—</td>
-            <td>—</td>
-          </tr>
-          <tr data-placeholder="true" data-location="Los Angeles" data-cuisine="" data-stars="">
-            <td>Placeholder</td>
-            <td>Los Angeles</td>
-            <td>—</td>
-            <td>—</td>
-            <td>—</td>
-            <td>—</td>
-          </tr>
-          <tr data-placeholder="true" data-location="Japan" data-cuisine="" data-stars="">
-            <td>Placeholder</td>
-            <td>Japan</td>
-            <td>—</td>
-            <td>—</td>
-            <td>—</td>
-            <td>—</td>
-          </tr>
-        </tbody>
-      </table>
+        <table class="rank-table" id="rank-table">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Restaurant</th>
+              <th>City</th>
+              <th>Cuisine</th>
+              <th>Michelin</th>
+              <th>Score</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody id="rank-body">
+            <tr data-location="San Francisco" data-cuisine="Indian fusion" data-michelin="Guide" data-score="4.3" data-city="San Francisco" data-name="Tiya">
+              <td>1</td>
+              <td class="name"><a href="review-tiya.html">Tiya</a></td>
+              <td>San Francisco</td>
+              <td>Indian fusion</td>
+              <td>Guide 2024–25</td>
+              <td class="score">4.3</td>
+              <td><a href="#" class="reserve-link">Reserve →</a></td>
+            </tr>
+            <tr data-location="San Francisco" data-cuisine="Contemporary Californian" data-michelin="Guide" data-score="6.8" data-city="San Francisco" data-name="Snail Bar">
+              <td>2</td>
+              <td class="name"><a href="review-snail-bar.html">Snail Bar</a></td>
+              <td>San Francisco</td>
+              <td>Contemporary Californian</td>
+              <td>Guide 2023–25</td>
+              <td class="score">6.8</td>
+              <td><a href="#" class="reserve-link">Reserve →</a></td>
+            </tr>
+            <tr data-location="San Francisco" data-cuisine="Thai / Californian" data-michelin="1 Star" data-score="7.6" data-city="San Francisco" data-name="Nari">
+              <td>3</td>
+              <td class="name"><a href="review-nari.html">Nari</a></td>
+              <td>San Francisco</td>
+              <td>Thai / Californian</td>
+              <td>1 Star 2023–25</td>
+              <td class="score">7.6</td>
+              <td><a href="#" class="reserve-link">Reserve →</a></td>
+            </tr>
+            <tr data-location="San Francisco" data-cuisine="Filipino" data-michelin="Guide" data-score="5.6" data-city="San Francisco" data-name="F.O.B. Kitchen">
+              <td>4</td>
+              <td class="name"><a href="review-fob-kitchen.html">F.O.B. Kitchen</a></td>
+              <td>San Francisco</td>
+              <td>Filipino</td>
+              <td>Guide 2021–25</td>
+              <td class="score">5.6</td>
+              <td><a href="#" class="reserve-link">Reserve →</a></td>
+            </tr>
+            <tr data-placeholder="true" data-location="New York" data-cuisine="" data-michelin="" data-score="" data-city="New York" data-name="Placeholder">
+              <td>—</td>
+              <td class="name">Placeholder</td>
+              <td>New York</td>
+              <td>—</td>
+              <td>—</td>
+              <td>—</td>
+              <td>—</td>
+            </tr>
+            <tr data-placeholder="true" data-location="Los Angeles" data-cuisine="" data-michelin="" data-score="" data-city="Los Angeles" data-name="Placeholder">
+              <td>—</td>
+              <td class="name">Placeholder</td>
+              <td>Los Angeles</td>
+              <td>—</td>
+              <td>—</td>
+              <td>—</td>
+              <td>—</td>
+            </tr>
+            <tr data-placeholder="true" data-location="Japan" data-cuisine="" data-michelin="" data-score="" data-city="Japan" data-name="Placeholder">
+              <td>—</td>
+              <td class="name">Placeholder</td>
+              <td>Japan</td>
+              <td>—</td>
+              <td>—</td>
+              <td>—</td>
+              <td>—</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
   </main>
 
   <footer class="site-footer">
     <div class="footer-inner">
       <a href="index.html" class="footer-logo">
-        <span class="footer-logo-mark">M&M</span>
-        <span>Masala & Miso</span>
+        <span class="logo-mark">M&M</span>
+        Masala & Miso
       </a>
       <nav class="footer-nav">
-        <a href="blog.html">Blog</a>
+        <a href="blog.html">Reviews</a>
         <a href="rankings.html">Rankings</a>
         <a href="best-of.html">Best Of</a>
         <a href="about.html">About</a>
       </nav>
-      <span class="copyright">© Masala & Miso. Michelin-backed reviews.</span>
+      <span class="copyright">© Masala & Miso</span>
     </div>
   </footer>
 
