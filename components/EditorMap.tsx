@@ -73,8 +73,8 @@ export default function EditorMap() {
   const openCity = openCityId ? CITIES.find((c) => c.id === openCityId) : null
 
   return (
-    <section ref={ref} className="relative py-10 sm:py-12 overflow-hidden section-after-image">
-      <div className="max-w-layout mx-auto px-6 sm:px-8 mb-4">
+    <section ref={ref} className="relative pt-8 sm:pt-10 pb-0 overflow-hidden bg-page">
+      <div className="max-w-layout mx-auto px-6 sm:px-8 mb-3">
         <h2 className="font-playfair text-2xl sm:text-3xl font-medium text-midnight text-center mb-2 tracking-tight">
           Where We&apos;ve Dined
         </h2>
@@ -87,45 +87,46 @@ export default function EditorMap() {
         className="w-full transition-opacity duration-700"
         style={{ opacity: visible ? 1 : 0 }}
       >
-        <div className="relative overflow-hidden">
-          {/* Ombre in from top — soft fade with a hint of palette (cream) */}
+        <div className="relative overflow-hidden w-full" style={{ background: '#f3f3f5' }}>
+          {/* Ombre in — less at top */}
           <div
-            className="absolute inset-x-0 top-0 h-44 sm:h-52 z-10 pointer-events-none"
+            className="absolute inset-x-0 top-0 z-10 pointer-events-none"
             style={{
-              background: 'linear-gradient(to bottom, #f3f3f5 0%, rgba(243, 243, 245, 0.92) 18%, rgba(243, 243, 245, 0.5) 42%, rgba(209, 209, 214, 0.15) 70%, transparent 100%)',
+              height: '28%',
+              background: 'linear-gradient(to bottom, #f3f3f5 0%, rgba(243, 243, 245, 0.92) 25%, rgba(243, 243, 245, 0.4) 65%, transparent 100%)',
             }}
             aria-hidden
           />
-          {/* Ombre out at bottom — matching soft fade, no hard edge */}
+          {/* Ombre out — extends up over countries so fade is over South America */}
           <div
-            className="absolute inset-x-0 bottom-0 h-44 sm:h-52 z-10 pointer-events-none"
+            className="absolute inset-x-0 bottom-0 z-10 pointer-events-none"
             style={{
-              background: 'linear-gradient(to top, #f3f3f5 0%, rgba(243, 243, 245, 0.92) 18%, rgba(243, 243, 245, 0.5) 42%, rgba(209, 209, 214, 0.15) 70%, transparent 100%)',
+              height: '58%',
+              background: 'linear-gradient(to top, #f3f3f5 0%, #f3f3f5 4%, rgba(243, 243, 245, 0.97) 14%, rgba(243, 243, 245, 0.88) 28%, rgba(243, 243, 245, 0.5) 52%, transparent 100%)',
             }}
             aria-hidden
           />
           <svg
             viewBox="0 0 360 180"
             className="w-full h-auto block"
-            style={{ aspectRatio: '360 / 180', minHeight: 220 }}
+            style={{ aspectRatio: '360 / 180', minHeight: 420, maxHeight: 'min(80vh, 640px)' }}
             aria-label="World map: where we’ve dined"
           >
-            {/* Ocean — transparent so only land reads on page background */}
-            <rect width="360" height="180" fill="transparent" />
-            {/* Land — palette: soft wine fill (#7b445a), ocean stroke (#114665) */}
+            {/* Ocean — page background */}
+            <rect width="360" height="180" fill="#f3f3f5" />
+            {/* Land — darker countries only, abstract shapes */}
             <path
               d={LAND_PATH}
-              fill="rgba(123, 68, 90, 0.07)"
-              stroke="rgba(17, 70, 101, 0.3)"
-              strokeWidth={0.38}
+              fill="rgba(17, 70, 101, 0.54)"
+              stroke="rgba(17, 70, 101, 0.85)"
+              strokeWidth={0.58}
               strokeLinejoin="round"
               strokeLinecap="round"
             />
-            {/* City pins — travel pin shape, small */}
+            {/* City pins + labels */}
             {CITIES.map((city) => {
               const { x, y } = lonLatToXY(city.lon, city.lat)
               const isOpen = openCityId === city.id
-              const fill = isOpen ? '#720f32' : '#114665'
               return (
                 <g
                   key={city.id}
@@ -142,17 +143,27 @@ export default function EditorMap() {
                   }}
                   aria-label={`${city.cityName}: ${city.restaurants}`}
                 >
-                  {/* Subtle shadow for depth (point-down pin) */}
+                  <text
+                    x={0}
+                    y={10}
+                    textAnchor="middle"
+                    fill="#16202b"
+                    fontSize={3.2}
+                    fontFamily="var(--font-playfair), Georgia, serif"
+                    fontWeight={500}
+                    pointerEvents="none"
+                  >
+                    {city.cityName}
+                  </text>
                   <path
                     d={PIN_PATH}
-                    fill="rgba(0,0,0,0.1)"
+                    fill="rgba(17, 70, 101, 0.2)"
                     transform="scale(1,-1) translate(0.35, 0.28)"
                     pointerEvents="none"
                   />
-                  {/* Travel pin — point facing down */}
                   <path
                     d={PIN_PATH}
-                    fill={fill}
+                    fill="#720f32"
                     stroke="rgba(255,255,255,0.85)"
                     strokeWidth={0.45}
                     strokeLinejoin="round"
@@ -164,22 +175,22 @@ export default function EditorMap() {
           </svg>
         </div>
 
-        {/* Dropdown: restaurants for selected city */}
+        {/* Dropdown: restaurants for selected city — blue text on light */}
         {openCity && (
           <div
-            className="mt-4 rounded-sm bg-midnight/96 backdrop-blur-sm px-5 py-4 shadow-xl border border-black/10 max-w-md mx-auto animate-fade-in"
+            className="mt-2 rounded-sm bg-white/95 backdrop-blur-sm px-5 py-4 shadow-lg border border-ocean/15 max-w-md mx-auto animate-fade-in"
             role="region"
             aria-label={`Restaurants in ${openCity.cityName}`}
           >
-            <p className="font-playfair text-base font-medium text-white tracking-tight">
+            <p className="font-playfair text-base font-medium text-ocean tracking-tight">
               {openCity.cityName}
             </p>
-            <p className="text-white/85 text-metadata mt-1 leading-relaxed">
+            <p className="text-ocean/80 text-metadata mt-1 leading-relaxed">
               {openCity.restaurants}
             </p>
             <Link
               href="/ranking-guide"
-              className="inline-block mt-3 text-white/95 text-metadata border-b border-white/60 pb-0.5 hover:border-white transition-colors"
+              className="inline-block mt-3 text-ocean text-metadata border-b border-ocean/50 pb-0.5 hover:border-ocean transition-colors"
               style={{ backgroundImage: 'none' }}
             >
               View rankings →

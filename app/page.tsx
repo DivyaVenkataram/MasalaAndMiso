@@ -38,8 +38,8 @@ export default function Home() {
         <EditorMap />
       </FadeInSection>
 
-      {/* 5. Editorial text — fluid */}
-      <section className="section-after-image py-10 sm:py-12 px-8">
+      {/* 5. Editorial text — fluid, tight to map above */}
+      <section className="section-after-image pt-5 sm:pt-6 pb-10 sm:pb-12 px-8">
         <div className="max-w-2xl mx-auto text-center">
           <p className="text-midnight/85 text-[18px] leading-[1.6] mb-5">
             From San Francisco to Tokyo, we track the tables worth booking. Use the ranking guide to filter by city and cuisine.

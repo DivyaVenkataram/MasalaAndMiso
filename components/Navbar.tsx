@@ -10,7 +10,6 @@ const navLinks = [
   { href: '/ranking-guide', label: 'Ranking Guide' },
   { href: '/editors-table', label: "Editor's Table" },
   { href: '/best-drinks', label: 'Best Drinks' },
-  { href: '/cities', label: 'Cities' },
   { href: '/about', label: 'About' },
 ]
 
