@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rankings — Masala & Miso</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <a href="index.html" class="logo">
+      <span class="logo-mark">M&M</span>
+      <span>Masala & Miso</span>
+    </a>
+    <nav class="nav-main">
+      <a href="index.html">Home</a>
+      <a href="blog.html">Blog</a>
+      <a href="rankings.html" class="active">Rankings</a>
+      <a href="best-of.html">Best Of</a>
+      <a href="about.html">About</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <h1>Rankings</h1>
+      <p class="lead">Filter by location, price, cuisine—and reserve your next meal.</p>
+    </section>
+
+    <div class="main-content">
+      <div class="filters-bar">
+        <label for="filter-location">Location</label>
+        <select id="filter-location">
+          <option value="">All</option>
+          <option value="New York">New York</option>
+          <option value="Chicago">Chicago</option>
+          <option value="San Francisco">San Francisco</option>
+          <option value="Tokyo">Tokyo</option>
+          <option value="Paris">Paris</option>
+          <option value="California">California</option>
+        </select>
+        <label for="filter-price">Price</label>
+        <select id="filter-price">
+          <option value="">All</option>
+          <option value="$$$">$$$ (Splurge)</option>
+          <option value="$$">$$ (Fine)</option>
+          <option value="$">$ (Worth it)</option>
+        </select>
+        <label for="filter-cuisine">Cuisine</label>
+        <select id="filter-cuisine">
+          <option value="">All</option>
+          <option value="French">French</option>
+          <option value="Japanese">Japanese</option>
+          <option value="American">American</option>
+          <option value="Seafood">Seafood</option>
+          <option value="Contemporary">Contemporary</option>
+        </select>
+        <label for="filter-stars">Michelin stars</label>
+        <select id="filter-stars">
+          <option value="">All</option>
+          <option value="3">3 stars</option>
+          <option value="2">2 stars</option>
+          <option value="1">1 star</option>
+        </select>
+        <button type="button" class="btn btn-primary" id="reset-filters">Reset</button>
+      </div>
+
+      <table class="rank-table" id="rank-table">
+        <thead>
+          <tr>
+            <th>Restaurant</th>
+            <th>Location</th>
+            <th>Cuisine</th>
+            <th>Stars</th>
+            <th>Price</th>
+            <th>Reserve</th>
+          </tr>
+        </thead>
+        <tbody id="rank-body">
+          <tr data-location="New York" data-price="$$$" data-cuisine="Seafood" data-stars="3">
+            <td>Le Bernardin</td>
+            <td>New York</td>
+            <td>Seafood</td>
+            <td>★★★</td>
+            <td>$$$</td>
+            <td><a href="#" class="affiliate-link btn btn-primary">Reserve →</a></td>
+          </tr>
+          <tr data-location="Chicago" data-price="$$$" data-cuisine="American" data-stars="3">
+            <td>Alinea</td>
+            <td>Chicago</td>
+            <td>American</td>
+            <td>★★★</td>
+            <td>$$$</td>
+            <td><a href="#" class="affiliate-link btn btn-primary">Reserve →</a></td>
+          </tr>
+          <tr data-location="Tokyo" data-price="$$$" data-cuisine="Japanese" data-stars="3">
+            <td>Sukiyabashi Jiro</td>
+            <td>Tokyo</td>
+            <td>Japanese</td>
+            <td>★★★</td>
+            <td>$$$</td>
+            <td><a href="#" class="affiliate-link btn btn-primary">Reserve →</a></td>
+          </tr>
+          <tr data-location="New York" data-price="$$$" data-cuisine="American" data-stars="3">
+            <td>Eleven Madison Park</td>
+            <td>New York</td>
+            <td>American</td>
+            <td>★★★</td>
+            <td>$$$</td>
+            <td><a href="#" class="affiliate-link btn btn-primary">Reserve →</a></td>
+          </tr>
+          <tr data-location="San Francisco" data-price="$$$" data-cuisine="Contemporary" data-stars="3">
+            <td>Benu</td>
+            <td>San Francisco</td>
+            <td>Contemporary</td>
+            <td>★★★</td>
+            <td>$$$</td>
+            <td><a href="#" class="affiliate-link btn btn-primary">Reserve →</a></td>
+          </tr>
+          <tr data-location="San Francisco" data-price="$$$" data-cuisine="American" data-stars="3">
+            <td>Quince</td>
+            <td>San Francisco</td>
+            <td>American</td>
+            <td>★★★</td>
+            <td>$$$</td>
+            <td><a href="#" class="affiliate-link btn btn-primary">Reserve →</a></td>
+          </tr>
+          <tr data-location="San Francisco" data-price="$$$" data-cuisine="American" data-stars="3">
+            <td>Saison</td>
+            <td>San Francisco</td>
+            <td>American</td>
+            <td>★★★</td>
+            <td>$$$</td>
+            <td><a href="#" class="affiliate-link btn btn-primary">Reserve →</a></td>
+          </tr>
+          <tr data-location="California" data-price="$$$" data-cuisine="American" data-stars="3">
+            <td>The French Laundry</td>
+            <td>Yountville, CA</td>
+            <td>American</td>
+            <td>★★★</td>
+            <td>$$$</td>
+            <td><a href="#" class="affiliate-link btn btn-primary">Reserve →</a></td>
+          </tr>
+          <tr data-location="California" data-price="$$$" data-cuisine="American" data-stars="3">
+            <td>Single Thread</td>
+            <td>Healdsburg, CA</td>
+            <td>American</td>
+            <td>★★★</td>
+            <td>$$$</td>
+            <td><a href="#" class="affiliate-link btn btn-primary">Reserve →</a></td>
+          </tr>
+          <tr data-location="New York" data-price="$$" data-cuisine="Korean" data-stars="2">
+            <td>Atomix</td>
+            <td>New York</td>
+            <td>Korean</td>
+            <td>★★</td>
+            <td>$$</td>
+            <td><a href="#" class="affiliate-link btn btn-primary">Reserve →</a></td>
+          </tr>
+          <tr data-location="Chicago" data-price="$$" data-cuisine="American" data-stars="2">
+            <td>Oriole</td>
+            <td>Chicago</td>
+            <td>American</td>
+            <td>★★</td>
+            <td>$$</td>
+            <td><a href="#" class="affiliate-link btn btn-primary">Reserve →</a></td>
+          </tr>
+          <tr data-location="San Francisco" data-price="$$" data-cuisine="American" data-stars="2">
+            <td>Lazy Bear</td>
+            <td>San Francisco</td>
+            <td>American</td>
+            <td>★★</td>
+            <td>$$</td>
+            <td><a href="#" class="affiliate-link btn btn-primary">Reserve →</a></td>
+          </tr>
+          <tr data-location="Tokyo" data-price="$$" data-cuisine="Japanese" data-stars="2">
+            <td>Narisawa</td>
+            <td>Tokyo</td>
+            <td>Japanese</td>
+            <td>★★</td>
+            <td>$$</td>
+            <td><a href="#" class="affiliate-link btn btn-primary">Reserve →</a></td>
+          </tr>
+          <tr data-location="Paris" data-price="$$$" data-cuisine="French" data-stars="3">
+            <td>Arpège</td>
+            <td>Paris</td>
+            <td>French</td>
+            <td>★★★</td>
+            <td>$$$</td>
+            <td><a href="#" class="affiliate-link btn btn-primary">Reserve →</a></td>
+          </tr>
+          <tr data-location="Paris" data-price="$$$" data-cuisine="French" data-stars="3">
+            <td>Mirazur</td>
+            <td>Menton, France</td>
+            <td>French</td>
+            <td>★★★</td>
+            <td>$$$</td>
+            <td><a href="#" class="affiliate-link btn btn-primary">Reserve →</a></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <a href="index.html" class="footer-logo">
+        <span class="footer-logo-mark">M&M</span>
+        <span>Masala & Miso</span>
+      </a>
+      <nav class="footer-nav">
+        <a href="blog.html">Blog</a>
+        <a href="rankings.html">Rankings</a>
+        <a href="best-of.html">Best Of</a>
+        <a href="about.html">About</a>
+      </nav>
+      <span class="copyright">© Masala & Miso. Michelin-backed reviews.</span>
+    </div>
+  </footer>
+
+  <script src="js/rankings.js"></script>
+</body>
+</html>

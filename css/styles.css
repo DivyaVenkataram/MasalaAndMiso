@@ -1,0 +1,539 @@
+/* Masala & Miso — Michelin Review Food Blog */
+/* Burgundy & Dark Blue • Playfair Display • Libre Baskerville */
+
+@import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&display=swap');
+
+:root {
+  --burgundy: #722f37;
+  --burgundy-light: #8b3d47;
+  --burgundy-dark: #5a252c;
+  --navy: #0d1b2a;
+  --navy-mid: #1b263b;
+  --navy-light: #415a77;
+  --cream: #f8f4f0;
+  --cream-dark: #e8e2da;
+  --gold: #c9a227;
+  --gold-muted: #a68b4a;
+  --white: #fff;
+  --font-heading: 'Playfair Display', Georgia, serif;
+  --font-subheading: 'Libre Baskerville', Georgia, serif;
+  --font-body: 'Source Sans 3', -apple-system, BlinkMacSystemFont, sans-serif;
+  --shadow: 0 4px 20px rgba(13, 27, 42, 0.12);
+  --radius: 8px;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: 1.05rem;
+  line-height: 1.65;
+  color: var(--navy);
+  background: var(--cream);
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-heading);
+  font-weight: 600;
+  color: var(--navy);
+}
+
+h1 { font-size: clamp(2rem, 4vw, 3rem); }
+h2 { font-size: clamp(1.5rem, 2.5vw, 2rem); }
+h3 { font-size: clamp(1.2rem, 1.8vw, 1.5rem); }
+
+.subheading,
+.lead,
+blockquote {
+  font-family: var(--font-subheading);
+}
+
+a {
+  color: var(--burgundy);
+  text-decoration: none;
+  transition: color 0.2s, opacity 0.2s;
+}
+
+a:hover {
+  color: var(--burgundy-dark);
+  text-decoration: underline;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* ----- Header ----- */
+.site-header {
+  background: linear-gradient(135deg, var(--navy) 0%, var(--navy-mid) 100%);
+  color: var(--white);
+  padding: 0.75rem 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: var(--shadow);
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-heading);
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--white);
+  text-decoration: none;
+}
+
+.logo:hover {
+  color: var(--gold);
+  text-decoration: none;
+}
+
+.logo-mark {
+  width: 42px;
+  height: 42px;
+  background: linear-gradient(145deg, var(--burgundy) 0%, var(--burgundy-dark) 100%);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  color: var(--cream);
+  flex-shrink: 0;
+}
+
+.nav-main {
+  display: flex;
+  gap: 0.25rem;
+  flex-wrap: wrap;
+}
+
+.nav-main a {
+  color: var(--cream);
+  padding: 0.5rem 0.85rem;
+  border-radius: var(--radius);
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.nav-main a:hover {
+  background: rgba(255,255,255,0.1);
+  color: var(--white);
+  text-decoration: none;
+}
+
+.nav-main a.active {
+  background: var(--burgundy);
+  color: var(--white);
+}
+
+/* ----- Main content areas ----- */
+.main-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem;
+}
+
+.hero {
+  text-align: center;
+  padding: 2rem 1rem 3rem;
+  background: linear-gradient(180deg, var(--navy) 0%, var(--navy-mid) 50%, transparent 100%);
+  color: var(--white);
+  margin: -2rem -1.5rem 2rem;
+  padding: 3rem 1.5rem 4rem;
+}
+
+.hero h1 {
+  color: var(--white);
+  margin-bottom: 0.5rem;
+}
+
+.hero .lead {
+  color: var(--cream-dark);
+  font-size: 1.15rem;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* ----- Map section (home) ----- */
+.map-section {
+  margin: 2rem 0;
+}
+
+.map-intro {
+  max-width: 720px;
+  margin: 0 auto 1.5rem;
+  text-align: center;
+}
+
+.map-intro .subheading {
+  font-size: 1.1rem;
+  color: var(--navy-light);
+}
+
+#map {
+  height: 420px;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  border: 1px solid var(--cream-dark);
+}
+
+/* ----- Cards & reviews ----- */
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
+.card {
+  background: var(--white);
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 28px rgba(13, 27, 42, 0.15);
+}
+
+.card-image {
+  height: 180px;
+  background: linear-gradient(135deg, var(--navy-mid) 0%, var(--burgundy) 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--cream);
+  font-family: var(--font-subheading);
+  font-size: 0.9rem;
+}
+
+.card-body {
+  padding: 1.25rem;
+}
+
+.card-body h3 {
+  margin-top: 0;
+  font-size: 1.15rem;
+}
+
+.card-meta {
+  font-size: 0.9rem;
+  color: var(--navy-light);
+  margin-bottom: 0.5rem;
+}
+
+.stars {
+  color: var(--gold);
+  letter-spacing: 0.1em;
+}
+
+/* ----- Sections ----- */
+.section-title {
+  font-family: var(--font-heading);
+  color: var(--navy);
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid var(--burgundy);
+  display: inline-block;
+}
+
+/* ----- Buttons ----- */
+.btn {
+  display: inline-block;
+  padding: 0.6rem 1.25rem;
+  font-family: var(--font-body);
+  font-weight: 600;
+  border-radius: var(--radius);
+  border: none;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+
+.btn-primary {
+  background: var(--burgundy);
+  color: var(--white);
+}
+
+.btn-primary:hover {
+  background: var(--burgundy-dark);
+  color: var(--white);
+}
+
+.btn-outline {
+  background: transparent;
+  color: var(--burgundy);
+  border: 2px solid var(--burgundy);
+}
+
+.btn-outline:hover {
+  background: var(--burgundy);
+  color: var(--white);
+}
+
+/* ----- Blog page ----- */
+.blog-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.blog-list li {
+  margin-bottom: 2rem;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid var(--cream-dark);
+}
+
+.blog-list li:last-child {
+  border-bottom: none;
+}
+
+.blog-list h2 {
+  margin-top: 0;
+}
+
+.blog-list .meta {
+  font-size: 0.9rem;
+  color: var(--navy-light);
+  margin-bottom: 0.5rem;
+}
+
+/* ----- Rankings / filters ----- */
+.filters-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-bottom: 2rem;
+  align-items: center;
+}
+
+.filters-bar label {
+  font-weight: 600;
+  color: var(--navy);
+}
+
+.filters-bar select {
+  padding: 0.5rem 0.75rem;
+  border: 1px solid var(--cream-dark);
+  border-radius: var(--radius);
+  font-family: var(--font-body);
+  background: var(--white);
+  min-width: 140px;
+}
+
+.rank-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--white);
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+}
+
+.rank-table th,
+.rank-table td {
+  padding: 0.85rem 1rem;
+  text-align: left;
+  border-bottom: 1px solid var(--cream-dark);
+}
+
+.rank-table th {
+  background: var(--navy);
+  color: var(--white);
+  font-family: var(--font-subheading);
+  font-weight: 700;
+}
+
+.rank-table tr:hover {
+  background: var(--cream);
+}
+
+.affiliate-link {
+  font-size: 0.9rem;
+  white-space: nowrap;
+}
+
+/* ----- Best of lists ----- */
+.best-of-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 1.5rem;
+}
+
+.best-of-card {
+  background: var(--white);
+  padding: 1.5rem;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  border-left: 4px solid var(--burgundy);
+}
+
+.best-of-card h3 {
+  margin-top: 0;
+}
+
+/* ----- About / Credentials ----- */
+.about-hero {
+  background: linear-gradient(135deg, var(--navy) 0%, var(--burgundy-dark) 100%);
+  color: var(--white);
+  padding: 3rem 2rem;
+  border-radius: var(--radius);
+  margin-bottom: 2rem;
+}
+
+.about-hero h1 {
+  color: var(--white);
+  margin-top: 0;
+}
+
+.about-section {
+  margin-bottom: 2.5rem;
+}
+
+.about-section h2 {
+  color: var(--burgundy);
+  margin-bottom: 0.75rem;
+}
+
+.sponsors {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  align-items: center;
+  margin: 1rem 0;
+}
+
+.sponsor-logo {
+  width: 120px;
+  height: 60px;
+  background: var(--cream-dark);
+  border-radius: var(--radius);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-subheading);
+  font-size: 0.85rem;
+  color: var(--navy-light);
+  text-align: center;
+  padding: 0.5rem;
+}
+
+.quote-block {
+  background: var(--cream-dark);
+  border-left: 4px solid var(--burgundy);
+  padding: 1.25rem 1.5rem;
+  margin: 1.5rem 0;
+  font-family: var(--font-subheading);
+  font-style: italic;
+  color: var(--navy);
+}
+
+/* ----- Philosophy ----- */
+.philosophy-box {
+  background: linear-gradient(145deg, var(--navy-mid) 0%, var(--navy) 100%);
+  color: var(--cream);
+  padding: 2rem;
+  border-radius: var(--radius);
+  margin: 2rem 0;
+}
+
+.philosophy-box h2,
+.philosophy-box h3 {
+  color: var(--white);
+}
+
+.philosophy-box p {
+  color: var(--cream-dark);
+}
+
+/* ----- Footer ----- */
+.site-footer {
+  background: var(--navy);
+  color: var(--cream);
+  padding: 2rem 1.5rem;
+  margin-top: 3rem;
+}
+
+.footer-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.footer-logo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-heading);
+  font-size: 1.1rem;
+  color: var(--cream);
+  text-decoration: none;
+}
+
+.footer-logo:hover {
+  color: var(--gold);
+  text-decoration: none;
+}
+
+.footer-logo-mark {
+  width: 36px;
+  height: 36px;
+  background: var(--burgundy);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.9rem;
+  color: var(--cream);
+}
+
+.footer-nav a {
+  color: var(--cream-dark);
+  margin-left: 1rem;
+}
+
+.footer-nav a:hover {
+  color: var(--white);
+}
+
+.copyright {
+  font-size: 0.9rem;
+  color: var(--navy-light);
+}
+
+/* ----- Utilities ----- */
+.text-center { text-align: center; }
+.mt-2 { margin-top: 2rem; }
+.mb-2 { margin-bottom: 2rem; }
+
+/* Leaflet overrides for theme */
+.leaflet-popup-content-wrapper {
+  border-radius: var(--radius);
+  font-family: var(--font-body);
+}
+.leaflet-popup-content-wrapper .leaflet-popup-content {
+  margin: 0.75rem 1rem;
+  min-width: 160px;
+}
