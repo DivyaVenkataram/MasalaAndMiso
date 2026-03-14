@@ -4,7 +4,6 @@ import EditorMap from '@/components/EditorMap'
 import SectionDivider from '@/components/SectionDivider'
 import FadeInSection from '@/components/FadeInSection'
 import Link from 'next/link'
-import ImmersiveImageSection from '@/components/ImmersiveImageSection'
 
 export default function Home() {
   return (
