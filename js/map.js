@@ -1,11 +1,12 @@
-// Restaurant pins — Bay Area visits + placeholders
+// Restaurant pins — Bay Area visits + placeholders (New York, LA, Japan)
 const restaurants = [
   { name: 'Tiya', city: 'San Francisco', lat: 37.7879, lng: -122.4074, michelin: 'Guide 2024–25' },
   { name: 'Snail Bar', city: 'San Francisco', lat: 37.7694, lng: -122.4262, michelin: 'Guide 2023–25' },
   { name: 'Nari', city: 'San Francisco', lat: 37.7849, lng: -122.4094, michelin: '1 Star 2023–25' },
   { name: 'F.O.B. Kitchen', city: 'San Francisco', lat: 37.7627, lng: -122.4227, michelin: 'Guide 2021–25' },
-  { name: 'Placeholder', city: 'Coming soon', lat: 40.7128, lng: -74.0060, michelin: '—' },
-  { name: 'Placeholder', city: 'Coming soon', lat: 34.0522, lng: -118.2437, michelin: '—' },
+  { name: 'Placeholder', city: 'New York', lat: 40.7128, lng: -74.0060, michelin: '—' },
+  { name: 'Placeholder', city: 'Los Angeles', lat: 34.0522, lng: -118.2437, michelin: '—' },
+  { name: 'Placeholder', city: 'Japan', lat: 35.6762, lng: 139.6503, michelin: '—' },
 ];
 
 function initMap() {
