@@ -19,7 +19,7 @@ export default function Hero() {
   const textBlur = Math.min(3, scrollY / 150)
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden image-fade-to-page">
       <div
         className="absolute inset-0 bg-cover bg-center transition-transform duration-100 will-change-transform"
         style={{
@@ -28,7 +28,7 @@ export default function Hero() {
         }}
       />
       <div
-        className="absolute inset-0 bg-midnight/50 backdrop-blur-[2px]"
+        className="absolute inset-0 bg-gradient-to-b from-black/55 via-black/45 to-black/65"
         aria-hidden
       />
       <div
@@ -38,18 +38,17 @@ export default function Hero() {
           filter: textBlur > 0 ? `blur(${textBlur}px)` : undefined,
         }}
       >
-        <h1 className="font-playfair text-5xl sm:text-6xl md:text-7xl font-medium uppercase tracking-[0.15em] text-white mb-4">
+        <h1 className="font-playfair text-5xl sm:text-6xl md:text-[72px] font-medium uppercase tracking-[0.15em] text-white mb-4 leading-tight">
           MASALA & MISO
         </h1>
-        <p className="font-playfair text-xl sm:text-2xl text-white/95 mb-8 max-w-2xl mx-auto font-normal tracking-normal normal-case">
+        <p className="font-playfair text-section font-normal text-white/95 mb-8 max-w-2xl mx-auto tracking-normal normal-case">
           A culinary journey between India and Japan.
         </p>
         <Link
           href="/posts"
-          className="inline-block text-white border border-white/80 px-8 py-3 font-medium tracking-wide hover:bg-white hover:text-midnight transition-all duration-300 link-editorial"
-          style={{ backgroundImage: 'none' }}
+          className="inline-block text-white/95 font-medium text-[18px] border-b border-white/80 pb-1 hover:border-white transition-colors"
         >
-          Explore
+          Explore Posts →
         </Link>
       </div>
     </section>

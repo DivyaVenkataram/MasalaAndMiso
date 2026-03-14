@@ -11,7 +11,7 @@
     font-size: 18px;
     line-height: 1.6;
     color: #16202b;
-    background: #0a0a0a;
+    background: #f3f3f5;
     -webkit-font-smoothing: antialiased;
   }
 }
@@ -37,6 +37,12 @@
     font-size: 16px;
     line-height: 1.6;
   }
+  .bg-photo-soft {
+    filter: brightness(0.7) contrast(0.9) saturate(0.6);
+  }
+  .bg-photo-soft-blur {
+    filter: brightness(0.7) contrast(0.9) saturate(0.6) blur(1px);
+  }
 }
 
 .pull-quote-editorial {
@@ -51,6 +57,23 @@
 
 .section-divider {
   height: 1px;
-  background-color: rgba(123, 68, 90, 0.3);
-  margin: 80px 0;
+  background-color: rgba(123, 68, 90, 0.25);
+  margin: 60px 0;
+}
+
+/* Fluid transition: content section that follows an image fades in from transparent */
+.section-after-image {
+  background: linear-gradient(180deg, rgba(243, 243, 245, 0) 0%, rgba(243, 243, 245, 0.4) 12%, #f3f3f5 28%);
+}
+
+/* Image section that transitions into light content — fade bottom to page color */
+.image-fade-to-page::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 180px;
+  background: linear-gradient(to top, #f3f3f5, transparent);
+  pointer-events: none;
 }

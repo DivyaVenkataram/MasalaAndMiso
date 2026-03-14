@@ -5,6 +5,7 @@ import { usePathname } from 'next/navigation'
 import { useEffect, useState } from 'react'
 
 const navLinks = [
+  { href: '/', label: 'Home' },
   { href: '/posts', label: 'Posts' },
   { href: '/ranking-guide', label: 'Ranking Guide' },
   { href: '/editors-table', label: "Editor's Table" },
@@ -28,13 +29,13 @@ export default function Navbar() {
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-8 py-4 transition-all duration-300 ${
-        scrolled ? 'bg-black/80 backdrop-blur-md' : 'bg-transparent'
+        scrolled ? 'bg-page/95 backdrop-blur-sm' : 'bg-transparent'
       }`}
     >
       <Link
         href="/"
         className={`font-playfair text-lg font-medium uppercase tracking-[0.15em] transition-colors duration-200 ${
-          scrolled ? 'text-neutral hover:text-burgundy' : 'text-white hover:text-neutral'
+          scrolled ? 'text-midnight hover:text-burgundy' : 'text-white hover:text-white/90'
         }`}
       >
         MASALA & MISO
@@ -46,9 +47,10 @@ export default function Navbar() {
             <Link
               key={href}
               href={href}
-              className={`text-sm font-medium transition-colors duration-200 ${
-                scrolled ? 'link-editorial' : ''
+              className={`text-filter font-medium transition-colors duration-200 ${
+                scrolled ? 'link-editorial ' : ''
               } ${active ? 'text-burgundy' : scrolled ? 'text-midnight' : 'text-white/90 hover:text-white'}`}
+              style={!scrolled ? { backgroundImage: 'none' } : undefined}
             >
               {label}
             </Link>

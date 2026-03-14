@@ -23,8 +23,8 @@ export default function ArticlePage({
   children,
 }: ArticlePageProps) {
   return (
-    <article>
-      <div className="relative w-full aspect-[21/9] min-h-[320px]">
+    <article className="bg-page">
+      <div className="relative w-full aspect-[21/9] min-h-[280px]">
         <Image
           src={image}
           alt={imageAlt}
@@ -35,7 +35,7 @@ export default function ArticlePage({
         />
       </div>
       <div className="max-w-reading mx-auto px-8 py-section">
-        <h1 className="font-playfair text-3xl sm:text-4xl font-medium text-midnight mb-4">
+        <h1 className="font-playfair text-3xl sm:text-page font-medium text-midnight mb-4">
           {title}
         </h1>
         <p className="text-metadata text-midnight/70 uppercase tracking-widest mb-8">

@@ -1,23 +1,23 @@
 export default function AboutPage() {
   return (
     <main>
-      <section
-        className="relative pt-28 pb-section px-8 flex flex-col items-center justify-center min-h-[60vh] bg-cover bg-center"
-        style={{
-          backgroundImage: `linear-gradient(rgba(22,32,43,0.65), rgba(22,32,43,0.6)), url('https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1920&q=80')`,
-        }}
-      >
-        <h1 className="font-playfair text-4xl sm:text-5xl font-medium text-white text-center mb-4">
+      <section className="relative pt-28 pb-section px-8 flex flex-col items-center justify-center min-h-[55vh] bg-cover bg-center overflow-hidden">
+        <div
+          className="absolute inset-0 bg-cover bg-center"
+          style={{ backgroundImage: `url('https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1920&q=80')` }}
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/55 via-black/40 to-black/60" />
+        <h1 className="relative z-10 font-playfair text-4xl sm:text-5xl font-medium text-white text-center mb-3 tracking-tight">
           About Us & Credentials
         </h1>
-        <p className="text-white/90 text-center max-w-xl text-[18px] leading-[1.6]">
+        <p className="relative z-10 text-white/90 text-center max-w-xl text-[18px] leading-[1.6]">
           Who we are, why we&apos;re qualified to review the world&apos;s best tables, and who stands behind us.
         </p>
       </section>
 
-      <div className="max-w-reading mx-auto px-8 py-section">
+      <div className="max-w-reading mx-auto px-8 py-section section-after-image">
         <section className="mb-8">
-          <h2 className="font-playfair text-2xl sm:text-3xl font-medium text-midnight mb-4 border-b border-midnight/20 pb-2 w-fit">
+          <h2 className="font-playfair text-2xl sm:text-3xl font-medium text-midnight mb-4 tracking-tight border-b border-black/10 pb-2 w-fit">
             Our Background
           </h2>
           <div className="space-y-4 text-midnight text-[18px] leading-[1.6]">
@@ -29,9 +29,15 @@ export default function AboutPage() {
             </p>
           </div>
         </section>
+      </div>
 
+      <section className="relative w-full min-h-[40vh] bg-cover bg-center image-fade-to-page" style={{ backgroundImage: `url('https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=1920&q=80')` }}>
+        <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" aria-hidden />
+      </section>
+
+      <div className="max-w-reading mx-auto px-8 py-section section-after-image">
         <section className="mb-8">
-          <h2 className="font-playfair text-2xl sm:text-3xl font-medium text-midnight mb-4 border-b border-midnight/20 pb-2 w-fit">
+          <h2 className="font-playfair text-2xl sm:text-3xl font-medium text-midnight mb-4 tracking-tight border-b border-black/10 pb-2 w-fit">
             Michelin-Backed & Recognized
           </h2>
           <p className="text-midnight text-[18px] leading-[1.6] mb-6">
@@ -43,7 +49,7 @@ export default function AboutPage() {
         </section>
 
         <section className="mb-8">
-          <h2 className="font-playfair text-2xl sm:text-3xl font-medium text-midnight mb-4 border-b border-midnight/20 pb-2 w-fit">
+          <h2 className="font-playfair text-2xl sm:text-3xl font-medium text-midnight mb-4 tracking-tight border-b border-black/10 pb-2 w-fit">
             Sponsors & Partners
           </h2>
           <p className="text-midnight text-[18px] leading-[1.6] mb-4">
@@ -65,7 +71,7 @@ export default function AboutPage() {
         </section>
 
         <section className="mb-8">
-          <h2 className="font-playfair text-2xl sm:text-3xl font-medium text-midnight mb-4 border-b border-midnight/20 pb-2 w-fit">
+          <h2 className="font-playfair text-2xl sm:text-3xl font-medium text-midnight mb-4 tracking-tight border-b border-black/10 pb-2 w-fit">
             Quotes & Press
           </h2>
           <div className="space-y-6">
@@ -79,7 +85,7 @@ export default function AboutPage() {
         </section>
 
         <section>
-          <h2 className="font-playfair text-2xl sm:text-3xl font-medium text-midnight mb-4 border-b border-midnight/20 pb-2 w-fit">
+          <h2 className="font-playfair text-section font-medium text-midnight mb-4 border-b border-black/10 pb-2 w-fit">
             Contact & Ethics
           </h2>
           <p className="text-midnight text-[18px] leading-[1.6]">
