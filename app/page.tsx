@@ -38,14 +38,6 @@ export default function Home() {
           style={{ backgroundImage: `url('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=1920&q=80')` }}
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
-        <div className="absolute bottom-0 left-0 right-0 px-8 pb-12 sm:pb-16 text-center">
-          <Link
-            href="/editors-table"
-            className="text-white font-medium text-[18px] border-b border-white/80 pb-1 hover:border-white transition-colors"
-          >
-            Editor&apos;s Table →
-          </Link>
-        </div>
       </section>
     </main>
   )
