@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { Suspense } from 'react'
 import { Playfair_Display } from 'next/font/google'
 import './globals.css'
 import Navbar from '@/components/Navbar'
@@ -24,9 +25,13 @@ export default function RootLayout({
   return (
     <html lang="en" className={playfair.variable}>
       <body className="font-editorial">
-        <Navbar />
+        <Suspense fallback={<header className="h-16" />}>
+          <Navbar />
+        </Suspense>
         {children}
-        <Footer />
+        <Suspense fallback={<footer className="h-32" />}>
+          <Footer />
+        </Suspense>
       </body>
     </html>
   )
