@@ -29,13 +29,13 @@ export default function Navbar() {
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-8 py-4 transition-all duration-300 ${
-        scrolled ? 'bg-page/95 backdrop-blur-sm' : 'bg-transparent'
+        scrolled ? 'bg-midnight/95 backdrop-blur-sm' : 'bg-transparent'
       }`}
     >
       <Link
         href="/"
         className={`font-playfair text-lg font-medium uppercase tracking-[0.15em] transition-colors duration-200 ${
-          scrolled ? 'text-midnight hover:text-burgundy' : 'text-white hover:text-white/90'
+          scrolled ? 'text-white hover:text-neutral' : 'text-white hover:text-white/90'
         }`}
       >
         MASALA & MISO
@@ -48,8 +48,8 @@ export default function Navbar() {
               key={href}
               href={href}
               className={`text-filter font-medium transition-colors duration-200 ${
-                scrolled ? 'link-editorial ' : ''
-              } ${active ? 'text-burgundy' : scrolled ? 'text-midnight' : 'text-white/90 hover:text-white'}`}
+                active ? 'text-burgundy' : 'text-white/90 hover:text-white'
+              }`}
               style={!scrolled ? { backgroundImage: 'none' } : undefined}
             >
               {label}
