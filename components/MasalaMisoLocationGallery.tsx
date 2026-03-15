@@ -112,13 +112,13 @@ export default function MasalaMisoLocationGallery() {
                   'focus-visible:!opacity-100 focus-visible:!blur-0 focus-visible:outline-none',
                 ].join(' ')}
               >
-                <div className="relative flex min-h-0 w-full flex-1 items-center justify-center lg:min-h-0">
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="h-full w-full scale-[1.035] text-white/20 blur-[1px] transition-all duration-500 group-hover/item:scale-[1.045] group-hover/item:text-white/35">
+                <div className="relative flex min-h-0 w-full flex-1 items-center justify-center lg:min-h-0 lg:max-h-[200px]">
+                  <div className="absolute inset-0 flex items-center justify-center p-2">
+                    <div className="h-full w-full max-h-[180px] max-w-full scale-[1.035] text-white/20 blur-[1px] transition-all duration-500 group-hover/item:scale-[1.045] group-hover/item:text-white/35 [&>svg]:h-full [&>svg]:max-h-[180px] [&>svg]:w-auto [&>svg]:object-contain">
                       {location.shape}
                     </div>
                   </div>
-                  <div className="relative z-10 flex h-full w-full items-center justify-center text-white drop-shadow-[0_8px_24px_rgba(0,0,0,0.35)] transition-transform duration-500 group-hover/item:scale-[1.025]">
+                  <div className="relative z-10 flex h-full w-full max-h-[180px] max-w-full items-center justify-center p-2 text-white drop-shadow-[0_8px_24px_rgba(0,0,0,0.35)] transition-transform duration-500 group-hover/item:scale-[1.025] [&>svg]:h-full [&>svg]:max-h-[180px] [&>svg]:w-auto [&>svg]:object-contain">
                     {location.shape}
                   </div>
                 </div>
@@ -149,13 +149,13 @@ export default function MasalaMisoLocationGallery() {
                 href={location.href}
                 className="group/item flex min-h-[280px] flex-col items-center transition-all duration-500 hover:opacity-100 focus-visible:outline-none sm:min-h-[320px]"
               >
-                <div className="relative flex min-h-0 w-full flex-1 items-center justify-center">
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="h-full w-full scale-[1.03] text-white/20 blur-[1px] transition-all duration-500 group-hover/item:text-white/35">
+                <div className="relative flex min-h-0 w-full flex-1 items-center justify-center max-h-[220px]">
+                  <div className="absolute inset-0 flex items-center justify-center p-2">
+                    <div className="h-full w-full max-h-[200px] max-w-full scale-[1.03] text-white/20 blur-[1px] transition-all duration-500 group-hover/item:text-white/35 [&>svg]:h-full [&>svg]:max-h-[200px] [&>svg]:w-auto [&>svg]:object-contain">
                       {location.shape}
                     </div>
                   </div>
-                  <div className="relative z-10 flex h-full w-full items-center justify-center text-white drop-shadow-[0_8px_24px_rgba(0,0,0,0.35)] transition-transform duration-500 group-hover/item:scale-[1.025]">
+                  <div className="relative z-10 flex h-full w-full max-h-[200px] max-w-full items-center justify-center p-2 text-white drop-shadow-[0_8px_24px_rgba(0,0,0,0.35)] transition-transform duration-500 group-hover/item:scale-[1.025] [&>svg]:h-full [&>svg]:max-h-[200px] [&>svg]:w-auto [&>svg]:object-contain">
                     {location.shape}
                   </div>
                 </div>
