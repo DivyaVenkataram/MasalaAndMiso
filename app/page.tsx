@@ -1,4 +1,5 @@
 /** Layout: image-forward rhythm. Statement section overlaps second photo; dynamic on scroll. */
+import Link from 'next/link'
 import Hero from '@/components/Hero'
 import StatementSection from '@/components/StatementSection'
 import MasalaMisoLocationGallery from '@/components/MasalaMisoLocationGallery'
@@ -17,13 +18,11 @@ export default function Home() {
       <FadeInSection>
         <MasalaMisoLocationGallery />
       </FadeInSection>
-<<<<<<< HEAD
-=======
 
       {/* 5. Editorial text — fluid, tight to map above */}
       <section className="section-after-image pt-5 sm:pt-6 pb-10 sm:pb-12 px-8">
         <div className="max-w-2xl mx-auto text-center">
-          <p className="text-midnight/85 text-[18px] leading-[1.6] mb-5">
+          <p className="text-midnight text-[18px] leading-[1.6] mb-5">
             From San Francisco to Tokyo, we track the tables worth booking. Use the ranking guide to filter by city and cuisine.
           </p>
           <Link href="/ranking-guide" className="link-editorial text-midnight font-medium">
@@ -48,7 +47,6 @@ export default function Home() {
           </Link>
         </div>
       </section>
->>>>>>> 5043f88ddfeff8ad9b963d4cfefefcdab4c0b10d
     </main>
   )
 }
