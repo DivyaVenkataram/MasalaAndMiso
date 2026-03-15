@@ -1,8 +1,9 @@
 'use client'
 
-import { useMemo, useState } from 'react'
+import { useMemo, useState, useEffect, Suspense } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
+import { useSearchParams } from 'next/navigation'
 import { rankingsData } from '@/data/rankings'
 
 type Row = (typeof rankingsData)[0]
@@ -29,18 +30,26 @@ function scoreColor(score: number): string {
   return 'rgba(123,68,90,0.5)'
 }
 
-export default function RankingGuidePage() {
+function RankingGuideContent() {
+  const searchParams = useSearchParams()
   const [location, setLocation] = useState('')
   const [cuisine, setCuisine] = useState('')
   const [stars, setStars] = useState('')
 
+  useEffect(() => {
+    const loc = searchParams.get('location')
+    if (loc && locationOptions.includes(loc)) setLocation(loc)
+  }, [searchParams])
+
   const filtered = useMemo(() => {
-    return rankingsData.filter((row) => {
+    const list = rankingsData.filter((row) => {
       if (location && row.location !== location) return false
       if (cuisine && row.cuisine !== cuisine) return false
       if (stars && getStarsValue(row.michelin) !== stars) return false
       return true
     })
+    // Most recent first (higher id = more recently added)
+    return [...list].sort((a, b) => Number(b.id) - Number(a.id))
   }, [location, cuisine, stars])
 
   return (
@@ -112,48 +121,54 @@ export default function RankingGuidePage() {
         <ul className="space-y-0">
           {filtered.map((row, index) => {
             const score = parseScore(row.rating)
-            const hasPost = row.postSlug
+            const hasPost = Boolean(row.postSlug)
             const isPlaceholder = row.restaurant === 'Placeholder'
-            const Wrapper = hasPost ? Link : 'div'
-            const wrapperProps = hasPost ? { href: `/posts/${row.postSlug}` } : {}
+            const rowClassName = `flex gap-6 items-center py-5 border-b border-black/[0.06] last:border-b-0 transition-colors duration-200 ${hasPost ? 'group hover:bg-black/[0.02] cursor-pointer' : ''}`
+
+            const inner = (
+              <>
+                <span className="font-playfair text-2xl font-medium text-midnight/30 shrink-0 w-10">
+                  {String(index + 1).padStart(2, '0')}
+                </span>
+                {row.image && (
+                  <div className="relative w-20 h-20 shrink-0 rounded overflow-hidden bg-midnight/10">
+                    <Image src={row.image} alt="" fill className="object-cover" sizes="80px" />
+                  </div>
+                )}
+                <div className="min-w-0 flex-1">
+                  <h2 className="font-playfair text-xl font-medium text-midnight">
+                    {row.restaurant}
+                  </h2>
+                  <p className="text-midnight/60 text-metadata mt-0.5">
+                    {row.location}{row.cuisine !== '—' ? ` · ${row.cuisine}` : ''}
+                    {row.michelin !== '—' && ` · ${row.michelin}`}
+                  </p>
+                </div>
+                {!isPlaceholder && (
+                  <span
+                    className="font-medium text-metadata shrink-0 tabular-nums"
+                    style={{ color: scoreColor(score) }}
+                  >
+                    {row.rating}/10
+                  </span>
+                )}
+                {hasPost && (
+                  <span className="text-ocean text-metadata shrink-0 opacity-70 group-hover:opacity-100 transition-opacity">
+                    Read →
+                  </span>
+                )}
+              </>
+            )
 
             return (
               <li key={row.id}>
-                <Wrapper
-                  {...wrapperProps}
-                  className={`flex gap-6 items-center py-5 border-b border-black/[0.06] last:border-b-0 transition-colors duration-200 ${hasPost ? 'group hover:bg-black/[0.02] cursor-pointer' : ''}`}
-                >
-                  <span className="font-playfair text-2xl font-medium text-midnight/30 shrink-0 w-10">
-                    {String(index + 1).padStart(2, '0')}
-                  </span>
-                  {row.image && (
-                    <div className="relative w-20 h-20 shrink-0 rounded overflow-hidden bg-midnight/10">
-                      <Image src={row.image} alt="" fill className="object-cover" sizes="80px" />
-                    </div>
-                  )}
-                  <div className="min-w-0 flex-1">
-                    <h2 className="font-playfair text-xl font-medium text-midnight">
-                      {row.restaurant}
-                    </h2>
-                    <p className="text-midnight/60 text-metadata mt-0.5">
-                      {row.location}{row.cuisine !== '—' ? ` · ${row.cuisine}` : ''}
-                      {row.michelin !== '—' && ` · ${row.michelin}`}
-                    </p>
-                  </div>
-                  {!isPlaceholder && (
-                    <span
-                      className="font-medium text-metadata shrink-0 tabular-nums"
-                      style={{ color: scoreColor(score) }}
-                    >
-                      {row.rating}/10
-                    </span>
-                  )}
-                  {hasPost && (
-                    <span className="text-ocean text-metadata shrink-0 opacity-70 group-hover:opacity-100 transition-opacity">
-                      Read →
-                    </span>
-                  )}
-                </Wrapper>
+                {hasPost ? (
+                  <Link href={`/posts/${row.postSlug!}`} className={rowClassName}>
+                    {inner}
+                  </Link>
+                ) : (
+                  <div className={rowClassName}>{inner}</div>
+                )}
               </li>
             )
           })}
@@ -167,5 +182,13 @@ export default function RankingGuidePage() {
         />
       </section>
     </main>
+  )
+}
+
+export default function RankingGuidePage() {
+  return (
+    <Suspense fallback={<main className="min-h-screen bg-[#f3f3f5]" />}>
+      <RankingGuideContent />
+    </Suspense>
   )
 }

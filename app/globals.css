@@ -66,6 +66,11 @@
   background: linear-gradient(180deg, rgba(243, 243, 245, 0) 0%, rgba(243, 243, 245, 0.4) 12%, #f3f3f5 28%);
 }
 
+/* Home page: use cream (#f3f0ea) to match map section */
+.home-page .section-after-image {
+  background: linear-gradient(180deg, rgba(243, 240, 234, 0) 0%, rgba(243, 240, 234, 0.4) 12%, #f3f0ea 28%);
+}
+
 /* Image section that transitions into light content — fade bottom to page color */
 .image-fade-to-page::after {
   content: '';
@@ -76,6 +81,15 @@
   height: 180px;
   background: linear-gradient(to top, #f3f3f5, transparent);
   pointer-events: none;
+}
+
+.home-page .image-fade-to-page::after {
+  background: linear-gradient(to top, #f3f0ea, transparent);
+}
+
+/* No gradient line between the two dynamic photos on home — hero and statement flow into each other */
+.home-page .hero-section.image-fade-to-page::after {
+  display: none;
 }
 
 /* Regional map: marker hover ring */
@@ -124,4 +138,20 @@
 }
 .map-marker-pulse {
   animation: mapMarkerPulse 2.5s ease-in-out infinite;
+}
+
+/* Hide Cursor IDE–injected portal (0×0 overlay) so it doesn’t affect layout or dev tools */
+/* Carousel: hide scrollbar but keep scroll */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide Cursor IDE–injected portal (0×0 overlay) so it doesn't affect layout or dev tools */
+nextjs-portal[data-cursor-element-id] {
+  display: none !important;
+  pointer-events: none !important;
 }
