@@ -1,8 +1,24 @@
-export const stories = [
+/** All images: single-dish food photos (no restaurant interiors). */
+export type Story = {
+  slug: string
+  title: string
+  city: string
+  cuisine: string
+  description: string
+  image: string
+  readTime: string
+  author: string
+  date: string
+  body: unknown[]
+  pullQuote: string | null
+}
+
+export const stories: Story[] = [
   {
     slug: 'le-bernardin-ocean-on-a-plate',
     title: 'Le Bernardin: The Ocean on a Plate',
     city: 'New York',
+    cuisine: 'Seafood',
     description: 'Eric Ripert\'s temple of seafood remains the gold standard.',
     image: 'https://images.unsplash.com/photo-1559339352-11d035aa65de?w=800&q=80',
     readTime: '8 min read',
@@ -15,8 +31,9 @@ export const stories = [
     slug: 'alinea-edible-theatre',
     title: 'Alinea: Twenty Years of Edible Theatre',
     city: 'Chicago',
+    cuisine: 'Contemporary',
     description: 'Grant Achatz\'s flagship still delivers the most ambitious tasting menu in America.',
-    image: 'https://images.unsplash.com/photo-1550966871-3ed3cdb5ed0c?w=800&q=80',
+    image: 'https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=800&q=80',
     readTime: '10 min read',
     author: 'Masala & Miso',
     date: 'February 2025',
@@ -27,6 +44,7 @@ export const stories = [
     slug: 'jiro-edomae',
     title: 'Jiro: The Last Word in Edomae',
     city: 'Tokyo',
+    cuisine: 'Japanese',
     description: 'The definitive Edomae experience. Shari and neta in perfect balance.',
     image: 'https://images.unsplash.com/photo-1579871494447-9811cf80d66c?w=800&q=80',
     readTime: '6 min read',
@@ -39,8 +57,9 @@ export const stories = [
     slug: 'benu-san-francisco',
     title: 'Benu: East Meets West in the Tenderloin',
     city: 'San Francisco',
+    cuisine: 'Asian Fusion',
     description: 'Corey Lee\'s multi-cultural tasting menu is both precise and soulful.',
-    image: 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=800&q=80',
+    image: 'https://images.unsplash.com/photo-1544025162-d76694265947?w=800&q=80',
     readTime: '9 min read',
     author: 'Masala & Miso',
     date: 'December 2024',
@@ -51,8 +70,9 @@ export const stories = [
     slug: 'single-thread-healdsburg',
     title: 'Single Thread: Farm to Table in Wine Country',
     city: 'Healdsburg',
+    cuisine: 'Californian',
     description: 'The garden is the star. One of America\'s most immersive dining experiences.',
-    image: 'https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=800&q=80',
+    image: 'https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=800&q=80',
     readTime: '7 min read',
     author: 'Masala & Miso',
     date: 'November 2024',
@@ -63,8 +83,9 @@ export const stories = [
     slug: 'arpege-paris',
     title: 'Arpège: Alain Passard\'s Vegetable Revolution',
     city: 'Paris',
+    cuisine: 'French',
     description: 'The produce from Passard\'s gardens drives the menu. A landmark of modern French cuisine.',
-    image: 'https://images.unsplash.com/photo-1544148103-0773bf10d330?w=800&q=80',
+    image: 'https://images.unsplash.com/photo-1547592166-23ac45744acd?w=800&q=80',
     readTime: '8 min read',
     author: 'Masala & Miso',
     date: 'November 2024',
@@ -75,8 +96,9 @@ export const stories = [
     slug: 'atomix-new-york',
     title: 'Atomix: Korean Counter in NoMad',
     city: 'New York',
+    cuisine: 'Korean',
     description: 'Refined Korean tasting in an intimate counter setting. Two stars, fully deserved.',
-    image: 'https://images.unsplash.com/photo-1552566626-52f8b828add9?w=800&q=80',
+    image: 'https://images.unsplash.com/photo-1563245372-f21724e3856d?w=800&q=80',
     readTime: '6 min read',
     author: 'Masala & Miso',
     date: 'October 2024',
@@ -87,8 +109,9 @@ export const stories = [
     slug: 'narisawa-tokyo',
     title: 'Narisawa: Satoyama and Forest to Table',
     city: 'Tokyo',
+    cuisine: 'Japanese',
     description: 'Where the forest meets the plate. Japanese innovation at its finest.',
-    image: 'https://images.unsplash.com/photo-1559329007-40df8a9345d8?w=800&q=80',
+    image: 'https://images.unsplash.com/photo-1551024506-0bccd828d307?w=800&q=80',
     readTime: '7 min read',
     author: 'Masala & Miso',
     date: 'October 2024',
@@ -99,8 +122,9 @@ export const stories = [
     slug: 'quince-san-francisco',
     title: 'Quince: California Luxury in Jackson Square',
     city: 'San Francisco',
+    cuisine: 'Californian',
     description: 'Seasonal, elegant, and consistently excellent. A San Francisco institution.',
-    image: 'https://images.unsplash.com/photo-1550966871-3ed3cdb5ed0c?w=800&q=80',
+    image: 'https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=800&q=80',
     readTime: '8 min read',
     author: 'Masala & Miso',
     date: 'September 2024',
@@ -111,6 +135,7 @@ export const stories = [
     slug: 'tiya',
     title: 'Tiya: Indian Fusion in the Michelin Guide',
     city: 'San Francisco',
+    cuisine: 'Indian',
     description: 'Refined Indian fusion in the city. In the Guide 2024–25.',
     image: 'https://images.unsplash.com/photo-1565557623262-b51c2513a641?w=800&q=80',
     readTime: '5 min read',
@@ -123,8 +148,9 @@ export const stories = [
     slug: 'snail-bar',
     title: 'Snail Bar: Contemporary Californian',
     city: 'San Francisco',
+    cuisine: 'Californian',
     description: 'Wine-forward, ingredient-led. In the Michelin Guide 2023–25.',
-    image: 'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=800&q=80',
+    image: 'https://images.unsplash.com/photo-1604329760661-e71dc83f2b26?w=800&q=80',
     readTime: '5 min read',
     author: 'Masala & Miso',
     date: 'February 2025',
@@ -135,8 +161,9 @@ export const stories = [
     slug: 'nari',
     title: 'Nari: One Star, Thai and Californian',
     city: 'San Francisco',
+    cuisine: 'Thai',
     description: 'Our highest-rated visit. One Michelin star 2023–25.',
-    image: 'https://images.unsplash.com/photo-1525755662778-989d0524087e?w=800&q=80',
+    image: 'https://images.unsplash.com/photo-1551183053-bf1178de1c93?w=800&q=80',
     readTime: '6 min read',
     author: 'Masala & Miso',
     date: 'February 2025',
@@ -147,8 +174,9 @@ export const stories = [
     slug: 'fob-kitchen',
     title: 'F.O.B. Kitchen: Filipino Heart in the Guide',
     city: 'San Francisco',
+    cuisine: 'Filipino',
     description: 'In the Michelin Guide since 2021. Heart and technique.',
-    image: 'https://images.unsplash.com/photo-1552566626-52f8b828add9?w=800&q=80',
+    image: 'https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=800&q=80',
     readTime: '5 min read',
     author: 'Masala & Miso',
     date: 'January 2025',

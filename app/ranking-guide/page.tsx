@@ -53,7 +53,7 @@ function RankingGuideContent() {
   }, [location, cuisine, stars])
 
   return (
-    <main>
+    <main className="min-h-screen bg-[#f3f0ea] ranking-guide-page">
       <section className="relative pt-28 pb-section px-8 flex flex-col items-center justify-center min-h-[50vh] bg-cover bg-center overflow-hidden image-fade-to-page">
         <div
           className="absolute inset-0 bg-cover bg-center"
@@ -68,7 +68,8 @@ function RankingGuideContent() {
         </p>
       </section>
 
-      <div className="section-after-image py-section px-6 sm:px-8 max-w-4xl mx-auto">
+      <div className="ranking-guide-cream w-full">
+        <div className="section-after-image py-section px-6 sm:px-8 max-w-4xl mx-auto">
         <div className="flex flex-wrap items-baseline gap-x-6 gap-y-3 mb-10 pb-4 border-b border-black/[0.08]">
           <div className="flex items-baseline gap-2">
             <span className="text-midnight/60 text-metadata uppercase tracking-wider">Location</span>
@@ -132,7 +133,7 @@ function RankingGuideContent() {
                 </span>
                 {row.image && (
                   <div className="relative w-20 h-20 shrink-0 rounded overflow-hidden bg-midnight/10">
-                    <Image src={row.image} alt="" fill className="object-cover" sizes="80px" />
+                    <Image src={row.image} alt="" fill className="object-cover grayscale transition-all duration-500 group-hover:grayscale-0" sizes="80px" />
                   </div>
                 )}
                 <div className="min-w-0 flex-1">
@@ -173,6 +174,7 @@ function RankingGuideContent() {
             )
           })}
         </ul>
+        </div>
       </div>
 
       <section className="relative w-full min-h-[40vh] bg-cover bg-center image-fade-to-page">

@@ -87,6 +87,34 @@
   background: linear-gradient(to top, #f3f0ea, transparent);
 }
 
+/* Ranking guide: full-width cream block with subtle spices/herbs overlay */
+.ranking-guide-cream {
+  position: relative;
+  background: linear-gradient(180deg, rgba(243, 240, 234, 0) 0%, rgba(243, 240, 234, 0.4) 12%, #f3f0ea 28%);
+}
+.ranking-guide-cream::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  left: 50%;
+  width: 100vw;
+  margin-left: -50vw;
+  background-image: url('https://images.unsplash.com/photo-1506368249639-73a05d6f6488?w=1200&q=70');
+  background-size: cover;
+  background-position: center;
+  opacity: 0.06;
+  pointer-events: none;
+  z-index: 0;
+}
+.ranking-guide-cream .section-after-image {
+  position: relative;
+  z-index: 1;
+  background: none;
+}
+.ranking-guide-page .image-fade-to-page::after {
+  background: linear-gradient(to top, #f3f0ea, transparent);
+}
+
 /* No gradient line between the two dynamic photos on home — hero and statement flow into each other */
 .home-page .hero-section.image-fade-to-page::after {
   display: none;
@@ -148,6 +176,26 @@
 }
 .scrollbar-hide::-webkit-scrollbar {
   display: none;
+}
+
+.posts-grid {
+  gap: 10px;
+  padding: 20px 20px;
+}
+
+.card img {
+  transition: transform 0.6s ease;
+}
+.card:hover img {
+  transform: scale(1.04);
+}
+
+.filters select,
+.filters .filters-select {
+  border: 1px solid #ddd;
+  padding: 6px 10px;
+  font-size: 12px;
+  color: #720f32;
 }
 
 /* Hide Cursor IDE–injected portal (0×0 overlay) so it doesn't affect layout or dev tools */

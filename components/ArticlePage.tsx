@@ -24,12 +24,12 @@ export default function ArticlePage({
 }: ArticlePageProps) {
   return (
     <article className="bg-page">
-      <div className="relative w-full aspect-[21/9] min-h-[280px]">
+      <div className="group relative w-full aspect-[21/9] min-h-[280px] overflow-hidden">
         <Image
           src={image}
           alt={imageAlt}
           fill
-          className="object-cover"
+          className="object-cover grayscale transition-all duration-500 group-hover:grayscale-0"
           priority
           sizes="100vw"
         />
