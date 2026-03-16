@@ -56,10 +56,10 @@ export default function MasalaMisoLocationGallery() {
 
   return (
     <section
-      className="relative min-h-[130vh] overflow-hidden px-6 py-14 md:px-10 lg:px-16 pb-20"
+      className="relative min-h-screen overflow-hidden px-6 py-14 md:px-10 lg:px-16 pb-[380px] mb-[-380px]"
       data-section="explore-by-place"
     >
-      {/* Ocean photo background — map section only */}
+      {/* Ocean photo background — extends behind footer for seamless join */}
       <div
         className="absolute inset-0 bg-cover bg-center"
         style={{ backgroundImage: `url('${OCEAN_IMAGE}')` }}
@@ -75,8 +75,9 @@ export default function MasalaMisoLocationGallery() {
       <div className="absolute inset-0 bg-[#0a3d52]/40" aria-hidden />
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[#0a3d52]/50" aria-hidden />
 
-      <div className="relative z-10 flex min-h-[85vh] flex-col mx-auto max-w-[1680px] text-white">
-        <div className="flex-shrink-0 mb-6 flex flex-col items-center gap-4 text-center lg:mb-8">
+      <div className="relative z-10 flex min-h-screen flex-col w-full text-white">
+        <div className="flex-shrink-0 mb-8 flex flex-col items-center gap-5 text-center lg:mb-10">
+          <div className="h-px w-full max-w-4xl mx-auto bg-white/25" />
           <p className="text-[11px] uppercase tracking-[0.55em] text-white/85">
             Masala &amp; Miso
           </p>
