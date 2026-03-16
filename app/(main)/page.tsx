@@ -1,4 +1,4 @@
-/** Layout: image-forward rhythm. Statement section overlaps second photo; map then footer on ocean. */
+/** Layout: image-forward rhythm. Ocean from Explore by Place extends to footer. */
 import Hero from '@/components/Hero'
 import StatementSection from '@/components/StatementSection'
 import MasalaMisoLocationGallery from '@/components/MasalaMisoLocationGallery'
@@ -10,10 +10,10 @@ export default function Home() {
       {/* 1. Full-width hero — immersive photography */}
       <Hero />
 
-      {/* 2. Statement + CTAs overlapping second photo (grey tint), dynamic on scroll */}
+      {/* 2. Statement + CTAs overlapping second photo */}
       <StatementSection />
 
-      {/* 3. Where we've dined — Explore by Place (map); footer with Masala & Miso sits directly below on ocean */}
+      {/* 3. Explore by Place — ocean extends to footer */}
       <FadeInSection>
         <MasalaMisoLocationGallery />
       </FadeInSection>

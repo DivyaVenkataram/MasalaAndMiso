@@ -75,8 +75,14 @@ export default function MasalaMisoLocationGallery() {
       <div className="absolute inset-0 bg-[#0a3d52]/40" aria-hidden />
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[#0a3d52]/50" aria-hidden />
 
+<<<<<<< HEAD
+      <div className="relative z-10 flex min-h-screen flex-col w-full text-white">
+        <div className="flex-shrink-0 mb-8 flex flex-col items-center gap-5 text-center lg:mb-10">
+          <div className="h-px w-full max-w-4xl mx-auto bg-white/25" />
+=======
       <div className="relative z-10 flex min-h-[85vh] flex-col mx-auto max-w-[1680px] text-white">
         <div className="flex-shrink-0 mb-6 flex flex-col items-center gap-4 text-center lg:mb-8">
+>>>>>>> 2baa1517aac0d146f623f46c656b690580b2197a
           <p className="text-[11px] uppercase tracking-[0.55em] text-white/85">
             Masala &amp; Miso
           </p>
@@ -97,9 +103,10 @@ export default function MasalaMisoLocationGallery() {
           </div>
         </div>
 
-        <div className="group relative flex min-h-0 flex-1 w-full max-w-[1600px] mx-auto">
-          {/* Desktop: shapes in row 1, labels in one horizontal row (row 2) */}
-          <div className="hidden h-full lg:grid lg:grid-cols-5 lg:grid-rows-[1fr_auto] lg:gap-10 lg:gap-y-8 lg:flex-1 lg:min-h-0">
+        {/* Map area: full width of section, centered, fills space below header */}
+        <div className="group relative flex flex-1 min-h-0 w-full items-center justify-center">
+          {/* Desktop: full-width grid proportional to section, centered, fills space below */}
+          <div className="hidden w-full h-full min-h-[400px] lg:grid lg:grid-cols-5 lg:grid-rows-[1fr_auto] lg:gap-3 lg:gap-y-4 lg:content-center">
             {locations.map((location) => (
               <Link
                 key={location.id}
@@ -111,18 +118,18 @@ export default function MasalaMisoLocationGallery() {
                   'focus-visible:!opacity-100 focus-visible:!blur-0 focus-visible:outline-none',
                 ].join(' ')}
               >
-                <div className="relative flex min-h-0 w-full flex-1 items-center justify-center lg:min-h-0 lg:max-h-[320px]">
-                  <div className="absolute inset-0 flex items-center justify-center p-2">
-                    <div className="h-full w-full max-h-[280px] max-w-full scale-[1.035] text-white/20 blur-[1px] transition-all duration-500 group-hover/item:scale-[1.045] group-hover/item:text-white/35 [&>svg]:h-full [&>svg]:max-h-[280px] [&>svg]:w-auto [&>svg]:object-contain">
+                <div className="relative flex min-h-0 w-full flex-1 items-center justify-center lg:min-h-0 lg:max-h-[360px]">
+                  <div className="absolute inset-0 flex items-center justify-center p-1">
+                    <div className="h-full w-full max-h-[320px] max-w-full scale-[1.035] text-white/20 blur-[1px] transition-all duration-500 group-hover/item:scale-[1.045] group-hover/item:text-wine [&>svg]:h-full [&>svg]:max-h-[320px] [&>svg]:w-auto [&>svg]:object-contain">
                       {location.shape}
                     </div>
                   </div>
-                  <div className="relative z-10 flex h-full w-full max-h-[280px] max-w-full items-center justify-center p-2 text-white drop-shadow-[0_8px_24px_rgba(0,0,0,0.35)] transition-transform duration-500 group-hover/item:scale-[1.025] [&>svg]:h-full [&>svg]:max-h-[280px] [&>svg]:w-auto [&>svg]:object-contain">
+                  <div className="relative z-10 flex h-full w-full max-h-[320px] max-w-full items-center justify-center p-1 text-white drop-shadow-[0_8px_24px_rgba(0,0,0,0.35)] transition-transform duration-500 group-hover/item:scale-[1.025] [&>svg]:h-full [&>svg]:max-h-[320px] [&>svg]:w-auto [&>svg]:object-contain">
                     {location.shape}
                   </div>
                 </div>
 
-                <div className="flex-shrink-0 mt-4 w-full text-center lg:mt-0 lg:pt-8">
+                <div className="flex-shrink-0 mt-2 w-full text-center lg:mt-0 lg:pt-4">
                   <h3
                     className="text-[28px] uppercase tracking-[0.32em] text-white"
                     style={{ fontFamily: '"Cormorant Garamond", serif' }}
@@ -141,20 +148,20 @@ export default function MasalaMisoLocationGallery() {
           </div>
 
           {/* Mobile/tablet: larger shapes, fill space */}
-          <div className="grid min-h-0 flex-1 grid-cols-1 gap-10 sm:grid-cols-2 lg:hidden">
+          <div className="grid min-h-0 flex-1 grid-cols-1 gap-4 sm:grid-cols-2 lg:hidden">
             {locations.map((location) => (
               <Link
                 key={location.id}
                 href={location.href}
                 className="group/item flex min-h-[320px] flex-col items-center transition-all duration-500 hover:opacity-100 focus-visible:outline-none sm:min-h-[380px]"
               >
-                <div className="relative flex min-h-0 w-full flex-1 items-center justify-center max-h-[280px]">
-                  <div className="absolute inset-0 flex items-center justify-center p-2">
-                    <div className="h-full w-full max-h-[260px] max-w-full scale-[1.03] text-white/20 blur-[1px] transition-all duration-500 group-hover/item:text-white/35 [&>svg]:h-full [&>svg]:max-h-[260px] [&>svg]:w-auto [&>svg]:object-contain">
+                <div className="relative flex min-h-0 w-full flex-1 items-center justify-center max-h-[320px]">
+                  <div className="absolute inset-0 flex items-center justify-center p-1">
+                    <div className="h-full w-full max-h-[300px] max-w-full scale-[1.03] text-white/20 blur-[1px] transition-all duration-500 group-hover/item:text-wine [&>svg]:h-full [&>svg]:max-h-[300px] [&>svg]:w-auto [&>svg]:object-contain">
                       {location.shape}
                     </div>
                   </div>
-                  <div className="relative z-10 flex h-full w-full max-h-[260px] max-w-full items-center justify-center p-2 text-white drop-shadow-[0_8px_24px_rgba(0,0,0,0.35)] transition-transform duration-500 group-hover/item:scale-[1.025] [&>svg]:h-full [&>svg]:max-h-[260px] [&>svg]:w-auto [&>svg]:object-contain">
+                  <div className="relative z-10 flex h-full w-full max-h-[300px] max-w-full items-center justify-center p-1 text-white drop-shadow-[0_8px_24px_rgba(0,0,0,0.35)] transition-transform duration-500 group-hover/item:scale-[1.025] [&>svg]:h-full [&>svg]:max-h-[300px] [&>svg]:w-auto [&>svg]:object-contain">
                     {location.shape}
                   </div>
                 </div>
