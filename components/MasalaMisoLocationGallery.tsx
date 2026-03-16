@@ -56,7 +56,7 @@ export default function MasalaMisoLocationGallery() {
 
   return (
     <section
-      className="relative min-h-screen overflow-hidden px-6 py-14 md:px-10 lg:px-16 pb-[380px] mb-[-380px]"
+      className="relative min-h-[130vh] overflow-hidden px-6 py-14 md:px-10 lg:px-16 pb-[380px] mb-[-380px]"
       data-section="explore-by-place"
     >
       {/* Ocean photo background — extends behind footer for seamless join */}
@@ -148,7 +148,7 @@ export default function MasalaMisoLocationGallery() {
               <Link
                 key={location.id}
                 href={location.href}
-                className="group/item flex min-h-[280px] flex-col items-center transition-all duration-500 hover:opacity-100 focus-visible:outline-none sm:min-h-[320px]"
+                className="group/item flex min-h-[320px] flex-col items-center transition-all duration-500 hover:opacity-100 focus-visible:outline-none sm:min-h-[380px]"
               >
                 <div className="relative flex min-h-0 w-full flex-1 items-center justify-center max-h-[320px]">
                   <div className="absolute inset-0 flex items-center justify-center p-1">
