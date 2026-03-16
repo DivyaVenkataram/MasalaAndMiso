@@ -29,10 +29,11 @@ export default function ArticlePage({
           src={image}
           alt={imageAlt}
           fill
-          className="object-cover grayscale transition-all duration-500 group-hover:grayscale-0"
+          className="object-cover"
           priority
           sizes="100vw"
         />
+        <div className="absolute inset-0 bg-midnight/60 pointer-events-none transition-opacity duration-300 group-hover:opacity-0" aria-hidden />
       </div>
       <div className="max-w-reading mx-auto px-8 py-section">
         <h1 className="font-playfair text-3xl sm:text-page font-medium text-midnight mb-4">

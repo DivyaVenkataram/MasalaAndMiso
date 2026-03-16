@@ -35,10 +35,19 @@ function parseReadTimeMinutes(readTime: string): number {
 
 function formatPostTitle(title: string): ReactNode {
   const i = title.indexOf(': ')
-  if (i === -1) return <><span className="uppercase">{title}</span></>
-  const restaurant = title.slice(0, i)
+  if (i === -1) return <span className="block uppercase">{title}</span>
+  const restaurant = title.slice(0, i).toUpperCase()
   const subtitle = title.slice(i + 2).toLowerCase()
-  return <><span className="uppercase">{restaurant}</span>: {subtitle}</>
+  return (
+    <>
+      <span className="block uppercase text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-semibold leading-tight">
+        {restaurant}
+      </span>
+      <span className="block text-lg sm:text-xl md:text-2xl font-normal leading-snug mt-1 opacity-95">
+        {subtitle}
+      </span>
+    </>
+  )
 }
 
 const cardVariants = {
@@ -90,7 +99,7 @@ export default function PostsPage() {
   }, [location, cuisine, readTime, sort])
 
   return (
-    <main>
+    <main className="bg-[#0a1628]">
       {/* Hero — parallax */}
       <motion.section
         ref={heroRef}
@@ -103,18 +112,25 @@ export default function PostsPage() {
             y: heroY,
           }}
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-black/55 via-black/40 to-black/60" />
+        {/* Top: dark → Middle: image color → Bottom: deep navy */}
+        <div
+          className="absolute inset-0 z-[1] pointer-events-none"
+          style={{
+            background: 'linear-gradient(to bottom, rgba(0,0,0,0.72) 0%, rgba(0,0,0,0.4) 28%, transparent 48%, transparent 58%, rgba(10,22,40,0.6) 80%, #0a1628 100%)',
+          }}
+          aria-hidden
+        />
         <motion.div
           className="relative z-10 text-center max-w-2xl"
           style={{ opacity: heroOpacity, y: titleY }}
         >
           <motion.h1
-            className="font-playfair text-4xl sm:text-5xl md:text-6xl font-medium text-white mb-3 tracking-tight"
+            className="hero-title font-playfair font-medium mb-3 uppercase"
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
           >
-            Posts
+            The Journal
           </motion.h1>
           <motion.p
             className="text-white/90 text-[18px] sm:text-xl leading-[1.6]"
@@ -127,75 +143,82 @@ export default function PostsPage() {
         </motion.div>
       </motion.section>
 
-      {/* Filter bar — sticky, compact, burgundy text */}
-      <section className="filters border-b border-midnight/10 sticky top-[72px] z-40 bg-[#f3f0ea]/95 backdrop-blur-sm">
-        <div className="w-full max-w-7xl mx-auto px-3 sm:px-4 py-2">
-          <div className="flex flex-wrap items-center justify-center gap-x-3 gap-y-1.5 sm:gap-x-4">
-            <span className="text-burgundy text-xs font-medium uppercase tracking-wider shrink-0">Filter by</span>
-            <div className="relative inline-block shrink-0">
+      {/* Filter bar */}
+      <section className="filters sticky top-[72px] z-40 bg-[#0a1628]">
+        <div className="w-full max-w-7xl mx-auto px-3 sm:px-4 py-3 flex justify-center">
+          <div className="flex flex-wrap items-center gap-6 text-white/90">
+            <span className="text-[12px] uppercase tracking-[0.28em] text-white/60 shrink-0">
+              Filter By
+            </span>
+
+            <div className="relative">
               <label htmlFor="posts-sort" className="sr-only">Sort by</label>
               <select
                 id="posts-sort"
                 value={sort}
                 onChange={(e) => setSort(e.target.value as 'recent' | 'popular' | 'oldest')}
-                className="filters-select w-full min-w-0 max-w-[130px] sm:max-w-[140px] pl-2 pr-8 cursor-pointer appearance-none focus:outline-none focus:ring-1 focus:ring-burgundy/50 rounded bg-white/70 hover:bg-white/90 transition-colors"
-                style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%23720f32' stroke-width='1.5'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' d='M19.5 8.25l-7.5 7.5-7.5-7.5'/%3E%3C/svg%3E")`, backgroundRepeat: 'no-repeat', backgroundPosition: 'right 6px center', backgroundSize: '14px' }}
+                className="appearance-none bg-transparent border-0 border-b border-white/20 pr-8 pb-2 text-[17px] text-white/90 focus:outline-none focus:border-white/45 hover:border-white/35 transition cursor-pointer min-w-[120px]"
               >
                 {SORT_OPTIONS.map((opt) => (
                   <option key={opt.value} value={opt.value}>{opt.label}</option>
                 ))}
               </select>
+              <span className="pointer-events-none absolute right-1 top-[45%] h-2.5 w-2.5 -translate-y-1/2 rotate-45 border-b border-r border-white/70" aria-hidden />
             </div>
-            <div className="relative inline-block shrink-0">
+
+            <div className="relative">
               <label htmlFor="posts-location" className="sr-only">Location</label>
               <select
                 id="posts-location"
                 value={location}
                 onChange={(e) => setLocation(e.target.value)}
-                className="filters-select w-full min-w-0 max-w-[130px] sm:max-w-[140px] pl-2 pr-8 cursor-pointer appearance-none focus:outline-none focus:ring-1 focus:ring-burgundy/50 rounded bg-white/70 hover:bg-white/90 transition-colors"
-                style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%23720f32' stroke-width='1.5'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' d='M19.5 8.25l-7.5 7.5-7.5-7.5'/%3E%3C/svg%3E")`, backgroundRepeat: 'no-repeat', backgroundPosition: 'right 6px center', backgroundSize: '14px' }}
+                className="appearance-none bg-transparent border-0 border-b border-white/20 pr-8 pb-2 text-[17px] text-white/90 focus:outline-none focus:border-white/45 hover:border-white/35 transition cursor-pointer min-w-[120px]"
               >
                 <option value="">All locations</option>
                 {locationOptions.filter(Boolean).map((opt) => (
                   <option key={opt} value={opt}>{opt}</option>
                 ))}
               </select>
+              <span className="pointer-events-none absolute right-1 top-[45%] h-2.5 w-2.5 -translate-y-1/2 rotate-45 border-b border-r border-white/70" aria-hidden />
             </div>
-            <div className="relative inline-block shrink-0">
+
+            <div className="relative">
               <label htmlFor="posts-cuisine" className="sr-only">Cuisine</label>
               <select
                 id="posts-cuisine"
                 value={cuisine}
                 onChange={(e) => setCuisine(e.target.value)}
-                className="filters-select w-full min-w-0 max-w-[130px] sm:max-w-[140px] pl-2 pr-8 cursor-pointer appearance-none focus:outline-none focus:ring-1 focus:ring-burgundy/50 rounded bg-white/70 hover:bg-white/90 transition-colors"
-                style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%23720f32' stroke-width='1.5'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' d='M19.5 8.25l-7.5 7.5-7.5-7.5'/%3E%3C/svg%3E")`, backgroundRepeat: 'no-repeat', backgroundPosition: 'right 6px center', backgroundSize: '14px' }}
+                className="appearance-none bg-transparent border-0 border-b border-white/20 pr-8 pb-2 text-[17px] text-white/90 focus:outline-none focus:border-white/45 hover:border-white/35 transition cursor-pointer min-w-[120px]"
               >
                 <option value="">All cuisines</option>
                 {cuisineOptions.filter(Boolean).map((opt) => (
                   <option key={opt} value={opt}>{opt}</option>
                 ))}
               </select>
+              <span className="pointer-events-none absolute right-1 top-[45%] h-2.5 w-2.5 -translate-y-1/2 rotate-45 border-b border-r border-white/70" aria-hidden />
             </div>
-            <div className="relative inline-block shrink-0">
-              <label htmlFor="posts-readtime" className="sr-only">Reading time</label>
+
+            <div className="relative">
+              <label htmlFor="posts-readtime" className="sr-only">Read time</label>
               <select
                 id="posts-readtime"
                 value={readTime}
                 onChange={(e) => setReadTime(e.target.value)}
-                className="filters-select w-full min-w-0 max-w-[130px] sm:max-w-[140px] pl-2 pr-8 cursor-pointer appearance-none focus:outline-none focus:ring-1 focus:ring-burgundy/50 rounded bg-white/70 hover:bg-white/90 transition-colors"
-                style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%23720f32' stroke-width='1.5'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' d='M19.5 8.25l-7.5 7.5-7.5-7.5'/%3E%3C/svg%3E")`, backgroundRepeat: 'no-repeat', backgroundPosition: 'right 6px center', backgroundSize: '14px' }}
+                className="appearance-none bg-transparent border-0 border-b border-white/20 pr-8 pb-2 text-[17px] text-white/90 focus:outline-none focus:border-white/45 hover:border-white/35 transition cursor-pointer min-w-[120px]"
               >
                 <option value="">Any length</option>
                 {readTimeOptions.filter(Boolean).map((opt) => (
                   <option key={opt} value={opt}>{opt}</option>
                 ))}
               </select>
+              <span className="pointer-events-none absolute right-1 top-[45%] h-2.5 w-2.5 -translate-y-1/2 rotate-45 border-b border-r border-white/70" aria-hidden />
             </div>
+
             {(location || cuisine || readTime || sort !== 'recent') && (
               <motion.button
                 type="button"
                 onClick={() => { setLocation(''); setCuisine(''); setReadTime(''); setSort('recent') }}
-                className="text-xs text-burgundy font-medium hover:text-burgundy/80 transition-colors underline underline-offset-2 decoration-burgundy/60 hover:decoration-burgundy shrink-0"
+                className="text-[12px] uppercase tracking-[0.28em] text-white/60 hover:text-white/90 transition-opacity underline underline-offset-2 shrink-0 cursor-pointer bg-transparent border-0"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
               >
@@ -206,7 +229,7 @@ export default function PostsPage() {
         </div>
       </section>
 
-      <section className="relative section-after-image">
+      <section className="relative bg-[#0a1628]">
         <div className="posts-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
           <AnimatePresence mode="popLayout">
             {filtered.map((story, i) => (
@@ -217,7 +240,7 @@ export default function PostsPage() {
         <AnimatePresence>
           {filtered.length === 0 && (
             <motion.div
-              className="py-24 text-center text-midnight/70"
+              className="py-24 text-center text-white/70"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0 }}
@@ -227,7 +250,7 @@ export default function PostsPage() {
               <button
                 type="button"
                 onClick={() => { setLocation(''); setCuisine(''); setReadTime(''); setSort('recent') }}
-                className="mt-4 text-ocean link-editorial"
+                className="mt-4 text-white/90 hover:text-white underline underline-offset-2 decoration-white/50"
               >
                 Clear filters
               </button>
@@ -272,23 +295,25 @@ function PostCard({ story, index }: { story: Story; index: number }) {
           src={story.image}
           alt=""
           fill
-          className="object-cover grayscale duration-500 group-hover:grayscale-0"
+          className="object-cover"
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
         />
-        {/* Location + read time — burgundy; hide on hover */}
+        {/* Dark blue overlay — disappears on hover */}
+        <div className="absolute inset-0 bg-midnight/60 pointer-events-none transition-opacity duration-300 group-hover:opacity-0" aria-hidden />
+        {/* Location + read time — white; hide on hover */}
         <div className="absolute top-0 left-0 right-0 p-4 sm:p-5 flex items-center justify-between pointer-events-none transition-opacity duration-300 group-hover:opacity-0">
-          <span className="text-burgundy text-lg sm:text-[19px] uppercase tracking-wider font-medium drop-shadow-[0_1px_4px_rgba(0,0,0,0.5)]">{story.city}</span>
-          <span className="text-burgundy text-base sm:text-lg drop-shadow-[0_1px_4px_rgba(0,0,0,0.5)]">{story.readTime}</span>
+          <span className="text-white text-lg sm:text-[19px] uppercase tracking-wider font-medium drop-shadow-[0_1px_4px_rgba(0,0,0,0.5)]">{story.city}</span>
+          <span className="text-white text-base sm:text-lg drop-shadow-[0_1px_4px_rgba(0,0,0,0.5)]">{story.readTime}</span>
         </div>
-        {/* Title — restaurant ALL CAPS, rest lowercase; hide on hover */}
-        <div className="absolute inset-0 flex items-center justify-start px-5 py-5 sm:px-8 sm:py-8 pointer-events-none transition-opacity duration-300 group-hover:opacity-0">
-          <h2 className="font-playfair text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-semibold text-burgundy leading-[1.1] tracking-tight text-left max-w-full break-words drop-shadow-[0_2px_10px_rgba(0,0,0,0.5)]">
+        {/* Title — bottom left; restaurant larger, subtitle smaller; white; hide on hover */}
+        <div className="absolute inset-0 flex items-end justify-start px-5 py-5 sm:px-8 sm:py-8 pointer-events-none transition-opacity duration-300 group-hover:opacity-0">
+          <h2 className="font-playfair text-white tracking-tight text-left max-w-full break-words drop-shadow-[0_2px_10px_rgba(0,0,0,0.5)] [&_span]:block">
             {formatPostTitle(story.title)}
           </h2>
         </div>
-        {/* "Read →" — burgundy; visible only on hover */}
+        {/* "Read →" — white; visible only on hover */}
         <div className="absolute inset-0 flex items-center justify-center pointer-events-none opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-          <span className="font-playfair text-xl sm:text-2xl text-burgundy font-medium tracking-wide drop-shadow-[0_2px_8px_rgba(0,0,0,0.5)]">
+          <span className="font-playfair text-xl sm:text-2xl text-white font-medium tracking-wide drop-shadow-[0_2px_8px_rgba(0,0,0,0.5)]">
             Read →
           </span>
         </div>
