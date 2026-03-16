@@ -3,13 +3,8 @@
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 
-<<<<<<< HEAD
 const OCEAN_IMAGE =
   'https://images.unsplash.com/photo-1505144808419-1957a94ca61e?w=1920&q=80'
-=======
-const FOOTER_IMAGE =
-  'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=1920&q=80'
->>>>>>> 863b9ca36d7276627f476a5768863efd2a88c231
 
 export default function Footer() {
   const pathname = usePathname()
