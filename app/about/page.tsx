@@ -7,8 +7,8 @@ export default function AboutPage() {
           style={{ backgroundImage: `url('https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1920&q=80')` }}
         />
         <div className="absolute inset-0 bg-gradient-to-b from-black/55 via-black/40 to-black/60" />
-        <h1 className="relative z-10 font-playfair text-4xl sm:text-5xl font-medium text-white text-center mb-3 tracking-tight">
-          About Us & Credentials
+        <h1 className="hero-title relative z-10 font-playfair font-medium text-center mb-3">
+          ABOUT US & CREDENTIALS
         </h1>
         <p className="relative z-10 text-white/90 text-center max-w-xl text-[18px] leading-[1.6]">
           Who we are, why we&apos;re qualified to review the world&apos;s best tables, and who stands behind us.
@@ -22,17 +22,17 @@ export default function AboutPage() {
           </h2>
           <div className="space-y-4 text-midnight text-[18px] leading-[1.6]">
             <p>
-              I grew up in <strong>Tokyo</strong>—where Michelin first published a guide outside Europe—and learned to eat with intention. Breakfast was often a proper <em>washoku</em> spread; weekends meant standing at sushi counters and ramen shops where the language of <em>dashi</em>, <em>neta</em>, and <em>umami</em> was as native as the streets of Ginza. That foundation gave me a palate and vocabulary for precision: <em>shari</em> temperature, knife work, and the difference between technique that performs and technique that serves.
+              We grew up in <strong>Tokyo</strong> and the <strong>Bay Area</strong> respectively—one with parents from Japan, the other with immigrant parents from India. One of us learned to eat with intention in Tokyo—where Michelin first published a guide outside Europe—with breakfast often a proper <em>washoku</em> spread and weekends at sushi counters and ramen shops where the language of <em>dashi</em>, <em>neta</em>, and <em>umami</em> was as native as the streets of Ginza. The other came up in the Bay Area amid South Asian and Californian food cultures. That foundation gave us a shared palate and vocabulary for precision: <em>shari</em> temperature, knife work, and the difference between technique that performs and technique that serves.
             </p>
             <p>
-              Later, I trained in <strong>hospitality and culinary criticism</strong> in the U.S. and Europe, and have dined at hundreds of starred restaurants across Asia, North America, and France. I write in both <em>culinary technical language</em>—so chefs and serious diners can trust the critique—and in plain English, so everyone can decide where to book next. <strong>Masala & Miso</strong> is named for the two flavor worlds I hold closest: the spice and depth of South Asian cooking, and the clarity and fermentation of Japanese cuisine. Both inform how I judge a plate.
+              Later, we trained in <strong>hospitality and culinary criticism</strong> in the U.S. and Europe, and have dined at hundreds of starred restaurants across Asia, North America, and France. We write in both <em>culinary technical language</em>—so chefs and serious diners can trust the critique—and in plain English, so everyone can decide where to book next. <strong>Masala & Miso</strong> is named for the two flavor worlds we hold closest: the spice and depth of South Asian cooking, and the clarity and fermentation of Japanese cuisine. Both inform how we judge a plate.
             </p>
           </div>
         </section>
       </div>
 
-      <section className="relative w-full min-h-[40vh] bg-cover bg-center image-fade-to-page" style={{ backgroundImage: `url('https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=1920&q=80')` }}>
-        <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" aria-hidden />
+      <section className="relative w-full min-h-[40vh] bg-cover bg-center overflow-hidden image-fade-to-page" style={{ backgroundImage: `url('https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=1920&q=80')` }}>
+        <div className="absolute inset-0 bg-gradient-to-b from-black/55 via-transparent to-black/25" aria-hidden />
       </section>
 
       <div className="max-w-reading mx-auto px-8 py-section section-after-image">

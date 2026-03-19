@@ -7,7 +7,7 @@ export default function BlogPage() {
     <main className="pt-24 pb-20">
       <div className="max-w-layout mx-auto px-6">
         <h1 className="font-playfair text-5xl sm:text-6xl font-semibold uppercase tracking-brand text-midnight mb-4">
-          Blog
+          BLOG
         </h1>
         <p className="font-baskerville text-xl text-midnight/80 mb-16 max-w-reading">
           In-depth reviews, tasting notes, and stories from the table.

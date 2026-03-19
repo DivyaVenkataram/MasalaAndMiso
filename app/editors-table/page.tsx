@@ -51,11 +51,11 @@ export default function EditorsTablePage() {
   const titleY = useTransform(heroProgress, [0, 0.4], [0, 80])
 
   return (
-    <main className="bg-midnight">
-      {/* Hero — full viewport, parallax */}
+    <main className="bg-midnight -mb-1">
+      {/* Hero — parallax */}
       <motion.section
         ref={heroRef}
-        className="relative min-h-screen flex flex-col items-center justify-center px-6 sm:px-12 overflow-hidden"
+        className="relative min-h-[55vh] flex flex-col items-center justify-center px-6 sm:px-12 py-20 overflow-hidden"
       >
         <motion.div
           className="absolute inset-0 bg-cover bg-center scale-105"
@@ -78,12 +78,12 @@ export default function EditorsTablePage() {
             Curated lists
           </motion.p>
           <motion.h1
-            className="font-playfair text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-medium text-white tracking-tight leading-[0.95] mb-6"
+            className="hero-title font-playfair font-medium mb-6"
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
           >
-            Editor&apos;s Table
+            EDITOR&apos;S TABLE
           </motion.h1>
           <motion.p
             className="text-white/90 text-lg sm:text-xl max-w-xl mx-auto leading-relaxed"
@@ -96,13 +96,10 @@ export default function EditorsTablePage() {
         </motion.div>
       </motion.section>
 
-      {/* List sections — each full viewport, parallax + staggered content */}
+      {/* List sections — parallax + staggered content */}
       {lists.map((list, i) => (
         <ListSection key={i} list={list} index={i} />
       ))}
-
-      {/* Closing image */}
-      <ClosingSection />
     </main>
   )
 }
@@ -126,7 +123,7 @@ function ListSection({
   return (
     <motion.section
       ref={sectionRef}
-      className="relative min-h-screen flex flex-col justify-end py-24 sm:py-32 px-6 sm:px-12 lg:px-16 overflow-hidden"
+      className="relative min-h-[60vh] flex flex-col justify-end py-20 sm:py-28 px-6 sm:px-12 lg:px-16 overflow-hidden"
     >
       <motion.div
         className="absolute inset-0 bg-cover bg-center scale-110"
@@ -183,31 +180,6 @@ function ListSection({
           </Link>
         </motion.div>
       </motion.div>
-    </motion.section>
-  )
-}
-
-function ClosingSection() {
-  const ref = useRef<HTMLElement>(null)
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ['start end', 'end start'],
-  })
-  const bgY = useTransform(scrollYProgress, [0, 0.6], ['10%', '-25%'])
-
-  return (
-    <motion.section
-      ref={ref}
-      className="relative min-h-[60vh] overflow-hidden"
-    >
-      <motion.div
-        className="absolute inset-0 bg-cover bg-center scale-105"
-        style={{
-          backgroundImage: `url('https://images.unsplash.com/photo-1523531294919-4bcd7c65e216?w=1920&q=80')`,
-          y: bgY,
-        }}
-      />
-      <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
     </motion.section>
   )
 }

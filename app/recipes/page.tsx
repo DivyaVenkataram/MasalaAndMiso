@@ -5,7 +5,7 @@ export default function RecipesPage() {
     <main className="pt-28 pb-20">
       <div className="max-w-layout mx-auto px-6">
         <h1 className="font-playfair text-5xl sm:text-6xl font-semibold uppercase tracking-brand text-midnight mb-4">
-          Recipes
+          RECIPES
         </h1>
         <p className="font-baskerville text-xl text-midnight/80 mb-12 max-w-reading">
           From our kitchen to yours. Dishes inspired by the tables we&apos;ve visited—India, Japan, and the places in between.

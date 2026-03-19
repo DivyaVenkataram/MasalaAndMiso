@@ -12,7 +12,7 @@ export default function Footer() {
 
   return (
     <footer className={`relative overflow-hidden min-h-[280px] flex flex-col justify-center ${isHome ? '' : '-mt-px'}`}>
-      {/* On home: no background — gallery ocean extends behind. Other pages: show ocean. */}
+      {/* On home: no background — gallery ocean extends behind. Other pages: same ocean treatment. */}
       {!isHome && (
         <>
           <div
@@ -28,7 +28,6 @@ export default function Footer() {
       )}
       <div className="relative z-10 py-section px-8">
         <div className="max-w-layout mx-auto flex flex-col items-center text-center">
-          {!isHome && <div className="h-px w-full max-w-2xl bg-white/25 mb-8" aria-hidden />}
           <Link
             href="/"
             className="font-playfair text-xl font-medium uppercase tracking-[0.15em] text-white hover:text-neutral transition-colors inline-block mb-4"
@@ -39,7 +38,7 @@ export default function Footer() {
             A luxury culinary travel publication. Cross-cultural cuisine, travel storytelling, and elevated food journalism.
           </p>
         </div>
-        <div className={`max-w-layout mx-auto mt-8 pt-8 text-center ${!isHome ? 'border-t border-white/20' : ''}`}>
+        <div className="max-w-layout mx-auto mt-8 pt-8 text-center">
           <p className="text-white/70 text-metadata">© Masala & Miso</p>
         </div>
       </div>

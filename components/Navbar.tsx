@@ -9,7 +9,6 @@ const navLinks = [
   { href: '/posts', label: 'Posts' },
   { href: '/ranking-guide', label: 'Ranking Guide' },
   { href: '/editors-table', label: "Editor's Table" },
-  { href: '/best-drinks', label: 'Best Drinks' },
   { href: '/about', label: 'About' },
 ]
 

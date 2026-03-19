@@ -5,7 +5,7 @@ export default function RestaurantsPage() {
     <main className="pt-28 pb-20">
       <div className="max-w-layout mx-auto px-6">
         <h1 className="font-playfair text-5xl sm:text-6xl font-semibold uppercase tracking-brand text-midnight mb-4">
-          Restaurants
+          RESTAURANTS
         </h1>
         <p className="font-baskerville text-xl text-midnight/80 mb-12 max-w-reading">
           Our curated rankings and in-depth reviews. Filter by location and cuisine, or explore the map.

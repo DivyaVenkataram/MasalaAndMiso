@@ -67,7 +67,6 @@ export default function PostsPage() {
   const [sort, setSort] = useState<'recent' | 'popular' | 'oldest'>('recent')
 
   const heroRef = useRef<HTMLElement>(null)
-  const bottomRef = useRef<HTMLElement>(null)
 
   const { scrollYProgress: heroProgress } = useScroll({
     target: heroRef,
@@ -76,12 +75,6 @@ export default function PostsPage() {
   const heroY = useTransform(heroProgress, [0, 1], ['0%', '28%'])
   const heroOpacity = useTransform(heroProgress, [0, 0.6], [1, 0.25])
   const titleY = useTransform(heroProgress, [0, 0.4], [0, 60])
-
-  const { scrollYProgress: bottomProgress } = useScroll({
-    target: bottomRef,
-    offset: ['start end', 'end start'],
-  })
-  const bottomY = useTransform(bottomProgress, [0, 0.5], ['12%', '-18%'])
 
   const filtered = useMemo(() => {
     let list = stories.filter((story) => {
@@ -130,7 +123,7 @@ export default function PostsPage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
           >
-            The Journal
+            THE JOURNAL
           </motion.h1>
           <motion.p
             className="text-white/90 text-[18px] sm:text-xl leading-[1.6]"
@@ -258,21 +251,6 @@ export default function PostsPage() {
           )}
         </AnimatePresence>
       </section>
-
-      {/* Bottom — parallax */}
-      <motion.section
-        ref={bottomRef}
-        className="relative w-full min-h-[40vh] overflow-hidden image-fade-to-page"
-      >
-        <motion.div
-          className="absolute inset-0 bg-cover bg-center scale-105"
-          style={{
-            backgroundImage: `url('https://images.unsplash.com/photo-1550966871-3ed3cdb5ed0c?w=1920&q=80')`,
-            y: bottomY,
-          }}
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
-      </motion.section>
     </main>
   )
 }
