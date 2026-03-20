@@ -2,6 +2,7 @@
 
 import { useMemo, useState } from 'react'
 import { rankingsData } from '@/data/rankings'
+import { RankingStylePageHero } from '@/components/RankingStylePageHero'
 
 const locationOptions = ['', 'San Francisco', 'New York', 'Los Angeles', 'Japan']
 const cuisineOptions = ['', 'Indian fusion', 'Contemporary Californian', 'Thai / Californian', 'Filipino']
@@ -34,15 +35,20 @@ export default function RankingsPage() {
   }
 
   return (
-    <main className="pt-28 pb-20">
-      <div className="max-w-layout mx-auto px-6">
-        <h1 className="font-playfair text-5xl sm:text-6xl font-semibold uppercase tracking-brand text-midnight mb-4">
-          RANKINGS
-        </h1>
-        <p className="font-baskerville text-xl text-midnight/80 mb-12 max-w-reading">
-          Filter by location, price, cuisine—and reserve your next meal.
-        </p>
-
+    <main className="bg-[#f3f0ea]">
+      <RankingStylePageHero
+        imageSrc="https://images.unsplash.com/photo-1550966871-3ed3cdb5ed0c?w=1920&q=80"
+        imageAlt="Fine dining"
+        eyebrow="Filter & reserve"
+        title="RANKINGS"
+        description="Filter by location, price, cuisine—and reserve your next meal."
+        blendColor="#f3f0ea"
+        cta={{ href: '#rankings-table', label: 'View table' }}
+      />
+      <div
+        id="rankings-table"
+        className="relative z-10 -mt-16 max-w-layout mx-auto px-6 pb-20 pt-4"
+      >
         <div className="flex flex-wrap items-center gap-4 mb-8">
           <label htmlFor="filter-location" className="font-semibold text-midnight">
             Location
@@ -51,7 +57,7 @@ export default function RankingsPage() {
             id="filter-location"
             value={location}
             onChange={(e) => setLocation(e.target.value)}
-            className="px-3 py-2 border border-neutral/60 rounded-sm bg-white font-sans text-midnight min-w-[140px]"
+            className="min-w-[140px] rounded-sm border border-neutral/60 bg-white px-3 py-2 font-sans text-midnight transition-colors hover:border-burgundy/50 focus:border-burgundy focus:outline-none focus:ring-1 focus:ring-burgundy/30"
           >
             {locationOptions.map((opt) => (
               <option key={opt || 'all'} value={opt}>
@@ -66,7 +72,7 @@ export default function RankingsPage() {
             id="filter-cuisine"
             value={cuisine}
             onChange={(e) => setCuisine(e.target.value)}
-            className="px-3 py-2 border border-neutral/60 rounded-sm bg-white font-sans text-midnight min-w-[200px]"
+            className="min-w-[200px] rounded-sm border border-neutral/60 bg-white px-3 py-2 font-sans text-midnight transition-colors hover:border-burgundy/50 focus:border-burgundy focus:outline-none focus:ring-1 focus:ring-burgundy/30"
           >
             {cuisineOptions.map((opt) => (
               <option key={opt || 'all'} value={opt}>
@@ -81,7 +87,7 @@ export default function RankingsPage() {
             id="filter-stars"
             value={stars}
             onChange={(e) => setStars(e.target.value)}
-            className="px-3 py-2 border border-neutral/60 rounded-sm bg-white font-sans text-midnight min-w-[120px]"
+            className="min-w-[120px] rounded-sm border border-neutral/60 bg-white px-3 py-2 font-sans text-midnight transition-colors hover:border-burgundy/50 focus:border-burgundy focus:outline-none focus:ring-1 focus:ring-burgundy/30"
           >
             {starsOptions.map((opt) => (
               <option key={opt || 'all'} value={opt}>

@@ -30,7 +30,7 @@ export default function Footer() {
         <div className="max-w-layout mx-auto flex flex-col items-center text-center">
           <Link
             href="/"
-            className="font-playfair text-xl font-medium uppercase tracking-[0.15em] text-white hover:text-neutral transition-colors inline-block mb-4"
+            className="font-playfair text-xl font-medium uppercase tracking-[0.15em] text-white hover:text-burgundy transition-colors inline-block mb-4"
           >
             MASALA & MISO
           </Link>

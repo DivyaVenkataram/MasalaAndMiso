@@ -2,8 +2,10 @@
 
 import Link from 'next/link'
 import Image from 'next/image'
+import { useMemo, useState } from 'react'
 import { motion } from 'framer-motion'
-import { ChevronDown, ArrowUpRight } from 'lucide-react'
+import { ArrowUpRight } from 'lucide-react'
+import { RankingStylePageHero } from '@/components/RankingStylePageHero'
 
 const restaurants = [
   {
@@ -57,113 +59,203 @@ const fadeUp = {
   }),
 }
 
+const SORT_OPTIONS = [
+  { value: 'rank', label: 'Default rank' },
+  { value: 'name', label: 'Name A–Z' },
+  { value: 'city', label: 'City A–Z' },
+] as const
+
+const selectClass =
+  'min-w-[120px] cursor-pointer appearance-none border-0 border-b border-white/20 bg-transparent pb-2 pr-8 text-[17px] text-white/90 transition-colors hover:border-burgundy focus:border-burgundy focus:outline-none'
+
 export default function RankingGuidePage() {
+  const [location, setLocation] = useState('')
+  const [cuisine, setCuisine] = useState('')
+  const [sort, setSort] = useState<(typeof SORT_OPTIONS)[number]['value']>('rank')
+  const [scope, setScope] = useState('')
+
+  const locationOptions = useMemo(
+    () => ['', ...Array.from(new Set(restaurants.map((r) => r.location))).sort()],
+    []
+  )
+  const cuisineOptions = useMemo(
+    () => ['', ...Array.from(new Set(restaurants.map((r) => r.cuisine))).sort()],
+    []
+  )
+
+  const filtered = useMemo(() => {
+    let list = restaurants.filter((r) => {
+      if (location && r.location !== location) return false
+      if (cuisine && r.cuisine !== cuisine) return false
+      return true
+    })
+    if (scope === 'top3') {
+      list = list.filter((r) => parseInt(r.rank, 10) <= 3)
+    }
+    if (sort === 'name') {
+      list = [...list].sort((a, b) => a.title.localeCompare(b.title))
+    } else if (sort === 'city') {
+      list = [...list].sort((a, b) => a.location.localeCompare(b.location))
+    }
+    return list
+  }, [location, cuisine, sort, scope])
+
+  const showReset = Boolean(location || cuisine || sort !== 'rank' || scope)
+
   return (
     <main className="bg-[#04152c] text-stone-100">
-      {/* HERO */}
-      <section className="relative h-[100svh] min-h-[760px] overflow-hidden">
-        {/* parallax-like background */}
-        <motion.div
-          initial={{ scale: 1.08, y: 0 }}
-          animate={{ scale: 1, y: -30 }}
-          transition={{ duration: 1.8, ease: [0.22, 1, 0.36, 1] }}
-          className="absolute inset-0"
-        >
-          <Image
-            src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1800&q=80"
-            alt="Restaurant interior"
-            fill
-            className="object-cover"
-            sizes="100vw"
-            priority
-          />
-        </motion.div>
+      <RankingStylePageHero
+        imageSrc="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1800&q=80"
+        imageAlt="Restaurant interior"
+        eyebrow="Archive of places worth returning to"
+        title="RANKING GUIDE"
+        description="Where we've dined. Collected slowly. Ranked with bias, memory, and a little obsession."
+        blendColor="#04152c"
+        cta={{ href: '#guide', label: 'Explore rankings' }}
+      />
 
-        {/* dark overlays */}
-        <div className="absolute inset-0 bg-black/35" />
-        <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-[#04152c]" />
-        <div className="absolute inset-x-0 bottom-0 h-64 bg-gradient-to-t from-[#04152c] to-transparent" />
+      {/* Filter bar — matches /posts journal filters */}
+      <section id="guide" className="filters sticky top-[72px] z-40 bg-[#04152c]">
+        <div className="mx-auto flex w-full max-w-7xl justify-center px-3 py-3 sm:px-4">
+          <div className="flex flex-wrap items-center gap-6 text-white/90">
+            <span className="shrink-0 text-[12px] uppercase tracking-[0.28em] text-white/60">
+              Filter By
+            </span>
 
-        {/* soft spotlight */}
-        <div className="absolute left-1/2 top-[58%] h-[420px] w-[800px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-white/10 blur-3xl" />
-
-        {/* HERO TEXT */}
-        <div className="relative z-20 flex h-full flex-col items-center justify-center px-6 pt-20 text-center">
-          <motion.p
-            initial={{ opacity: 0, y: 18 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.15, duration: 0.7 }}
-            className="mb-4 text-[10px] uppercase tracking-[0.45em] text-stone-300/80"
-          >
-            Archive of places worth returning to
-          </motion.p>
-
-          <motion.h1
-            initial={{ opacity: 0, y: 28 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.28, duration: 0.9 }}
-            className="max-w-6xl font-playfair text-[clamp(4rem,9vw,8.5rem)] leading-[0.9] tracking-[-0.04em] text-stone-50"
-          >
-            RANKING GUIDE
-          </motion.h1>
-
-          <motion.p
-            initial={{ opacity: 0, y: 18 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.45, duration: 0.8 }}
-            className="mt-4 max-w-xl text-sm text-stone-200/85 md:text-base"
-          >
-            Where we&apos;ve dined. Collected slowly. Ranked with bias,
-            memory, and a little obsession.
-          </motion.p>
-
-          <motion.div
-            initial={{ opacity: 0, y: 18 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.6, duration: 0.8 }}
-            className="mt-10"
-          >
-            <Link
-              href="#guide"
-              className="group inline-flex items-center gap-3 rounded-full border border-white/20 bg-white/8 px-5 py-3 text-sm text-white backdrop-blur-md transition hover:bg-white/14"
-            >
-              Explore rankings
-              <span className="transition group-hover:translate-y-0.5">↓</span>
-            </Link>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* FILTER BAR */}
-      <section
-        id="guide"
-        className="relative z-30 -mt-20 px-4 pb-10 sm:px-6 lg:px-10"
-      >
-        <div className="mx-auto max-w-6xl">
-          <div className="sticky top-5 z-40 rounded-[28px] border border-white/10 bg-[rgba(5,20,40,0.68)] p-4 shadow-[0_20px_80px_rgba(0,0,0,0.35)] backdrop-blur-2xl">
-            <div className="grid gap-3 md:grid-cols-[180px_1fr_1fr_1fr]">
-              <div className="flex items-center px-3 text-[11px] uppercase tracking-[0.35em] text-stone-400">
-                Filter by
-              </div>
-
-              {['All locations', 'All cuisines', 'All'].map((item) => (
-                <button
-                  key={item}
-                  className="flex items-center justify-between rounded-2xl border border-white/8 bg-white/[0.03] px-4 py-4 text-left text-sm text-stone-100 transition hover:border-white/20 hover:bg-white/[0.06]"
-                >
-                  <span>{item}</span>
-                  <ChevronDown className="h-4 w-4 shrink-0 text-stone-400" />
-                </button>
-              ))}
+            <div className="relative">
+              <label htmlFor="guide-sort" className="sr-only">
+                Sort by
+              </label>
+              <select
+                id="guide-sort"
+                value={sort}
+                onChange={(e) =>
+                  setSort(e.target.value as (typeof SORT_OPTIONS)[number]['value'])
+                }
+                className={selectClass}
+              >
+                {SORT_OPTIONS.map((opt) => (
+                  <option key={opt.value} value={opt.value}>
+                    {opt.label}
+                  </option>
+                ))}
+              </select>
+              <span
+                className="pointer-events-none absolute right-1 top-[45%] h-2.5 w-2.5 -translate-y-1/2 rotate-45 border-b border-r border-white/70"
+                aria-hidden
+              />
             </div>
+
+            <div className="relative">
+              <label htmlFor="guide-location" className="sr-only">
+                Location
+              </label>
+              <select
+                id="guide-location"
+                value={location}
+                onChange={(e) => setLocation(e.target.value)}
+                className={selectClass}
+              >
+                <option value="">All locations</option>
+                {locationOptions
+                  .filter(Boolean)
+                  .map((opt) => (
+                    <option key={opt} value={opt}>
+                      {opt}
+                    </option>
+                  ))}
+              </select>
+              <span
+                className="pointer-events-none absolute right-1 top-[45%] h-2.5 w-2.5 -translate-y-1/2 rotate-45 border-b border-r border-white/70"
+                aria-hidden
+              />
+            </div>
+
+            <div className="relative">
+              <label htmlFor="guide-cuisine" className="sr-only">
+                Cuisine
+              </label>
+              <select
+                id="guide-cuisine"
+                value={cuisine}
+                onChange={(e) => setCuisine(e.target.value)}
+                className={selectClass}
+              >
+                <option value="">All cuisines</option>
+                {cuisineOptions
+                  .filter(Boolean)
+                  .map((opt) => (
+                    <option key={opt} value={opt}>
+                      {opt}
+                    </option>
+                  ))}
+              </select>
+              <span
+                className="pointer-events-none absolute right-1 top-[45%] h-2.5 w-2.5 -translate-y-1/2 rotate-45 border-b border-r border-white/70"
+                aria-hidden
+              />
+            </div>
+
+            <div className="relative">
+              <label htmlFor="guide-scope" className="sr-only">
+                List scope
+              </label>
+              <select
+                id="guide-scope"
+                value={scope}
+                onChange={(e) => setScope(e.target.value)}
+                className={selectClass}
+              >
+                <option value="">All entries</option>
+                <option value="top3">Top 3 only</option>
+              </select>
+              <span
+                className="pointer-events-none absolute right-1 top-[45%] h-2.5 w-2.5 -translate-y-1/2 rotate-45 border-b border-r border-white/70"
+                aria-hidden
+              />
+            </div>
+
+            {showReset && (
+              <motion.button
+                type="button"
+                onClick={() => {
+                  setLocation('')
+                  setCuisine('')
+                  setSort('rank')
+                  setScope('')
+                }}
+                className="shrink-0 cursor-pointer border-0 bg-transparent text-[12px] uppercase tracking-[0.28em] text-white/60 underline underline-offset-2 transition-colors hover:text-burgundy"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+              >
+                Reset
+              </motion.button>
+            )}
           </div>
         </div>
       </section>
 
       {/* LIST */}
-      <section className="relative px-4 pb-28 sm:px-6 lg:px-10">
+      <section className="relative px-4 pb-28 pt-4 sm:px-6 lg:px-10">
         <div className="mx-auto max-w-6xl space-y-8">
-          {restaurants.map((item, i) => (
+          {filtered.length === 0 && (
+            <div className="py-24 text-center text-white/70">
+              <p className="text-lg">No restaurants match the selected filters.</p>
+              <button
+                type="button"
+                onClick={() => {
+                  setLocation('')
+                  setCuisine('')
+                  setSort('rank')
+                  setScope('')
+                }}
+                className="mt-4 border-0 bg-transparent text-white/90 underline underline-offset-2 decoration-white/50 transition-colors hover:text-burgundy hover:decoration-burgundy"
+              >
+                Clear filters
+              </button>
+            </div>
+          )}
+          {filtered.map((item, i) => (
             <motion.article
               key={item.rank}
               custom={i}
@@ -171,7 +263,7 @@ export default function RankingGuidePage() {
               whileInView="show"
               viewport={{ once: true, amount: 0.25 }}
               variants={fadeUp}
-              className="group relative overflow-hidden rounded-[34px] border border-white/8 bg-white/[0.03]"
+              className="group relative overflow-hidden rounded-sm border border-white/8 bg-white/[0.03]"
             >
               {/* glow */}
               <div className="pointer-events-none absolute inset-0 opacity-0 transition duration-500 group-hover:opacity-100">
@@ -221,7 +313,7 @@ export default function RankingGuidePage() {
                   <div className="mt-8">
                     <Link
                       href={item.slug ? `/posts/${item.slug}` : '#'}
-                      className="inline-flex items-center gap-2 text-sm text-stone-100 transition group-hover:gap-3"
+                      className="inline-flex items-center gap-2 rounded-sm border border-white/25 px-4 py-2.5 text-sm text-stone-100 transition group-hover:gap-3 hover:border-burgundy hover:bg-burgundy/30"
                     >
                       View full review
                       <ArrowUpRight className="h-4 w-4 shrink-0" />

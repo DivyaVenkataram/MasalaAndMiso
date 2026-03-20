@@ -34,7 +34,7 @@ export default function Navbar() {
       <Link
         href="/"
         className={`font-playfair text-xl md:text-2xl font-medium uppercase tracking-[0.15em] transition-colors duration-200 ${
-          scrolled ? 'text-white hover:text-neutral' : 'text-white hover:text-white/90'
+          scrolled ? 'text-white hover:text-burgundy' : 'text-white hover:text-burgundy'
         }`}
       >
         MASALA & MISO
@@ -47,7 +47,7 @@ export default function Navbar() {
               key={href}
               href={href}
               className={`text-base md:text-lg font-medium transition-colors duration-200 ${
-                scrolled ? 'text-white/90 hover:text-white' : 'text-white/90 hover:text-white'
+                scrolled ? 'text-white/90 hover:text-burgundy' : 'text-white/90 hover:text-burgundy'
               } ${active ? 'text-burgundy' : ''}`}
               style={!scrolled ? { backgroundImage: 'none' } : undefined}
             >

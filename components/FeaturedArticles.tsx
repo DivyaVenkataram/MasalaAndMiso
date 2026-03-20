@@ -62,7 +62,7 @@ function ArticleCard({
           className="object-cover transition-transform duration-300 group-hover:scale-105"
           sizes={large ? '(max-width: 768px) 100vw, 66vw' : '(max-width: 768px) 100vw, 33vw'}
         />
-        <span className="absolute top-4 left-4 rounded-full bg-wine/90 px-3 py-1 text-sm font-medium text-white">
+        <span className="absolute top-4 left-4 rounded-sm bg-wine/90 px-3 py-1 text-sm font-medium text-white">
           {city}
         </span>
       </div>

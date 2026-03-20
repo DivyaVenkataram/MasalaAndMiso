@@ -1,21 +1,22 @@
+import { RankingStylePageHero } from '@/components/RankingStylePageHero'
+
 export default function AboutPage() {
   return (
-    <main>
-      <section className="relative pt-28 pb-section px-8 flex flex-col items-center justify-center min-h-[55vh] bg-cover bg-center overflow-hidden">
-        <div
-          className="absolute inset-0 bg-cover bg-center"
-          style={{ backgroundImage: `url('https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1920&q=80')` }}
-        />
-        <div className="absolute inset-0 bg-gradient-to-b from-black/55 via-black/40 to-black/60" />
-        <h1 className="hero-title relative z-10 font-playfair font-medium text-center mb-3">
-          ABOUT US & CREDENTIALS
-        </h1>
-        <p className="relative z-10 text-white/90 text-center max-w-xl text-[18px] leading-[1.6]">
-          Who we are, why we&apos;re qualified to review the world&apos;s best tables, and who stands behind us.
-        </p>
-      </section>
+    <main className="bg-[#f3f0ea]">
+      <RankingStylePageHero
+        imageSrc="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1920&q=80"
+        imageAlt="Dining room"
+        eyebrow="Who stands behind the reviews"
+        title="ABOUT US & CREDENTIALS"
+        description="Who we are, why we're qualified to review the world's best tables, and who stands behind us."
+        blendColor="#f3f0ea"
+        cta={{ href: '#about-content', label: 'Read our story' }}
+      />
 
-      <div className="max-w-reading mx-auto px-8 py-section section-after-image">
+      <div
+        id="about-content"
+        className="max-w-reading mx-auto px-8 py-section section-after-image"
+      >
         <section className="mb-8">
           <h2 className="font-playfair text-2xl sm:text-3xl font-medium text-midnight mb-4 tracking-tight border-b border-black/10 pb-2 w-fit">
             Our Background

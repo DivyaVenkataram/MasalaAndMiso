@@ -1,15 +1,22 @@
 import Link from 'next/link'
+import { RankingStylePageHero } from '@/components/RankingStylePageHero'
 
 export default function NewsletterPage() {
   return (
-    <main className="pt-28 pb-20">
-      <div className="max-w-layout mx-auto px-6">
-        <h1 className="font-playfair text-5xl sm:text-6xl font-semibold uppercase tracking-brand text-midnight mb-4">
-          NEWSLETTER
-        </h1>
-        <p className="font-baskerville text-xl text-midnight/80 mb-12 max-w-reading">
-          Join our table. Weekly reviews, city guides, and the occasional recipe.
-        </p>
+    <main className="bg-[#f3f0ea]">
+      <RankingStylePageHero
+        imageSrc="https://images.unsplash.com/photo-1528605248644-14dd04022da1?w=1920&q=80"
+        imageAlt="Gathering at the table"
+        eyebrow="One dispatch per week"
+        title="NEWSLETTER"
+        description="Join our table. Weekly reviews, city guides, and the occasional recipe."
+        blendColor="#f3f0ea"
+        cta={{ href: '#newsletter-content', label: 'Get started' }}
+      />
+      <div
+        id="newsletter-content"
+        className="relative z-10 -mt-16 max-w-layout mx-auto px-6 pb-20 pt-4"
+      >
         <div className="max-w-md">
           <div className="rounded-sm border border-wine/30 bg-neutral/30 p-8">
             <p className="font-baskerville text-midnight/90 mb-6">
@@ -25,13 +32,17 @@ export default function NewsletterPage() {
               <button
                 type="button"
                 disabled
-                className="px-6 py-3 bg-wine/50 text-white font-medium rounded-sm cursor-not-allowed"
+                className="rounded-sm bg-wine/50 px-6 py-3 font-medium text-white cursor-not-allowed enabled:cursor-pointer enabled:hover:bg-burgundy enabled:transition-colors"
               >
                 Notify me
               </button>
             </div>
             <p className="mt-4 text-midnight/60 text-xs">
-              Until then, follow along on <Link href="/blog" className="text-ocean hover:text-burgundy">the blog</Link>.
+              Until then, follow along on{' '}
+              <Link href="/posts" className="text-ocean hover:text-burgundy">
+                the journal
+              </Link>
+              .
             </p>
           </div>
         </div>

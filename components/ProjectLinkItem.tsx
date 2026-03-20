@@ -18,7 +18,7 @@ export default function ProjectLinkItem({
   className = '',
 }: ProjectLinkItemProps) {
   const base =
-    'block font-editorial text-midnight/90 text-[17px] leading-snug py-3 border-b border-black/8 last:border-b-0 hover:text-ocean hover:border-ocean/40 transition-colors duration-200'
+    'block font-editorial text-midnight/90 text-[17px] leading-snug py-3 border-b border-black/8 last:border-b-0 hover:text-burgundy hover:border-burgundy/40 transition-colors duration-200'
 
   if (external) {
     return (

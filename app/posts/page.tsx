@@ -5,6 +5,7 @@ import Image from 'next/image'
 import { useMemo, useState, type ReactNode } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { stories, type Story } from '@/data/stories'
+import { RankingStylePageHero } from '@/components/RankingStylePageHero'
 
 const locationOptions = ['', ...Array.from(new Set(stories.map((s) => s.city))).sort()]
 const cuisineOptions = ['', ...Array.from(new Set(stories.map((s) => s.cuisine))).sort()]
@@ -82,50 +83,21 @@ export default function PostsPage() {
   }, [location, cuisine, readTime, sort])
 
   return (
-    <main className="bg-[#0a1628]">
-      {/* Hero — full viewport, zoom-in */}
-      <section className="relative h-[100svh] min-h-[760px] overflow-hidden">
-        <motion.div
-          initial={{ scale: 1.08, y: 0 }}
-          animate={{ scale: 1, y: -30 }}
-          transition={{ duration: 1.8, ease: [0.22, 1, 0.36, 1] }}
-          className="absolute inset-0"
-        >
-          <Image
-            src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1920&q=80"
-            alt=""
-            fill
-            className="object-cover"
-            sizes="100vw"
-            priority
-          />
-        </motion.div>
-        <div className="absolute inset-0 bg-black/35" />
-        <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-[#0a1628]" />
-        <div className="absolute inset-x-0 bottom-0 h-64 bg-gradient-to-t from-[#0a1628] to-transparent" />
-        <div className="absolute left-1/2 top-[58%] h-[420px] w-[800px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-white/10 blur-3xl" />
-        <div className="relative z-20 flex h-full flex-col items-center justify-center px-6 pt-20 text-center">
-          <motion.h1
-            className="hero-title font-playfair font-medium mb-3 uppercase"
-            initial={{ opacity: 0, y: 28 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.28, duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
-          >
-            THE JOURNAL
-          </motion.h1>
-          <motion.p
-            className="text-white/90 text-[18px] sm:text-xl leading-[1.6]"
-            initial={{ opacity: 0, y: 18 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.45, duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-          >
-            Dispatches from the table. Long-form reviews and stories.
-          </motion.p>
-        </div>
-      </section>
+    <main className="bg-[#04152c]">
+      <RankingStylePageHero
+        imageSrc="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1920&q=80"
+        eyebrow="Long-form reviews & stories"
+        title="THE JOURNAL"
+        description="Dispatches from the table. Long-form reviews and stories."
+        blendColor="#04152c"
+        cta={{ href: '#posts-filters', label: 'Browse the journal' }}
+      />
 
       {/* Filter bar */}
-      <section className="filters sticky top-[72px] z-40 bg-[#0a1628]">
+      <section
+        id="posts-filters"
+        className="filters sticky top-[72px] z-40 bg-[#04152c]"
+      >
         <div className="w-full max-w-7xl mx-auto px-3 sm:px-4 py-3 flex justify-center">
           <div className="flex flex-wrap items-center gap-6 text-white/90">
             <span className="text-[12px] uppercase tracking-[0.28em] text-white/60 shrink-0">
@@ -138,7 +110,7 @@ export default function PostsPage() {
                 id="posts-sort"
                 value={sort}
                 onChange={(e) => setSort(e.target.value as 'recent' | 'popular' | 'oldest')}
-                className="appearance-none bg-transparent border-0 border-b border-white/20 pr-8 pb-2 text-[17px] text-white/90 focus:outline-none focus:border-white/45 hover:border-white/35 transition cursor-pointer min-w-[120px]"
+                className="min-w-[120px] cursor-pointer appearance-none border-0 border-b border-white/20 bg-transparent pb-2 pr-8 text-[17px] text-white/90 transition-colors hover:border-burgundy focus:border-burgundy focus:outline-none"
               >
                 {SORT_OPTIONS.map((opt) => (
                   <option key={opt.value} value={opt.value}>{opt.label}</option>
@@ -153,7 +125,7 @@ export default function PostsPage() {
                 id="posts-location"
                 value={location}
                 onChange={(e) => setLocation(e.target.value)}
-                className="appearance-none bg-transparent border-0 border-b border-white/20 pr-8 pb-2 text-[17px] text-white/90 focus:outline-none focus:border-white/45 hover:border-white/35 transition cursor-pointer min-w-[120px]"
+                className="min-w-[120px] cursor-pointer appearance-none border-0 border-b border-white/20 bg-transparent pb-2 pr-8 text-[17px] text-white/90 transition-colors hover:border-burgundy focus:border-burgundy focus:outline-none"
               >
                 <option value="">All locations</option>
                 {locationOptions.filter(Boolean).map((opt) => (
@@ -169,7 +141,7 @@ export default function PostsPage() {
                 id="posts-cuisine"
                 value={cuisine}
                 onChange={(e) => setCuisine(e.target.value)}
-                className="appearance-none bg-transparent border-0 border-b border-white/20 pr-8 pb-2 text-[17px] text-white/90 focus:outline-none focus:border-white/45 hover:border-white/35 transition cursor-pointer min-w-[120px]"
+                className="min-w-[120px] cursor-pointer appearance-none border-0 border-b border-white/20 bg-transparent pb-2 pr-8 text-[17px] text-white/90 transition-colors hover:border-burgundy focus:border-burgundy focus:outline-none"
               >
                 <option value="">All cuisines</option>
                 {cuisineOptions.filter(Boolean).map((opt) => (
@@ -185,7 +157,7 @@ export default function PostsPage() {
                 id="posts-readtime"
                 value={readTime}
                 onChange={(e) => setReadTime(e.target.value)}
-                className="appearance-none bg-transparent border-0 border-b border-white/20 pr-8 pb-2 text-[17px] text-white/90 focus:outline-none focus:border-white/45 hover:border-white/35 transition cursor-pointer min-w-[120px]"
+                className="min-w-[120px] cursor-pointer appearance-none border-0 border-b border-white/20 bg-transparent pb-2 pr-8 text-[17px] text-white/90 transition-colors hover:border-burgundy focus:border-burgundy focus:outline-none"
               >
                 <option value="">Any length</option>
                 {readTimeOptions.filter(Boolean).map((opt) => (
@@ -199,7 +171,7 @@ export default function PostsPage() {
               <motion.button
                 type="button"
                 onClick={() => { setLocation(''); setCuisine(''); setReadTime(''); setSort('recent') }}
-                className="text-[12px] uppercase tracking-[0.28em] text-white/60 hover:text-white/90 transition-opacity underline underline-offset-2 shrink-0 cursor-pointer bg-transparent border-0"
+                className="text-[12px] uppercase tracking-[0.28em] text-white/60 hover:text-burgundy transition-colors underline underline-offset-2 shrink-0 cursor-pointer bg-transparent border-0"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
               >
@@ -210,7 +182,7 @@ export default function PostsPage() {
         </div>
       </section>
 
-      <section className="relative bg-[#0a1628]">
+      <section className="relative bg-[#04152c]">
         <div className="posts-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
           <AnimatePresence mode="popLayout">
             {filtered.map((story, i) => (
@@ -231,7 +203,7 @@ export default function PostsPage() {
               <button
                 type="button"
                 onClick={() => { setLocation(''); setCuisine(''); setReadTime(''); setSort('recent') }}
-                className="mt-4 text-white/90 hover:text-white underline underline-offset-2 decoration-white/50"
+                className="mt-4 text-white/90 hover:text-burgundy underline underline-offset-2 decoration-white/50 hover:decoration-burgundy"
               >
                 Clear filters
               </button>
@@ -279,7 +251,7 @@ function PostCard({ story, index }: { story: Story; index: number }) {
         </div>
         {/* "Read →" — white; visible only on hover */}
         <div className="absolute inset-0 flex items-center justify-center pointer-events-none opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-          <span className="font-playfair text-xl sm:text-2xl text-white font-medium tracking-wide drop-shadow-[0_2px_8px_rgba(0,0,0,0.5)]">
+          <span className="font-playfair text-xl font-medium tracking-wide text-burgundy drop-shadow-[0_2px_8px_rgba(0,0,0,0.5)] sm:text-2xl">
             Read →
           </span>
         </div>

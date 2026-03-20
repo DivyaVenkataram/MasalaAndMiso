@@ -17,6 +17,30 @@
 }
 
 @layer components {
+  /* Square outline CTA — matches “A Table Between Two Worlds” buttons; burgundy on hover */
+  .btn-outline-light {
+    @apply inline-flex items-center justify-center rounded-sm border-2 border-white px-8 py-4 text-sm font-medium uppercase tracking-[0.18em] text-white transition-all duration-200;
+  }
+  .btn-outline-light:hover {
+    @apply border-burgundy bg-burgundy text-white;
+  }
+
+  /* Filled actions on light pages */
+  .btn-filled-midnight {
+    @apply inline-flex items-center justify-center rounded-sm bg-midnight px-5 py-2.5 font-medium text-white transition-colors duration-200;
+  }
+  .btn-filled-midnight:hover {
+    @apply bg-burgundy;
+  }
+
+  /* Filter / menu controls on dark UI (ranking guide, etc.) */
+  .btn-filter-dark {
+    @apply flex items-center justify-between rounded-sm border border-white/8 bg-white/[0.03] px-4 py-4 text-left text-sm text-stone-100 transition-colors duration-200;
+  }
+  .btn-filter-dark:hover {
+    @apply border-burgundy/55 bg-burgundy/25;
+  }
+
   .link-editorial {
     color: #114665;
     transition: color 0.25s ease, background-size 0.25s ease;

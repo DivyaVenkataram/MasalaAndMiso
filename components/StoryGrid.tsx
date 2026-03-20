@@ -60,7 +60,7 @@ export default function StoryGrid() {
         {cityTags.map((tag) => (
           <span
             key={tag}
-            className="rounded-full bg-wine px-4 py-1.5 text-sm font-medium text-white"
+            className="rounded-sm bg-wine px-4 py-1.5 text-sm font-medium text-white"
           >
             {tag}
           </span>
@@ -85,7 +85,7 @@ export default function StoryGrid() {
               </div>
               <div className="p-5">
                 <span className="text-sm font-medium text-wine">{story.city}</span>
-                <h3 className="font-baskerville text-xl text-midnight mt-1 mb-2 group-hover:text-ocean transition-colors">
+                <h3 className="font-baskerville text-xl text-midnight mt-1 mb-2 transition-colors group-hover:text-burgundy">
                   {story.title}
                 </h3>
                 <p className="text-midnight/80 text-base leading-relaxed line-clamp-2">

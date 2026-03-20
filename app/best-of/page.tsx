@@ -1,16 +1,22 @@
 import Link from 'next/link'
+import { RankingStylePageHero } from '@/components/RankingStylePageHero'
 
 export default function BestOfPage() {
   return (
-    <main className="pt-28 pb-20">
-      <div className="max-w-layout mx-auto px-6">
-        <h1 className="font-playfair text-5xl sm:text-6xl font-semibold uppercase tracking-brand text-midnight mb-4">
-          BEST OF
-        </h1>
-        <p className="font-baskerville text-xl text-midnight/80 mb-12 max-w-reading">
-          Curated lists by city, experience, and budget—so you know where to book first.
-        </p>
-
+    <main className="bg-[#f3f0ea]">
+      <RankingStylePageHero
+        imageSrc="https://images.unsplash.com/photo-1579871494447-9811cf80d66c?w=1920&q=80"
+        imageAlt="Sushi"
+        eyebrow="Curated picks by city & mood"
+        title="BEST OF"
+        description="Curated lists by city, experience, and budget—so you know where to book first."
+        blendColor="#f3f0ea"
+        cta={{ href: '#best-of-content', label: 'Dive in' }}
+      />
+      <div
+        id="best-of-content"
+        className="relative z-10 -mt-16 max-w-layout mx-auto px-6 pb-20 pt-4"
+      >
         <section className="bg-midnight text-neutral rounded-sm p-8 sm:p-10 mb-16">
           <h2 className="font-baskerville text-2xl text-white mb-4">Our Dining Philosophy</h2>
           <p className="text-neutral/90 leading-relaxed max-w-reading">
