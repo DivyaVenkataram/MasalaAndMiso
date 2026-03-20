@@ -1,8 +1,9 @@
 'use client'
 
 import Link from 'next/link'
-import { motion, useScroll, useTransform } from 'framer-motion'
+import Image from 'next/image'
 import { useRef } from 'react'
+import { motion, useScroll, useTransform } from 'framer-motion'
 
 const lists = [
   {
@@ -41,60 +42,56 @@ const itemFade = {
 }
 
 export default function EditorsTablePage() {
-  const heroRef = useRef<HTMLElement>(null)
-  const { scrollYProgress: heroProgress } = useScroll({
-    target: heroRef,
-    offset: ['start start', 'end start'],
-  })
-  const heroY = useTransform(heroProgress, [0, 1], ['0%', '35%'])
-  const heroOpacity = useTransform(heroProgress, [0, 0.5], [1, 0.3])
-  const titleY = useTransform(heroProgress, [0, 0.4], [0, 80])
-
   return (
     <main className="bg-midnight -mb-1">
-      {/* Hero — parallax */}
-      <motion.section
-        ref={heroRef}
-        className="relative min-h-[55vh] flex flex-col items-center justify-center px-6 sm:px-12 py-20 overflow-hidden"
-      >
+      {/* Hero — full viewport, zoom-in */}
+      <section className="relative h-[100svh] min-h-[760px] overflow-hidden">
         <motion.div
-          className="absolute inset-0 bg-cover bg-center scale-105"
-          style={{
-            backgroundImage: `url('https://images.unsplash.com/photo-1550966871-3ed3cdb5ed0c?w=1920&q=80')`,
-            y: heroY,
-          }}
-        />
-        <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/35 to-black/70" />
-        <motion.div
-          className="relative z-10 text-center max-w-4xl mx-auto"
-          style={{ opacity: heroOpacity, y: titleY }}
+          initial={{ scale: 1.08, y: 0 }}
+          animate={{ scale: 1, y: -30 }}
+          transition={{ duration: 1.8, ease: [0.22, 1, 0.36, 1] }}
+          className="absolute inset-0"
         >
+          <Image
+            src="https://images.unsplash.com/photo-1550966871-3ed3cdb5ed0c?w=1920&q=80"
+            alt=""
+            fill
+            className="object-cover"
+            sizes="100vw"
+            priority
+          />
+        </motion.div>
+        <div className="absolute inset-0 bg-black/35" />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-midnight" />
+        <div className="absolute inset-x-0 bottom-0 h-64 bg-gradient-to-t from-midnight to-transparent" />
+        <div className="absolute left-1/2 top-[58%] h-[420px] w-[800px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-white/10 blur-3xl" />
+        <div className="relative z-20 flex h-full flex-col items-center justify-center px-6 pt-20 text-center">
           <motion.p
             className="text-white/70 text-xs sm:text-sm uppercase tracking-[0.4em] mb-4"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.4, duration: 0.8 }}
+            initial={{ opacity: 0, y: 18 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.15, duration: 0.7 }}
           >
             Curated lists
           </motion.p>
           <motion.h1
             className="hero-title font-playfair font-medium mb-6"
-            initial={{ opacity: 0, y: 40 }}
+            initial={{ opacity: 0, y: 28 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
+            transition={{ delay: 0.28, duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
           >
             EDITOR&apos;S TABLE
           </motion.h1>
           <motion.p
             className="text-white/90 text-lg sm:text-xl max-w-xl mx-auto leading-relaxed"
-            initial={{ opacity: 0, y: 24 }}
+            initial={{ opacity: 0, y: 18 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
+            transition={{ delay: 0.45, duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
           >
             Our top 5 by cuisine and place. Where we keep going back.
           </motion.p>
-        </motion.div>
-      </motion.section>
+        </div>
+      </section>
 
       {/* List sections — parallax + staggered content */}
       {lists.map((list, i) => (

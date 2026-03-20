@@ -2,8 +2,8 @@
 
 import Link from 'next/link'
 import Image from 'next/image'
-import { useMemo, useState, useRef, type ReactNode } from 'react'
-import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion'
+import { useMemo, useState, type ReactNode } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
 import { stories, type Story } from '@/data/stories'
 
 const locationOptions = ['', ...Array.from(new Set(stories.map((s) => s.city))).sort()]
@@ -66,16 +66,6 @@ export default function PostsPage() {
   const [readTime, setReadTime] = useState('')
   const [sort, setSort] = useState<'recent' | 'popular' | 'oldest'>('recent')
 
-  const heroRef = useRef<HTMLElement>(null)
-
-  const { scrollYProgress: heroProgress } = useScroll({
-    target: heroRef,
-    offset: ['start start', 'end start'],
-  })
-  const heroY = useTransform(heroProgress, [0, 1], ['0%', '28%'])
-  const heroOpacity = useTransform(heroProgress, [0, 0.6], [1, 0.25])
-  const titleY = useTransform(heroProgress, [0, 0.4], [0, 60])
-
   const filtered = useMemo(() => {
     let list = stories.filter((story) => {
       if (location && story.city !== location) return false
@@ -93,48 +83,46 @@ export default function PostsPage() {
 
   return (
     <main className="bg-[#0a1628]">
-      {/* Hero — parallax */}
-      <motion.section
-        ref={heroRef}
-        className="relative min-h-[55vh] pt-28 pb-section px-8 flex flex-col items-center justify-center overflow-hidden"
-      >
+      {/* Hero — full viewport, zoom-in */}
+      <section className="relative h-[100svh] min-h-[760px] overflow-hidden">
         <motion.div
-          className="absolute inset-0 bg-cover bg-center scale-105"
-          style={{
-            backgroundImage: `url('https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1920&q=80')`,
-            y: heroY,
-          }}
-        />
-        {/* Top: dark → Middle: image color → Bottom: deep navy */}
-        <div
-          className="absolute inset-0 z-[1] pointer-events-none"
-          style={{
-            background: 'linear-gradient(to bottom, rgba(0,0,0,0.72) 0%, rgba(0,0,0,0.4) 28%, transparent 48%, transparent 58%, rgba(10,22,40,0.6) 80%, #0a1628 100%)',
-          }}
-          aria-hidden
-        />
-        <motion.div
-          className="relative z-10 text-center max-w-2xl"
-          style={{ opacity: heroOpacity, y: titleY }}
+          initial={{ scale: 1.08, y: 0 }}
+          animate={{ scale: 1, y: -30 }}
+          transition={{ duration: 1.8, ease: [0.22, 1, 0.36, 1] }}
+          className="absolute inset-0"
         >
+          <Image
+            src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1920&q=80"
+            alt=""
+            fill
+            className="object-cover"
+            sizes="100vw"
+            priority
+          />
+        </motion.div>
+        <div className="absolute inset-0 bg-black/35" />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-[#0a1628]" />
+        <div className="absolute inset-x-0 bottom-0 h-64 bg-gradient-to-t from-[#0a1628] to-transparent" />
+        <div className="absolute left-1/2 top-[58%] h-[420px] w-[800px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-white/10 blur-3xl" />
+        <div className="relative z-20 flex h-full flex-col items-center justify-center px-6 pt-20 text-center">
           <motion.h1
             className="hero-title font-playfair font-medium mb-3 uppercase"
-            initial={{ opacity: 0, y: 24 }}
+            initial={{ opacity: 0, y: 28 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+            transition={{ delay: 0.28, duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
           >
             THE JOURNAL
           </motion.h1>
           <motion.p
             className="text-white/90 text-[18px] sm:text-xl leading-[1.6]"
-            initial={{ opacity: 0, y: 16 }}
+            initial={{ opacity: 0, y: 18 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
+            transition={{ delay: 0.45, duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
           >
             Dispatches from the table. Long-form reviews and stories.
           </motion.p>
-        </motion.div>
-      </motion.section>
+        </div>
+      </section>
 
       {/* Filter bar */}
       <section className="filters sticky top-[72px] z-40 bg-[#0a1628]">

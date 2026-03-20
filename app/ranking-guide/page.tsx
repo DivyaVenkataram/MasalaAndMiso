@@ -1,292 +1,238 @@
 'use client'
 
-import { useMemo, useState, useEffect, useRef, Suspense } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
-import { useSearchParams } from 'next/navigation'
-import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion'
-import { rankingsData } from '@/data/rankings'
+import { motion } from 'framer-motion'
+import { ChevronDown, ArrowUpRight } from 'lucide-react'
 
-type Row = (typeof rankingsData)[0]
+const restaurants = [
+  {
+    rank: '01',
+    title: 'Sushi Shin',
+    location: 'Tokyo, Japan',
+    cuisine: 'Japanese',
+    image:
+      'https://images.unsplash.com/photo-1579871494447-9811cf80d66c?auto=format&fit=crop&w=1200&q=80',
+    slug: null as string | null,
+  },
+  {
+    rank: '02',
+    title: 'Providence',
+    location: 'Los Angeles',
+    cuisine: 'Seafood',
+    image:
+      'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=1200&q=80',
+    slug: null as string | null,
+  },
+  {
+    rank: '03',
+    title: 'Benu',
+    location: 'San Francisco',
+    cuisine: 'Contemporary',
+    image:
+      'https://images.unsplash.com/photo-1559339352-11d035aa65de?auto=format&fit=crop&w=1200&q=80',
+    slug: null as string | null,
+  },
+  {
+    rank: '04',
+    title: 'Narisawa',
+    location: 'Tokyo, Japan',
+    cuisine: 'Modern Japanese',
+    image:
+      'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1200&q=80',
+    slug: null as string | null,
+  },
+]
 
-const locationOptions = ['', 'San Francisco', 'New York', 'Los Angeles', 'Japan']
-const cuisineOptions = ['', 'Indian fusion', 'Contemporary Californian', 'Thai / Californian', 'Filipino']
-const starsOptions = ['', 'Guide', '1']
-
-function getStarsValue(michelin: string): string {
-  if (michelin.startsWith('1')) return '1'
-  if (michelin.startsWith('Guide')) return 'Guide'
-  return ''
-}
-
-function parseScore(rating: string): number {
-  const n = parseFloat(rating)
-  return isNaN(n) ? 0 : n
-}
-
-function scoreColor(score: number): string {
-  if (score >= 8) return '#e8a4b8'
-  if (score >= 5) return '#7eb8d4'
-  if (score >= 3) return '#b8a4b0'
-  return 'rgba(255,255,255,0.5)'
-}
-
-const stagger = 0.06
-const listVariants = {
-  hidden: { opacity: 0, y: 16 },
-  visible: (i: number) => ({
+const fadeUp = {
+  hidden: { opacity: 0, y: 40 },
+  show: (i: number) => ({
     opacity: 1,
     y: 0,
-    transition: { delay: i * stagger, duration: 0.4, ease: [0.25, 0.46, 0.45, 0.94] },
+    transition: {
+      delay: i * 0.08,
+      duration: 0.8,
+      ease: [0.22, 1, 0.36, 1],
+    },
   }),
-  exit: { opacity: 0, transition: { duration: 0.2 } },
-}
-
-function RankingGuideContent() {
-  const searchParams = useSearchParams()
-  const [location, setLocation] = useState('')
-  const [cuisine, setCuisine] = useState('')
-  const [stars, setStars] = useState('')
-  const heroRef = useRef<HTMLElement>(null)
-
-  const { scrollYProgress: heroProgress } = useScroll({
-    target: heroRef,
-    offset: ['start start', 'end start'],
-  })
-  const heroY = useTransform(heroProgress, [0, 1], ['0%', '28%'])
-  const heroOpacity = useTransform(heroProgress, [0, 0.6], [1, 0.25])
-  const titleY = useTransform(heroProgress, [0, 0.4], [0, 60])
-
-  useEffect(() => {
-    const loc = searchParams.get('location')
-    if (loc && locationOptions.includes(loc)) setLocation(loc)
-  }, [searchParams])
-
-  const filtered = useMemo(() => {
-    const list = rankingsData.filter((row) => {
-      if (location && row.location !== location) return false
-      if (cuisine && row.cuisine !== cuisine) return false
-      if (stars && getStarsValue(row.michelin) !== stars) return false
-      return true
-    })
-    return [...list].sort((a, b) => Number(b.id) - Number(a.id))
-  }, [location, cuisine, stars])
-
-  return (
-    <main className="min-h-screen bg-[#0a1628]">
-      {/* Hero — same structure as posts */}
-      <motion.section
-        ref={heroRef}
-        className="relative min-h-[55vh] pt-28 pb-section px-8 flex flex-col items-center justify-center overflow-hidden"
-      >
-        <motion.div
-          className="absolute inset-0 bg-cover bg-center scale-105"
-          style={{
-            backgroundImage: `url('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=1920&q=80')`,
-            y: heroY,
-          }}
-        />
-        <div
-          className="absolute inset-0 z-[1] pointer-events-none"
-          style={{
-            background: 'linear-gradient(to bottom, rgba(0,0,0,0.72) 0%, rgba(0,0,0,0.4) 28%, transparent 48%, transparent 58%, rgba(10,22,40,0.6) 80%, #0a1628 100%)',
-          }}
-          aria-hidden
-        />
-        <motion.div
-          className="relative z-10 text-center max-w-2xl"
-          style={{ opacity: heroOpacity, y: titleY }}
-        >
-          <motion.h1
-            className="hero-title font-playfair font-medium mb-3 uppercase whitespace-nowrap"
-            initial={{ opacity: 0, y: 24 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-          >
-            RANKING GUIDE
-          </motion.h1>
-          <motion.p
-            className="text-white/90 text-[18px] sm:text-xl leading-[1.6]"
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
-          >
-            Where we&apos;ve dined. Click for the full review.
-          </motion.p>
-        </motion.div>
-      </motion.section>
-
-      {/* Filter bar — match posts */}
-      <section className="filters sticky top-[72px] z-40 bg-[#0a1628]">
-        <div className="w-full max-w-7xl mx-auto px-3 sm:px-4 py-3 flex justify-center">
-          <div className="flex flex-wrap items-center gap-6 text-white/90">
-            <span className="text-[12px] uppercase tracking-[0.28em] text-white/60 shrink-0">
-              Filter By
-            </span>
-
-            <div className="relative">
-              <label htmlFor="rg-location" className="sr-only">Location</label>
-              <select
-                id="rg-location"
-                value={location}
-                onChange={(e) => setLocation(e.target.value)}
-                className="appearance-none bg-transparent border-0 border-b border-white/20 pr-8 pb-2 text-[17px] text-white/90 focus:outline-none focus:border-white/45 hover:border-white/35 transition cursor-pointer min-w-[120px]"
-              >
-                <option value="">All locations</option>
-                {locationOptions.filter(Boolean).map((opt) => (
-                  <option key={opt} value={opt}>{opt}</option>
-                ))}
-              </select>
-              <span className="pointer-events-none absolute right-1 top-[45%] h-2.5 w-2.5 -translate-y-1/2 rotate-45 border-b border-r border-white/70" aria-hidden />
-            </div>
-
-            <div className="relative">
-              <label htmlFor="rg-cuisine" className="sr-only">Cuisine</label>
-              <select
-                id="rg-cuisine"
-                value={cuisine}
-                onChange={(e) => setCuisine(e.target.value)}
-                className="appearance-none bg-transparent border-0 border-b border-white/20 pr-8 pb-2 text-[17px] text-white/90 focus:outline-none focus:border-white/45 hover:border-white/35 transition cursor-pointer min-w-[120px]"
-              >
-                <option value="">All cuisines</option>
-                {cuisineOptions.filter(Boolean).map((opt) => (
-                  <option key={opt} value={opt}>{opt}</option>
-                ))}
-              </select>
-              <span className="pointer-events-none absolute right-1 top-[45%] h-2.5 w-2.5 -translate-y-1/2 rotate-45 border-b border-r border-white/70" aria-hidden />
-            </div>
-
-            <div className="relative">
-              <label htmlFor="rg-michelin" className="sr-only">Michelin</label>
-              <select
-                id="rg-michelin"
-                value={stars}
-                onChange={(e) => setStars(e.target.value)}
-                className="appearance-none bg-transparent border-0 border-b border-white/20 pr-8 pb-2 text-[17px] text-white/90 focus:outline-none focus:border-white/45 hover:border-white/35 transition cursor-pointer min-w-[120px]"
-              >
-                <option value="">All</option>
-                {starsOptions.filter(Boolean).map((opt) => (
-                  <option key={opt} value={opt}>{opt}</option>
-                ))}
-              </select>
-              <span className="pointer-events-none absolute right-1 top-[45%] h-2.5 w-2.5 -translate-y-1/2 rotate-45 border-b border-r border-white/70" aria-hidden />
-            </div>
-
-            {(location || cuisine || stars) && (
-              <motion.button
-                type="button"
-                onClick={() => { setLocation(''); setCuisine(''); setStars('') }}
-                className="text-[12px] uppercase tracking-[0.28em] text-white/60 hover:text-white/90 transition-opacity underline underline-offset-2 shrink-0 cursor-pointer bg-transparent border-0"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-              >
-                Reset
-              </motion.button>
-            )}
-          </div>
-        </div>
-      </section>
-
-      {/* List — dark background, full-width content area */}
-      <section className="relative bg-[#0a1628]">
-        <div className="w-full max-w-5xl mx-auto px-4 sm:px-6 py-8 sm:py-12">
-          <ul className="space-y-0">
-            <AnimatePresence mode="popLayout" initial={false}>
-              {filtered.map((row, index) => {
-                const score = parseScore(row.rating)
-                const hasPost = Boolean(row.postSlug)
-                const isPlaceholder = !row.postSlug && row.rating === '—'
-                const rowClassName = `flex gap-5 sm:gap-6 items-center py-6 border-b border-white/[0.08] last:border-b-0 transition-colors duration-200 ${hasPost ? 'group cursor-pointer' : ''} ${hasPost ? 'hover:bg-white/[0.04]' : ''}`
-
-                const inner = (
-                  <>
-                    <span className="font-playfair text-2xl font-medium text-white/40 shrink-0 w-10 tabular-nums">
-                      {String(index + 1).padStart(2, '0')}
-                    </span>
-                    {row.image && (
-                      <div className="relative w-24 h-24 sm:w-28 sm:h-28 shrink-0 rounded overflow-hidden bg-midnight/20">
-                        <Image src={row.image} alt="" fill className="object-cover" sizes="112px" />
-                        <div className="absolute inset-0 bg-midnight/60 pointer-events-none transition-opacity duration-300 group-hover:opacity-0" aria-hidden />
-                      </div>
-                    )}
-                    <div className="min-w-0 flex-1">
-                      <h2 className="font-playfair text-xl sm:text-2xl font-medium text-white">
-                        {row.restaurant}
-                      </h2>
-                      <p className="text-white/60 text-metadata mt-0.5">
-                        {row.location}{row.cuisine !== '—' ? ` · ${row.cuisine}` : ''}
-                        {row.michelin !== '—' && ` · ${row.michelin}`}
-                      </p>
-                    </div>
-                    {!isPlaceholder && (
-                      <span
-                        className="font-medium text-metadata shrink-0 tabular-nums"
-                        style={{ color: scoreColor(score) }}
-                      >
-                        {row.rating}/10
-                      </span>
-                    )}
-                    {hasPost && (
-                      <span className="text-white/70 text-metadata shrink-0 opacity-70 group-hover:opacity-100 transition-opacity">
-                        Read →
-                      </span>
-                    )}
-                  </>
-                )
-
-                return (
-                  <motion.li
-                    key={row.id}
-                    layout
-                    custom={index}
-                    variants={listVariants}
-                    initial="hidden"
-                    animate="visible"
-                    exit="exit"
-                  >
-                    {hasPost ? (
-                      <Link href={`/posts/${row.postSlug!}`} className={rowClassName}>
-                        {inner}
-                      </Link>
-                    ) : (
-                      <div className={rowClassName}>{inner}</div>
-                    )}
-                  </motion.li>
-                )
-              })}
-            </AnimatePresence>
-          </ul>
-
-          <AnimatePresence>
-            {filtered.length === 0 && (
-              <motion.div
-                className="py-24 text-center text-white/70"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: 0.4 }}
-              >
-                <p className="text-lg">No restaurants match the selected filters.</p>
-                <button
-                  type="button"
-                  onClick={() => { setLocation(''); setCuisine(''); setStars('') }}
-                  className="mt-4 text-white/90 hover:text-white underline underline-offset-2 decoration-white/50"
-                >
-                  Clear filters
-                </button>
-              </motion.div>
-            )}
-          </AnimatePresence>
-        </div>
-      </section>
-    </main>
-  )
 }
 
 export default function RankingGuidePage() {
   return (
-    <Suspense fallback={<main className="min-h-screen bg-[#0a1628]" />}>
-      <RankingGuideContent />
-    </Suspense>
+    <main className="bg-[#04152c] text-stone-100">
+      {/* HERO */}
+      <section className="relative h-[100svh] min-h-[760px] overflow-hidden">
+        {/* parallax-like background */}
+        <motion.div
+          initial={{ scale: 1.08, y: 0 }}
+          animate={{ scale: 1, y: -30 }}
+          transition={{ duration: 1.8, ease: [0.22, 1, 0.36, 1] }}
+          className="absolute inset-0"
+        >
+          <Image
+            src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1800&q=80"
+            alt="Restaurant interior"
+            fill
+            className="object-cover"
+            sizes="100vw"
+            priority
+          />
+        </motion.div>
+
+        {/* dark overlays */}
+        <div className="absolute inset-0 bg-black/35" />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-[#04152c]" />
+        <div className="absolute inset-x-0 bottom-0 h-64 bg-gradient-to-t from-[#04152c] to-transparent" />
+
+        {/* soft spotlight */}
+        <div className="absolute left-1/2 top-[58%] h-[420px] w-[800px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-white/10 blur-3xl" />
+
+        {/* HERO TEXT */}
+        <div className="relative z-20 flex h-full flex-col items-center justify-center px-6 pt-20 text-center">
+          <motion.p
+            initial={{ opacity: 0, y: 18 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.15, duration: 0.7 }}
+            className="mb-4 text-[10px] uppercase tracking-[0.45em] text-stone-300/80"
+          >
+            Archive of places worth returning to
+          </motion.p>
+
+          <motion.h1
+            initial={{ opacity: 0, y: 28 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.28, duration: 0.9 }}
+            className="max-w-6xl font-playfair text-[clamp(4rem,9vw,8.5rem)] leading-[0.9] tracking-[-0.04em] text-stone-50"
+          >
+            RANKING GUIDE
+          </motion.h1>
+
+          <motion.p
+            initial={{ opacity: 0, y: 18 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.45, duration: 0.8 }}
+            className="mt-4 max-w-xl text-sm text-stone-200/85 md:text-base"
+          >
+            Where we&apos;ve dined. Collected slowly. Ranked with bias,
+            memory, and a little obsession.
+          </motion.p>
+
+          <motion.div
+            initial={{ opacity: 0, y: 18 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.6, duration: 0.8 }}
+            className="mt-10"
+          >
+            <Link
+              href="#guide"
+              className="group inline-flex items-center gap-3 rounded-full border border-white/20 bg-white/8 px-5 py-3 text-sm text-white backdrop-blur-md transition hover:bg-white/14"
+            >
+              Explore rankings
+              <span className="transition group-hover:translate-y-0.5">↓</span>
+            </Link>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* FILTER BAR */}
+      <section
+        id="guide"
+        className="relative z-30 -mt-20 px-4 pb-10 sm:px-6 lg:px-10"
+      >
+        <div className="mx-auto max-w-6xl">
+          <div className="sticky top-5 z-40 rounded-[28px] border border-white/10 bg-[rgba(5,20,40,0.68)] p-4 shadow-[0_20px_80px_rgba(0,0,0,0.35)] backdrop-blur-2xl">
+            <div className="grid gap-3 md:grid-cols-[180px_1fr_1fr_1fr]">
+              <div className="flex items-center px-3 text-[11px] uppercase tracking-[0.35em] text-stone-400">
+                Filter by
+              </div>
+
+              {['All locations', 'All cuisines', 'All'].map((item) => (
+                <button
+                  key={item}
+                  className="flex items-center justify-between rounded-2xl border border-white/8 bg-white/[0.03] px-4 py-4 text-left text-sm text-stone-100 transition hover:border-white/20 hover:bg-white/[0.06]"
+                >
+                  <span>{item}</span>
+                  <ChevronDown className="h-4 w-4 shrink-0 text-stone-400" />
+                </button>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* LIST */}
+      <section className="relative px-4 pb-28 sm:px-6 lg:px-10">
+        <div className="mx-auto max-w-6xl space-y-8">
+          {restaurants.map((item, i) => (
+            <motion.article
+              key={item.rank}
+              custom={i}
+              initial="hidden"
+              whileInView="show"
+              viewport={{ once: true, amount: 0.25 }}
+              variants={fadeUp}
+              className="group relative overflow-hidden rounded-[34px] border border-white/8 bg-white/[0.03]"
+            >
+              {/* glow */}
+              <div className="pointer-events-none absolute inset-0 opacity-0 transition duration-500 group-hover:opacity-100">
+                <div className="absolute -left-10 top-0 h-40 w-40 rounded-full bg-white/10 blur-3xl" />
+              </div>
+
+              <div className="grid items-stretch md:grid-cols-[120px_1.2fr_1fr]">
+                {/* rank */}
+                <div className="flex items-center justify-center border-b border-white/8 p-6 md:border-b-0 md:border-r md:border-white/8">
+                  <span className="font-playfair text-4xl text-stone-400/80 transition duration-500 group-hover:scale-110 group-hover:text-stone-200">
+                    {item.rank}
+                  </span>
+                </div>
+
+                {/* image */}
+                <div className="relative min-h-[260px] overflow-hidden">
+                  <Image
+                    src={item.image}
+                    alt={item.title}
+                    fill
+                    className="object-cover transition duration-700 group-hover:scale-105"
+                    sizes="(max-width: 768px) 100vw, 50vw"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-r from-black/10 via-transparent to-black/30" />
+                </div>
+
+                {/* content */}
+                <div className="flex flex-col justify-between p-8 md:p-10">
+                  <div>
+                    <p className="mb-3 text-[10px] uppercase tracking-[0.35em] text-stone-400">
+                      {item.cuisine}
+                    </p>
+
+                    <h2 className="font-playfair text-3xl leading-tight text-stone-50 md:text-4xl">
+                      {item.title}
+                    </h2>
+
+                    <p className="mt-3 text-sm text-stone-300">{item.location}</p>
+
+                    <p className="mt-6 max-w-md text-sm leading-7 text-stone-300/85">
+                      A more dramatic, editorial card layout instantly makes the
+                      guide feel curated rather than placeholder. Add real copy
+                      later and this will look much more intentional.
+                    </p>
+                  </div>
+
+                  <div className="mt-8">
+                    <Link
+                      href={item.slug ? `/posts/${item.slug}` : '#'}
+                      className="inline-flex items-center gap-2 text-sm text-stone-100 transition group-hover:gap-3"
+                    >
+                      View full review
+                      <ArrowUpRight className="h-4 w-4 shrink-0" />
+                    </Link>
+                  </div>
+                </div>
+              </div>
+            </motion.article>
+          ))}
+        </div>
+      </section>
+    </main>
   )
 }
